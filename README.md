@@ -5,7 +5,7 @@ Learning Management System Based On CSI Core LMS Product
 <h1>Requirements:</h1>
 
 <H2>Tasks For Mentorland Team To Do:</H2>
-1 page (if possible for each user flow) - some notes about assets, paywalls, <br>
+1-page (if possible for each user flow) - some notes about assets, paywalls, <br>
 Student based flow with all student use cases(enroll, take course, buy nfts, sell nfts, buy paid courses, buy non-transferrable Mentorship token)<br>
 Official Email address for Devops(used by CSI and internal ops at mentorland)<br>
 Official Email address for inquiry of system admin(notification of new user, pw reset email)<br>
@@ -18,17 +18,18 @@ Domain config: Sandbox domain, Main application url<br>
 Billing Set billing for Mentorland Server to Bill Mentorland Credit Card <br>
 
 <H2>GitHub Repo - Code Repository $</H2>
-github.com/csi/mentorland AND github.com/csi/learning-management-system<br>
-Documentation for CSI Learning Management System(LMS) app<br>
-How to deploy <br>
-Holds Smart Contracts<br>
-Main net deployment documentation for partners <br>
+This app should be present in CSI-Mentorland Repo<br>
+This app should be present in CSI-LMS repo<br>
+Create Full Documentation for CSI Learning Management System(LMS) app<br>
+Create Full Document For How to deploy <br>
+Create Folders and Documentatio for Smart Contracts<br>
+Create Main-net deployment documentation for partners(may include factory contracts) <br>
 
 
-<H2>Moralis for web3 API service $</H2>
+<H2>DICISION FORE TEAM - Moralis for web3 API service or subgraph ? $</H2>
 
 <H2>Components Of CSI Learning Management Application</H2>
-
+**All Engineers Must Know Components Requirements**<br>
 Front End Design: Logo & Assets - Develop FE of the Figma File<br>
 Dashboards For: Admin and Teacher Users<br>
 Dashboard For: Student and Free Members<br>

@@ -3,7 +3,7 @@ import React from 'react'
 
 function StageOne() {
     return (
-        <div className='w-5/12 mx-auto mt-5  h-[30rem] flex flex-col  justify-center'>
+        <div className='w-5/12 mx-auto mt-16  h-[25rem] flex flex-col  justify-center'>
             <p className='text-center font-semibold text-2xl'>Let's get to know each other first</p>
             <p className='text-center text-[#959595]'>Please enter your details</p>
 
@@ -31,13 +31,6 @@ function StageOne() {
                     </div>
                 </div>
             </div>
-
-            <div className='flex gap-10 mt-6 justify-center'>
-                <button className='bg-[#2668d8] py-1.5 px-4 flex text-xl rounded-lg'><Icon className='text-3xl' icon="tabler:arrow-right" />Next</button>
-                <button className='text-xl text-[#b9baba]'>Skip</button>
-            </div>
-
-
         </div>
     )
 }

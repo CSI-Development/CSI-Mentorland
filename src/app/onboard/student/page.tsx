@@ -10,7 +10,7 @@ import StageThree from '@/components/onboard/StageThree'
 import StageFour from '@/components/onboard/StageFour'
 
 function studentOnboard() {
-  const [stage, setStage] = useState(4);
+  const [stage, setStage] = useState(1);
   const updateStage=()=>{
     setStage(stage+1)
   }

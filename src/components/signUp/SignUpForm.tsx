@@ -3,6 +3,7 @@ import Image from 'next/image'
 import React, { useState } from 'react'
 import Logo from '../../../public/logoDark.png'
 import { Icon } from '@iconify/react/dist/iconify.js'
+import Link from 'next/link'
 
 function SignUpForm() {
 
@@ -60,7 +61,9 @@ function SignUpForm() {
                             <p>At least 10 characters</p>
                         </div>
                     </div>
-                    <button className={` rounded-lg w-full py-2.5 text-lg my-2 ${role === "" ? ` text-white bg-[#b9baba] ` : ` text-black bg-[#2668d8] `}`}>Get Started</button>
+                    <Link href={"/onboard/student"}>
+                        <button className={` rounded-lg w-full py-2.5 text-lg my-2 font-semibold ${role === "" ? ` text-white bg-[#b9baba] ` : ` text-white bg-[#2668d8] `}`}>Get Started</button>
+                    </Link>
                     <div className='flex gap-2'>
                         <p>Already have an accoutn?</p>
                         <button className='text-[#2668d8] '>Login</button>

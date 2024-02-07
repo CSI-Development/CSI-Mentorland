@@ -9,7 +9,7 @@ function signUp({ }: Props) {
         <>
             <div className='w-full bg-white flex'>
                 <img className='h-screen' src={sideCoverImage.src} />
-                <div className='w-full'>
+                <div className='w-full overflow-y-scroll h-screen '>
                     <SignUpForm/>
                 </div>
             </div>

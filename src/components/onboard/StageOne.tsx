@@ -4,7 +4,7 @@ import React from 'react'
 function StageOne() {
     return (
         <div className='w-5/12 mx-auto mt-16  h-[25rem] flex flex-col  justify-center'>
-            <p className='text-center font-semibold text-2xl'>Let's get to know each other first</p>
+            <p className='text-center font-semibold text-2xl'>{`Let's get to know each other first`}</p>
             <p className='text-center text-[#959595]'>Please enter your details</p>
 
             <p className='mt-8'>First, tell us your First and Last names*</p>

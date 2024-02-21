@@ -4,7 +4,7 @@ import Logo from '../../../public/logo.png'
 
 function Header() {
   return (
-    <div className='w-full flex bg-[#010d27] py-5 px-10 fixed justify-between'>
+    <nav className='w-full flex bg-[#010d27] py-5 px-10 fixed justify-between'>
       <div>
         <Image alt='logo' src={Logo} />
       </div>
@@ -15,7 +15,7 @@ function Header() {
         <button>Sign Up</button>
         <button>Log In</button>
       </div>
-    </div>
+    </nav>
   )
 }
 

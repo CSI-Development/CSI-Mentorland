@@ -4,10 +4,12 @@ import React from 'react'
 
 function mentorselection() {
   return (
-    <>
-    <Header/>
-    <SelectmentorComponent/>
-    </>
+
+    <div className='overflow-y-hidden'>
+      <Header />
+      <SelectmentorComponent />
+    </div>
+
   )
 }
 

@@ -13,6 +13,7 @@ import mentor10 from '../../../public/sampleMentor/mentor10.png'
 import mentor11 from '../../../public/sampleMentor/mentor11.png'
 import mentor12 from '../../../public/sampleMentor/mentor12.png'
 import Image, { StaticImageData } from 'next/image'
+import { Icon } from '@iconify/react/dist/iconify.js'
 
 
 function SelectmentorComponent() {
@@ -35,23 +36,30 @@ function SelectmentorComponent() {
     };
 
     return (
-        <div className='w-full h-screen pt-20 overflow-y-scroll pb-5'>
-            <p className='text-center font-semibold text-2xl mt-4'>
-                We have {mentorsList.length} Mentors that might interest you
-            </p>
-            <div className='w-7/12 flex mx-auto text-xl mt-3 mb-2'>
-                <p className='font-semibold mr-2'>Coaching</p>
-                <p>8 Courses</p>
-            </div>
+        <div className='overflow-hidden bg-[#010d27]'>
 
-            <div className='w-7/12 grid grid-cols-4 gap-4 mx-auto'>
-                {mentorsList.map((mentor, index) => (
-                    <div key={index} onClick={() => toggleSelectMentor(mentor)} className={`relative cursor-pointer ${selectedMentors.includes(mentor) ? 'border-yellow-500 border-4 rounded-3xl my-auto' : ''}`}>
-                        <Image className='rounded-3xl' alt={`mentor-${index}`} src={mentor} />
+            <div className='h-screen pt-20'>
+                <div className='w-full h-full overflow-y-scroll pb-5'>
+                    <p className='text-center font-semibold text-2xl mt-4'>
+                        We have {mentorsList.length} Mentors that might interest you
+                    </p>
+                    <div className='w-7/12 flex mx-auto text-xl mt-3 mb-2'>
+                        <p className='font-semibold mr-2'>Coaching</p>
+                        <p>8 Courses</p>
                     </div>
-                ))}
+                    <div className='w-11/12 grid grid-cols-2 md:grid-cols-3 md:w-7/12 lg:grid-cols-4 lg:7/12 gap-4 mx-auto '>
+                        {mentorsList.map((mentor, index) => (
+                            <div key={index} onClick={() => toggleSelectMentor(mentor)} className={`relative cursor-pointer`}>
+                                <Image className={`rounded-3xl  ${selectedMentors.includes(mentor) ? ' border-yellow-500 border-4 rounded-3xl my-auto ' : ''}`} alt={`mentor-${index}`} src={mentor} />
+                            </div>
+                        ))}
+                    </div>
+                    <div className='flex gap-10 mt-6 justify-center bg-[#010d27] '>
+                        <button className='bg-[#2668d8] py-1.5 px-4 flex text-xl rounded-lg'><Icon className='text-3xl' icon="tabler:arrow-right" />Next</button>
+                        <button className='text-xl text-[#b9baba] w-20'>Skip</button>
+                    </div>
+                </div>
             </div>
-            
         </div>
     )
 }

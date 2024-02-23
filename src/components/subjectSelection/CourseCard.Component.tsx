@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import sampleSubject from '../../../public/selectSubject/subjectCoverImg.png';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface CourseCardProps {
     title: string;
@@ -38,9 +39,11 @@ function CourseCard(props: CourseCardProps) {
                     <p className='text-3xl font-bold text-center'>
                         {price}
                     </p>
+                    <Link href='/subjectSelection/payment'>
                     <button className='bg-blue-500 text-white py-2 w-28 px-4 rounded-lg mt-4'>
                         Join Now
                     </button>
+                    </Link>
                 </div>
             </div>
         </div>

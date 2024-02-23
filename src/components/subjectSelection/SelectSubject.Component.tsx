@@ -6,29 +6,7 @@ import MentorProfileCard from './MentorProfileCard.Component';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import CourseCard from './CourseCard.Component';
 
-interface MentorData {
-  coachName: string;
-  domain: string;
-  twitter: string;
-  facebook: string;
-  instagram: string;
-  profilePic: string;
-  courses: Course[];
-}
-
-interface Course {
-  courseName: string;
-  courseDiscription: string;
-  courseThumbnail: string;
-  courseId: string;
-  price: number;
-}
-
-interface SelectSubjectProps {
-  mentorData: MentorData[];
-}
-
-function SelectSubjectComponent(props: SelectSubjectProps) {
+function SelectSubjectComponent() {
   const mentorData = [
     {
       coachName: 'Cody Getchell',

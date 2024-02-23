@@ -8,7 +8,7 @@ function subjectSelection() {
 
     <div className='overflow-y-hidden'>
       <Header />
-      <SelectSubjectComponent />
+      <SelectSubjectComponent  />
     </div>
 
   )

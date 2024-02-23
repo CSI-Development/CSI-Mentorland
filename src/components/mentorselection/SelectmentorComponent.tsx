@@ -14,6 +14,7 @@ import mentor11 from '../../../public/sampleMentor/mentor11.png'
 import mentor12 from '../../../public/sampleMentor/mentor12.png'
 import Image, { StaticImageData } from 'next/image'
 import { Icon } from '@iconify/react/dist/iconify.js'
+import Link from 'next/link'
 
 
 function SelectmentorComponent() {
@@ -55,7 +56,9 @@ function SelectmentorComponent() {
                         ))}
                     </div>
                     <div className='flex gap-10 mt-6 justify-center bg-[#010d27] '>
+                        <Link href={'/subjectSelection'}>
                         <button className='bg-[#2668d8] py-1.5 px-4 flex text-xl rounded-lg'><Icon className='text-3xl' icon="tabler:arrow-right" />Next</button>
+                        </Link>
                         <button className='text-xl text-[#b9baba] w-20'>Skip</button>
                     </div>
                 </div>

@@ -1,13 +1,13 @@
 "use client"
 import React, { useState } from 'react'
 import PayWithCard from './PayWithCard.Component'
+import Link from 'next/link'
 
 function PaymentProcessContent() {
-    const [paymentMethod, setPaymentMethod] = useState('')
     return (
         <div className='overflow-hidden bg-[#010d27]'>
             <div className='h-screen pt-20'>
-                { paymentMethod==="" && <div className='w-full h-full overflow-y-scroll pb-5'>
+                {<div className='w-full h-full overflow-y-scroll pb-5'>
                     <p className='text-center font-semibold text-3xl mt-10 w-3/12 mx-auto'>
                         Please complete payment
                     </p>
@@ -20,12 +20,18 @@ function PaymentProcessContent() {
                             <p>USD</p>
                             <p className='font-bold'>$2500</p>
                         </div>
-                        <button onClick={()=>setPaymentMethod("card")} className='text-xl font-semibold text-center border border-[#fefffe] w-full mt-5 py-1 rounded-lg' >Pay with Mentorland Balance</button>
-                        <button className='text-xl font-semibold text-center border border-[#fefffe] w-full mt-5 py-1 rounded-lg' >Pay with Card/Debit Card</button>
-                        <button className='text-xl font-semibold text-center border border-[#fefffe] w-full mt-5 py-1 rounded-lg' >Pay with Crypto</button>
+                        <Link href='/subjectSelection/payment/mentorland-balence-payment'>
+                            <button className='text-xl font-semibold text-center border border-[#fefffe] w-full mt-5 py-1 rounded-lg' >Pay with Mentorland Balance</button>
+                        </Link>
+                        <Link href='/subjectSelection/payment/card-payment'>
+                            <button className='text-xl font-semibold text-center border border-[#fefffe] w-full mt-5 py-1 rounded-lg' >Pay with Card/Debit Card</button>
+                        </Link>
+                        <Link href='/subjectSelection/payment/crypto-payment'>
+                            <button className='text-xl font-semibold text-center border border-[#fefffe] w-full mt-5 py-1 rounded-lg' >Pay with Crypto</button>
+                        </Link>
                     </div>
-                </div> }
-                {paymentMethod==="card" && <PayWithCard />}
+                </div>}
+                {<PayWithCard />}
             </div>
         </div>
     )

@@ -2,8 +2,8 @@
 import React from 'react';
 
 // Import the image from the public folder
-import background from '../../../public/LandingBg1.png';
-import cards from '../../../public/CascadingCard.png';
+import background from '../../../public/landingPage/LandingBg1.png';
+import cards from '../../../public/landingPage/CascadingCard.png';
 import Image from 'next/image';
 import Link from 'next/link';
 

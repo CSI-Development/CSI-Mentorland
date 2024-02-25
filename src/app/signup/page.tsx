@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
-import sideCoverImage from '../../../public/signupSideImage.png'
-import SignUpForm from '@/components/signUp/SignUpForm'
+import sideCoverImage from '../../../public/onboardStudent/signupSideImage.png'
+import SignUpForm from '@/components/signUp/SignUpForm.Component'
 type Props = {}
 
 function signUp({ }: Props) {

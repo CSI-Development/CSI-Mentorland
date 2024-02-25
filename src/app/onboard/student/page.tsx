@@ -2,12 +2,12 @@
 import React, { useState } from 'react'
 import Logo from '../../../../public/logo.png'
 import Image from 'next/image'
-import OnboardingPageTracker from '@/components/onboard/OnboardingPageTracker'
-import StageOne from '@/components/onboard/StageOne'
+import OnboardingPageTracker from '@/components/onboard/OnboardingPageTracker.Component'
+import StageOne from '@/components/onboard/StageOne.Component'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import StageTwo from '@/components/onboard/StageTwo'
-import StageThree from '@/components/onboard/StageThree'
-import StageFour from '@/components/onboard/StageFour'
+import StageTwo from '@/components/onboard/StageTwo.Component'
+import StageThree from '@/components/onboard/StageThree.Component'
+import StageFour from '@/components/onboard/StageFour.Component'
 import Link from 'next/link'
 
 function StudentOnboard() {

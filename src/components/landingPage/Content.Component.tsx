@@ -12,10 +12,18 @@ import landingSection2 from '../../../public/landingPage/landingSection2.png';
 import landingSection3 from '../../../public/landingPage/landingSection3.png';
 import landingSection4 from '../../../public/landingPage/landingSection4.png';
 import landingSection5 from '../../../public/landingPage/landingSection5.png';
+import landingSection7 from '../../../public/landingPage/landingSection7.png';
 import blogThumbnail1 from '../../../public/landingPage/blogThumbnail1.png';
 import blogThumbnail2 from '../../../public/landingPage/blogThumbnail2.png';
 import blogThumbnail3 from '../../../public/landingPage/blogThumbnail3.png';
 import quoteAutor from '../../../public/landingPage/quoteAutor.png';
+import course1 from '../../../public/landingPage/course1.png';
+import course2 from '../../../public/landingPage/course2.png';
+import course3 from '../../../public/landingPage/course3.png';
+import course4 from '../../../public/landingPage/course4.png';
+import course5 from '../../../public/landingPage/course5.png';
+import course6 from '../../../public/landingPage/course6.png';
+import logo from '../../../public/logo.png';
 
 const Content: React.FC = () => {
   interface Blog {
@@ -25,6 +33,13 @@ const Content: React.FC = () => {
     date: string;
     author: string;
     link: string;
+  }
+
+  interface course {
+    title: string;
+    thumbnailImg: string;
+    description: string;
+    price: string;
   }
 
   const [blog, setBlog] = useState([{
@@ -50,10 +65,51 @@ const Content: React.FC = () => {
   },
   ])
 
+  const [courses, setCourses] = useState([
+    {
+      title: 'Introduction to Blockchain',
+      thumbnailImg: course1,
+      description: 'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+      price: '$12,990',
+    },
+    {
+      title: 'Introduction to Blockchain',
+      thumbnailImg: course2,
+      description: 'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+      price: '$12,990',
+    },
+    {
+      title: 'Introduction to Blockchain',
+      thumbnailImg: course3,
+      description: 'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+      price: '$12,990',
+    },
+    {
+      title: 'Introduction to Blockchain',
+      thumbnailImg: course4,
+      description: 'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+      price: '$12,990',
+    },
+    {
+      title: 'Introduction to Blockchain',
+      thumbnailImg: course5,
+      description: 'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+      price: '$12,990',
+    },
+    {
+      title: 'Introduction to Blockchain',
+      thumbnailImg: course6,
+      description: 'consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+      price: '$12,990',
+    },
+  ])
+
+
+
   return (
     <div className='overflow-hidden bg-[#010d27]'>
       <div className='h-screen pt-20'>
-        <div className='w-full h-full overflow-y-scroll pb-5'>
+        <div className='w-full h-full overflow-y-scroll '>
 
           {/* signin and section 0 */}
           <div
@@ -114,12 +170,35 @@ const Content: React.FC = () => {
               <Image alt='cards' src={quoteAutor} className='h-20' />
               <div className='flex flex-col justify-center mx-3'>
                 <p className='text-2xl font-bold'>Matt Dibbert</p>
-                <p className='text-lg'>Serial Enterpreneur, Author</p>
+                <p className='text-sm'>Serial Enterpreneur, Author</p>
               </div>
             </div>
           </div>
 
+          {/* section 7 */}
+          <div className=' w-full mx-auto bg-cover bg-center pb-16 ' style={{ backgroundImage: `url(${landingSection7.src})` }}>
+            <p className='my-10 mt-16 text-3xl font-bold text-center'>Most Popular Courses</p>
+            <div className='grid grid-cols-3 gap-8 w-10/12 mx-auto  '>
+              {courses.map((course) => {
+                return (
+                  <div className=' rounded-t-3xl bg-[#151B2B]'>
+                    <Image alt='cards' src={course.thumbnailImg} className='w-full rounded-t-3xl' />
+                    <div className='p-5  pt-0'>
+                      <p className='text-2xl mt-2 font-bold'>{course.title}</p>
+                      <p className='text-lg text-[#FFD600] mt-1 mb-2'>{course.price}</p>
+                      <p className='text-lg'>{course.description}</p>
+                      <button className='bg-[#2769d8] px-3 py-1 text-sm rounded-full mt-4'>Read More</button>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
 
+          {/* footer */}
+              <div className='bg-[#0f2345] h-20 flex items-center flex-col justify-center'>
+                <Image alt='cards' src={logo} className=' w-3/12' />
+              </div>
 
         </div>
       </div>

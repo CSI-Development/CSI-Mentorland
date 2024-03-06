@@ -20,13 +20,13 @@ function PaymentProcessContent() {
                             <p>USD</p>
                             <p className='font-bold'>$2500</p>
                         </div>
-                        <Link href='/subjectSelection/payment/mentorland-balence-payment'>
+                        <Link href='/student/subjectSelection/payment/mentorland-balence-payment'>
                             <button className='text-xl font-semibold text-center border border-[#fefffe] w-full mt-5 py-1 rounded-lg' >Pay with Mentorland Balance</button>
                         </Link>
-                        <Link href='/subjectSelection/payment/card-payment'>
+                        <Link href='/student/subjectSelection/payment/card-payment'>
                             <button className='text-xl font-semibold text-center border border-[#fefffe] w-full mt-5 py-1 rounded-lg' >Pay with Card/Debit Card</button>
                         </Link>
-                        <Link href='/subjectSelection/payment/crypto-payment'>
+                        <Link href='/student/subjectSelection/payment/crypto-payment'>
                             <button className='text-xl font-semibold text-center border border-[#fefffe] w-full mt-5 py-1 rounded-lg' >Pay with Crypto</button>
                         </Link>
                     </div>

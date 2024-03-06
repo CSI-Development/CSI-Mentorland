@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import sampleSubject2 from '../../../public/selectSubject/subjectMentor.png'
+import sampleSubject2 from '../../../../public/selectSubject/subjectMentor.png'
 import Image from 'next/image'
 import { Icon } from '@iconify/react/dist/iconify.js'
 

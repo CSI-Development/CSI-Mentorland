@@ -39,7 +39,7 @@ function CourseCard(props: CourseCardProps) {
                     <p className='text-3xl font-bold text-center'>
                         {price}
                     </p>
-                    <Link href='/subjectSelection/payment'>
+                    <Link href='/student/subjectSelection/payment'>
                     <button className='bg-blue-500 text-white py-2 w-28 px-4 rounded-lg mt-4'>
                         Join Now
                     </button>

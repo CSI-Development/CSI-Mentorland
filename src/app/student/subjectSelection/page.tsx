@@ -1,6 +1,6 @@
 import Header from '@/components/commonComponents/Header.Component'
-import SelectmentorComponent from '@/components/mentorselection/Selectmentor.Component'
-import SelectSubjectComponent from '@/components/subjectSelection/SelectSubject.Component'
+import SelectmentorComponent from '@/components/student/mentorselection/Selectmentor.Component'
+import SelectSubjectComponent from '@/components/student/subjectSelection/SelectSubject.Component'
 import React from 'react'
 
 function subjectSelection() {

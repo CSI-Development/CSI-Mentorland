@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
-import sampleSubject from '../../../public/selectSubject/subjectCoverImg.png';
-import sampleSubject2 from '../../../public/selectSubject/subjectMentor.png';
+import sampleSubject from '../../../../public/selectSubject/subjectCoverImg.png';
+import sampleSubject2 from '../../../../public/selectSubject/subjectMentor.png';
 import MentorProfileCard from './MentorProfileCard.Component';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import CourseCard from './CourseCard.Component';

@@ -1,5 +1,5 @@
 import Header from '@/components/commonComponents/Header.Component'
-import SelectmentorComponent from '@/components/mentorselection/Selectmentor.Component'
+import SelectmentorComponent from '@/components/student/mentorselection/Selectmentor.Component'
 import React from 'react'
 
 function mentorselection() {

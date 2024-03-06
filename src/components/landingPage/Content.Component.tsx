@@ -144,9 +144,9 @@ const Content: React.FC = () => {
           <div className="bg-cover bg-center pb-10" style={{ backgroundImage: `url(${landingSection4.src})` }}>
             <p className='my-10 text-3xl font-bold text-center'>Blog</p>
             <div className='flex gap-5 justify-center'>
-              {blog.map((blog) => {
+              {blog.map((blog,i) => {
                 return (
-                  <div className='w-3/12 rounded-t-3xl bg-[#151B2B]'>
+                  <div key={i} className='w-3/12 rounded-t-3xl bg-[#151B2B]'>
                     <Image alt='cards' src={blog.thumbnailImg} className='w-full rounded-t-3xl' />
                     <div className='p-5  pt-0'>
                       <p className='text-2xl mt-2 font-bold'>{blog.title}</p>
@@ -179,9 +179,9 @@ const Content: React.FC = () => {
           <div className=' w-full mx-auto bg-cover bg-center pb-16 ' style={{ backgroundImage: `url(${landingSection7.src})` }}>
             <p className='my-10 mt-16 text-3xl font-bold text-center'>Most Popular Courses</p>
             <div className='grid grid-cols-3 gap-8 w-10/12 mx-auto  '>
-              {courses.map((course) => {
+              {courses.map((course,i) => {
                 return (
-                  <div className=' rounded-t-3xl bg-[#151B2B]'>
+                  <div key={i} className=' rounded-t-3xl bg-[#151B2B]'>
                     <Image alt='cards' src={course.thumbnailImg} className='w-full rounded-t-3xl' />
                     <div className='p-5  pt-0'>
                       <p className='text-2xl mt-2 font-bold'>{course.title}</p>

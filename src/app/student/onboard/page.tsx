@@ -2,12 +2,12 @@
 import React, { useState } from 'react'
 import Logo from '../../../../public/logo.png'
 import Image from 'next/image'
-import OnboardingPageTracker from '@/components/onboard/OnboardingPageTracker.Component'
-import StageOne from '@/components/onboard/StageOne.Component'
+import OnboardingPageTracker from '@/components/student/onboard/OnboardingPageTracker.Component'
+import StageOne from '@/components/student/onboard/StageOne.Component'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import StageTwo from '@/components/onboard/StageTwo.Component'
-import StageThree from '@/components/onboard/StageThree.Component'
-import StageFour from '@/components/onboard/StageFour.Component'
+import StageTwo from '@/components/student/onboard/StageTwo.Component'
+import StageThree from '@/components/student/onboard/StageThree.Component'
+import StageFour from '@/components/student/onboard/StageFour.Component'
 import Link from 'next/link'
 
 function StudentOnboard() {
@@ -30,7 +30,7 @@ function StudentOnboard() {
         </div>
         :
         <div className='flex gap-10 mt-6 justify-center bg-[#010d27] '>
-          <Link href={'/mentorselection'}>
+          <Link href={'/student/mentorselection'}>
             <button onClick={() => updateStage()} className='bg-[#2668d8] py-1.5 px-4 flex text-xl rounded-lg'><Icon className='text-3xl' icon="tabler:arrow-right" />Select Mentor</button>
           </Link>
         </div>

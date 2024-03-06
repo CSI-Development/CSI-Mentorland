@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
-import mentor1 from '../../../public/sampleImages/sampleImg1.png'
-import mentor2 from '../../../public/sampleImages/sampleImg2.png'
-import mentor3 from '../../../public/sampleImages/sampleImg3.png'
+import mentor1 from '../../../../public/sampleImages/sampleImg1.png'
+import mentor2 from '../../../../public/sampleImages/sampleImg2.png'
+import mentor3 from '../../../../public/sampleImages/sampleImg3.png'
 
 function StageFour() {
     return (

@@ -61,7 +61,7 @@ function SignUpForm() {
                             <p>At least 10 characters</p>
                         </div>
                     </div>
-                    <Link href={"/onboard/student"}>
+                    <Link href={"student/onboard"}>
                         <button className={` rounded-lg w-full py-2.5 text-lg my-2 font-semibold ${role === "" ? ` text-white bg-[#b9baba] ` : ` text-white bg-[#2668d8] `}`}>Get Started</button>
                     </Link>
                     <div className='flex gap-2'>

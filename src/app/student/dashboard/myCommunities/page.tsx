@@ -1,14 +1,14 @@
-import React from 'react'
+import MyCommunities from "@/components/student/dashboardStudentComponents/myCommunities/MyCommunities.Component";
+import React from "react";
 
 function communities() {
   return (
-    <div>
-        <div className="h-full pt-24 w-full ">
-          <h1 className="bg-white  text-black ">communities</h1>
-          
-        </div>
-    </div>
-  )
+    
+      <div className="h-full pt-24 w-full  ">
+        <MyCommunities />
+      </div>
+  
+  );
 }
 
-export default communities
+export default communities;

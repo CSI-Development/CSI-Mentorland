@@ -4,7 +4,7 @@ import React from "react";
 
 function Sidebar() {
   return (
-    <div className="w-3/12 h-full bg-[#fffefe] pt-24 border-r-2">
+    <div className="w-1/5 h-full bg-[#fffefe] pt-24 border-r-2">
 
       <div className="flex text-black justify-start gap-2 px-8 py-2  bg-slate-400">
         <Icon icon="mdi-light:view-dashboard" className="text-3xl" />

@@ -28,7 +28,7 @@ const CourseOverview = () => {
 
 const UserPofileCard = () => {
   return (
-    <div className="w-full rounded-lg shadow-lg flex relative flex-col items-center  overflow-hidden">
+    <div className="w-full bg-white rounded-lg shadow-md flex relative flex-col items-center  overflow-hidden">
       <img
         src="https://images.unsplash.com/photo-1614850715649-1d0106293bd1?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt=""
@@ -54,7 +54,7 @@ const UserPofileCard = () => {
 
 const FavoriteClassmatesCard = () => {
   return (
-    <div className="w-full rounded-lg shadow-md p-3 gap-5 flex flex-col">
+    <div className="w-full rounded-lg bg-white shadow-md p-3 gap-5 flex flex-col">
       <h1 className="text-md font-bold">Favorite Classmates</h1>
       <div className="w-full grid grid-cols-3 gap-2 gap-y-5">
         {[...Array(9)].map((item) => (
@@ -88,9 +88,11 @@ function Dashbaord() {
       <h1 className="font-bold text-xl">General Dashboard</h1>
       <div className="w-full gap-5 flex-1 flex  ">
         <div className="w-2/3 flex gap-3 flex-col ">
-          <div className="w-full rounded-lg shadow-md p-3 h-52">schedular</div>
+          <div className="w-full rounded-lg shadow-md p-3 h-52 bg-white">
+            schedular
+          </div>
           <FavoriteClassmatesCard />
-          <div className="w-full rounded-lg shadow-md p-3">
+          <div className="w-full rounded-lg shadow-md p-3 bg-white">
             <h1 className="text-md font-bold">Support Tickets</h1>
             <div className="flex w-full justify-center items-center gap-3 my-5 mt-32">
               <button className="w-1/6 bg-transparent text-primary p-1 justify-center items-center font-semibold px-2 border-2 flex gap-2 border-primary rounded-lg">
@@ -110,7 +112,7 @@ function Dashbaord() {
         </div>
         <div className="w-1/3 flex flex-col gap-3">
           <UserPofileCard />
-          <div className="w-full shadow-md p-3 flex flex-col gap-3 ">
+          <div className="w-full shadow-md p-3 flex flex-col gap-3 bg-white rounded-lg">
             <h1 className="text-md font-bold">Favorite Mentors</h1>
             <div className="w-full grid grid-cols-4 gap-3 ">
               {[...Array(8)].map((i) => (

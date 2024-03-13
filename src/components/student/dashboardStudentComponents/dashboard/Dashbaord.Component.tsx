@@ -44,7 +44,7 @@ const UserPofileCard = () => {
         <h1 className="text-sm font-semibold">Current Communities</h1>
         <div className="w-full flex flex-col gap-4 mb-5">
           {[...Array(2)].map((i) => (
-            <CourseOverview />
+            <CourseOverview key={i} />
           ))}
         </div>
       </div>
@@ -57,8 +57,8 @@ const FavoriteClassmatesCard = () => {
     <div className="w-full rounded-lg bg-white shadow-md p-3 gap-5 flex flex-col">
       <h1 className="text-md font-bold">Favorite Classmates</h1>
       <div className="w-full grid grid-cols-3 gap-2 gap-y-5">
-        {[...Array(9)].map((item) => (
-          <div className="flex items-center gap-3 ">
+        {[...Array(9)].map((item, index) => (
+          <div key={index} className="flex items-center gap-3 ">
             <img
               src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
               alt=""
@@ -116,7 +116,7 @@ function Dashbaord() {
             <h1 className="text-md font-bold">Favorite Mentors</h1>
             <div className="w-full grid grid-cols-4 gap-3 ">
               {[...Array(8)].map((i) => (
-                <div className="flex flex-col text-center items-center gap-1">
+                <div key={i} className="flex flex-col text-center items-center gap-1">
                   <img
                     src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
                     alt=""

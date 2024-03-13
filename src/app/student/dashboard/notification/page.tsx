@@ -1,8 +1,11 @@
+import Notification from '@/components/student/dashboardStudentComponents/notification/Notification.Component'
 import React from 'react'
 
 function page() {
   return (
-    <div>page</div>
+    <div className="h-full px-4 w-full  ">
+        <Notification />
+      </div>
   )
 }
 

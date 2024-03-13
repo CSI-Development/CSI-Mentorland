@@ -33,8 +33,13 @@ const AccessCards = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
+<<<<<<< HEAD:src/components/student/dashboardStudentComponents/myWallet/WalletAssets.compnent.tsx
         {[...Array(2)].map((item, idx) => (
           <AccessCard idx={idx + 1} />
+=======
+        {[...Array(2)].map((item,i) => (
+          <AccessCard key={i} />
+>>>>>>> d67e0bd2611be52b9ac34cf51537b2ab900c230c:src/components/student/dashboardStudentComponents/wallet/WalletAssets.compnent.tsx
         ))}
       </div>
     </div>
@@ -52,8 +57,13 @@ const CertificatedOfCompletion = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
+<<<<<<< HEAD:src/components/student/dashboardStudentComponents/myWallet/WalletAssets.compnent.tsx
         {[...Array(1)].map((item, idx) => (
           <AccessCard idx={idx + 1} />
+=======
+        {[...Array(1)].map((item,i) => (
+          <AccessCard key={i}/>
+>>>>>>> d67e0bd2611be52b9ac34cf51537b2ab900c230c:src/components/student/dashboardStudentComponents/wallet/WalletAssets.compnent.tsx
         ))}
       </div>
     </div>
@@ -89,8 +99,13 @@ const EnrichedPacks = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
+<<<<<<< HEAD:src/components/student/dashboardStudentComponents/myWallet/WalletAssets.compnent.tsx
         {[...Array(2)].map((item, idx) => (
           <AccessCard idx={idx + 1} />
+=======
+        {[...Array(2)].map((item,i) => (
+          <AccessCard key={i}/>
+>>>>>>> d67e0bd2611be52b9ac34cf51537b2ab900c230c:src/components/student/dashboardStudentComponents/wallet/WalletAssets.compnent.tsx
         ))}
       </div>
     </div>
@@ -108,8 +123,13 @@ const EventCards = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
+<<<<<<< HEAD:src/components/student/dashboardStudentComponents/myWallet/WalletAssets.compnent.tsx
         {[...Array(2)].map((item, idx) => (
           <AccessCard idx={idx + 1} />
+=======
+        {[...Array(2)].map((item,i) => (
+          <AccessCard key={i} />
+>>>>>>> d67e0bd2611be52b9ac34cf51537b2ab900c230c:src/components/student/dashboardStudentComponents/wallet/WalletAssets.compnent.tsx
         ))}
       </div>
     </div>

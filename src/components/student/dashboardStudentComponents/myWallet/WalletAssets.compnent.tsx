@@ -4,9 +4,21 @@ import Badge1 from "../../../../../public/studentDashboard/wallet/badge1.svg";
 import Badge2 from "../../../../../public/studentDashboard/wallet/badge2.svg";
 import Badge3 from "../../../../../public/studentDashboard/wallet/badge3.svg";
 import Image from "next/image";
+import AccessCard1 from "../../../../../public/studentDashboard/wallet/accesscard1.png";
+import AccessCard2 from "../../../../../public/studentDashboard/wallet/accesscard2.png";
 
-const AccessCard = () => {
-  return <div className="w-full bg-red-400 h-36 rounded-lg"></div>;
+const AccessCard = ({ idx }: { idx: number }) => {
+  if (idx == 1) {
+    return (
+      <Image src={AccessCard1} alt="" className="w-full h-36 object-cover" />
+    );
+  }
+  if (idx == 2) {
+    return (
+      <Image src={AccessCard2} alt="" className="w-full h-36 object-cover" />
+    );
+  }
+  // return <div className="w-full bg-red-400 h-36 rounded-lg"></div>;
 };
 
 const AccessCards = () => {
@@ -21,8 +33,8 @@ const AccessCards = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
-        {[...Array(2)].map((item) => (
-          <AccessCard />
+        {[...Array(2)].map((item, idx) => (
+          <AccessCard idx={idx + 1} />
         ))}
       </div>
     </div>
@@ -40,8 +52,8 @@ const CertificatedOfCompletion = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
-        {[...Array(1)].map((item) => (
-          <AccessCard />
+        {[...Array(1)].map((item, idx) => (
+          <AccessCard idx={idx + 1} />
         ))}
       </div>
     </div>
@@ -77,8 +89,8 @@ const EnrichedPacks = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
-        {[...Array(2)].map((item) => (
-          <AccessCard />
+        {[...Array(2)].map((item, idx) => (
+          <AccessCard idx={idx + 1} />
         ))}
       </div>
     </div>
@@ -96,8 +108,8 @@ const EventCards = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
-        {[...Array(2)].map((item) => (
-          <AccessCard />
+        {[...Array(2)].map((item, idx) => (
+          <AccessCard idx={idx + 1} />
         ))}
       </div>
     </div>

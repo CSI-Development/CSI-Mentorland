@@ -9,9 +9,10 @@ import {
 } from "@material-tailwind/react";
 import WalletAssets from "@/components/student/dashboardStudentComponents/myWallet/WalletAssets.compnent";
 import WalletEarnings from "@/components/student/dashboardStudentComponents/myWallet/WalletEarnings.component";
+import WalletFundings from "@/components/student/dashboardStudentComponents/myWallet/WalletFundings.component";
 
 const Wallet = () => {
-  const [currentTab, setCurrentTab] = useState<string>("earnings");
+  const [currentTab, setCurrentTab] = useState<string>("fundings");
   const tabData = [
     {
       label: "Assets",
@@ -60,7 +61,7 @@ const Wallet = () => {
             <WalletEarnings />
           </TabPanel>
           <TabPanel value="fundings">
-            <WalletAssets />
+            <WalletFundings />
           </TabPanel>
           {/* {tabData.map(({ value }) => (
             <TabPanel key={value} value={value} className="w-full p-0">

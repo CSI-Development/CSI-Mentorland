@@ -86,7 +86,7 @@ function Dashbaord() {
   return (
     <div className=" h-full w-full flex flex-col text-black p-5">
       <h1 className="font-bold text-xl">General Dashboard</h1>
-      <div className="w-full gap-5 flex-1 flex  ">
+      <div className="w-full gap-5 flex-1 flex mt-4 ">
         <div className="w-2/3 flex gap-3 flex-col ">
           <div className="w-full rounded-lg shadow-md p-3 h-52 bg-white">
             schedular
@@ -125,6 +125,20 @@ function Dashbaord() {
                   <h1 className="text-xs text-[#1A458F] ">Elkoya Micoclin</h1>
                 </div>
               ))}
+            </div>
+            <div className="flex w-full justify-center items-center gap-3 my-5 mt-3">
+              <button className="w-2/6 bg-transparent text-primary p-1 justify-center items-center font-semibold px-2 border-2 flex gap-2 border-primary rounded-lg">
+                <Icon
+                  icon="bxs:user-minus"
+                  color="#2769D9"
+                  className="w-6 h-6"
+                />
+                Remove
+              </button>
+              <button className="w-2/6 bg-primary text-white p-1 px-2 border-2 font-semibold flex justify-center items-center gap-2 border-primary rounded-lg">
+                <Icon icon="bxs:user-plus" className="w-6 h-6" />
+                Add
+              </button>
             </div>
           </div>
         </div>

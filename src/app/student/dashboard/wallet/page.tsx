@@ -7,9 +7,10 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import WalletAssets from "@/components/student/dashboardStudentComponents/myWallet/WalletAssets.compnent";
-import WalletEarnings from "@/components/student/dashboardStudentComponents/myWallet/WalletEarnings.component";
-import WalletFundings from "@/components/student/dashboardStudentComponents/myWallet/WalletFundings.component";
+
+import WalletEarnings from "@/components/student/dashboardStudentComponents/wallet/WalletEarnings.component";
+import WalletFundings from "@/components/student/dashboardStudentComponents/wallet/WalletFundings.component";
+import WalletAssets from "@/components/student/dashboardStudentComponents/wallet/WalletAssets.compnent";
 
 const Wallet = () => {
   const [currentTab, setCurrentTab] = useState<string>("fundings");

@@ -21,8 +21,8 @@ const AccessCards = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
-        {[...Array(2)].map((item) => (
-          <AccessCard />
+        {[...Array(2)].map((item,i) => (
+          <AccessCard key={i} />
         ))}
       </div>
     </div>
@@ -40,8 +40,8 @@ const CertificatedOfCompletion = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
-        {[...Array(1)].map((item) => (
-          <AccessCard />
+        {[...Array(1)].map((item,i) => (
+          <AccessCard key={i}/>
         ))}
       </div>
     </div>
@@ -77,8 +77,8 @@ const EnrichedPacks = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
-        {[...Array(2)].map((item) => (
-          <AccessCard />
+        {[...Array(2)].map((item,i) => (
+          <AccessCard key={i}/>
         ))}
       </div>
     </div>
@@ -96,8 +96,8 @@ const EventCards = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
-        {[...Array(2)].map((item) => (
-          <AccessCard />
+        {[...Array(2)].map((item,i) => (
+          <AccessCard key={i} />
         ))}
       </div>
     </div>

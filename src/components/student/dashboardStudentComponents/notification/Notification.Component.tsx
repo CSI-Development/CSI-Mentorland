@@ -54,6 +54,7 @@ function Notification() {
           {notification.map((data, index) => {
             return (
               <NotificationCards
+                key={index}
                 notification={data.notification}
                 notificationDate={data.notificationDate}
                 notificationDiscription={data.notificationDiscription}

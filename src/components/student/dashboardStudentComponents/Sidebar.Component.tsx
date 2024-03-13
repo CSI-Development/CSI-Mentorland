@@ -7,12 +7,12 @@ function Sidebar() {
   const [selectedSidebarOption, setSelectedSidebarOption] =
     useState("dashboard");
   return (
-    <div className="w-1/5 h-full bg-[#fffefe] pt-24 border-r-2">
+    <div className="w-1/5 h-full bg-[#fffefe] pt-24 border-r-2 text-[#1A458F]">
       <Link href="/student/dashboard">
         <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
+          className={`flex  justify-start gap-2 px-8 py-2 
           ${
-            selectedSidebarOption === "dashboard" ? `bg-[#90A4B6]` : `null `
+            selectedSidebarOption === "dashboard" ? `bg-[#90A4B6] text-white` : `null `
           }`}
           onClick={() => setSelectedSidebarOption("dashboard")}
         >
@@ -23,8 +23,8 @@ function Sidebar() {
 
       <Link href="/student/dashboard/communities">
         <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "communities" ? `bg-[#90A4B6]` : `null `}`}
+          className={`flex  justify-start gap-2 px-8 py-2 
+        ${selectedSidebarOption === "communities" ? `bg-[#90A4B6] text-white` : `null `}`}
           onClick={() => setSelectedSidebarOption("communities")}
         >
           <Icon
@@ -37,8 +37,8 @@ function Sidebar() {
 
       <Link href="/student/dashboard/wallet">
         <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "wallet" ? `bg-[#90A4B6]` : `null `}`}
+          className={`flex  justify-start gap-2 px-8 py-2 
+        ${selectedSidebarOption === "wallet" ? `bg-[#90A4B6] text-white` : `null `}`}
           onClick={() => setSelectedSidebarOption("wallet")}
         >
           <Icon icon="f7:wallet" className="text-3xl" />
@@ -48,8 +48,8 @@ function Sidebar() {
 
       <Link href="/student/dashboard/notification">
         <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "notification" ? `bg-[#90A4B6]` : `null `}`}
+          className={`flex  justify-start gap-2 px-8 py-2 
+        ${selectedSidebarOption === "notification" ? `bg-[#90A4B6] text-white` : `null `}`}
           onClick={() => setSelectedSidebarOption("notification")}
         >
           <Icon icon="ion:mail-outline" className="text-3xl" />
@@ -59,8 +59,8 @@ function Sidebar() {
 
       <Link href="/student/dashboard/wishlist">
         <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "wishlist" ? `bg-[#90A4B6]` : `null `}`}
+          className={`flex  justify-start gap-2 px-8 py-2 
+        ${selectedSidebarOption === "wishlist" ? `bg-[#90A4B6] text-white` : `null `}`}
           onClick={() => setSelectedSidebarOption("wishlist")}
         >
           <Icon icon="solar:health-linear" className="text-3xl" />
@@ -70,8 +70,8 @@ function Sidebar() {
 
       <Link href="/student/dashboard/schedule">
         <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "schedule" ? `bg-[#90A4B6]` : `null `}`}
+          className={`flex  justify-start gap-2 px-8 py-2 
+        ${selectedSidebarOption === "schedule" ? `bg-[#90A4B6] text-white` : `null `}`}
           onClick={() => setSelectedSidebarOption("schedule")}
         >
           <Icon icon="uil:schedule" className="text-3xl" />
@@ -81,8 +81,8 @@ function Sidebar() {
 
       <Link href="/student/dashboard/analytics">
         <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "analytics" ? `bg-[#90A4B6]` : `null `}`}
+          className={`flex  justify-start gap-2 px-8 py-2 
+        ${selectedSidebarOption === "analytics" ? `bg-[#90A4B6] text-white` : `null `}`}
           onClick={() => setSelectedSidebarOption("analytics")}
         >
           <Icon icon="uim:analytics" className="text-3xl" />

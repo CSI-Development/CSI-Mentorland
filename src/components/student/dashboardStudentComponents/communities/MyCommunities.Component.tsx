@@ -128,7 +128,7 @@ function MyCommunities() {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 gap-5 gap-y-8 mt-8 md:grid-cols-2 h-[63vh] overflow-y-scroll ">
+      <div className="grid grid-cols-1 gap-5 gap-y-8 mt-8 md:grid-cols-2 h-[62vh] overflow-y-scroll ">
         {sampleData.map((data, index) => (
           <CommunityCard
             key={index}

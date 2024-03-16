@@ -34,7 +34,7 @@ const AccessCards = () => {
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
         {[...Array(2)].map((item, idx) => (
-          <AccessCard idx={idx + 1} />
+          <AccessCard key={idx} idx={idx + 1} />
         ))}
       </div>
     </div>
@@ -53,7 +53,7 @@ const CertificatedOfCompletion = () => {
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
         {[...Array(1)].map((item, idx) => (
-          <AccessCard idx={idx + 1} />
+          <AccessCard  key={idx} idx={idx + 1} />
         ))}
       </div>
     </div>
@@ -90,7 +90,7 @@ const EnrichedPacks = () => {
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
         {[...Array(2)].map((item, idx) => (
-          <AccessCard idx={idx + 1} />
+          <AccessCard  key={idx} idx={idx + 1} />
         ))}
       </div>
     </div>
@@ -109,7 +109,7 @@ const EventCards = () => {
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
         {[...Array(2)].map((item, idx) => (
-          <AccessCard idx={idx + 1} />
+          <AccessCard  key={idx} idx={idx + 1} />
         ))}
       </div>
     </div>

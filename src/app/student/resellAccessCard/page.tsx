@@ -78,9 +78,9 @@ function page() {
         <div className="flex-1">
           <div className="bg-white shadow-md flex flex-col gap-3 p-3 w-4/5 rounded-lg">
             <h1 className="text-lg font-bold">Recent Articles</h1>
-            {[...Array(3)].map((i) => {
+            {[...Array(3)].map((item, i) => {
               return (
-                <div className="w-full">
+                <div key={i}  className="w-full">
                   <h1 className="text-md font-bold">Cupcake ipsum dolo</h1>
                   <div className="text-sm font-thin">
                     Lorem ipsum, dolor sit amet consectetur adipisicing elit.

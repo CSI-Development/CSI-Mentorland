@@ -59,7 +59,7 @@ const CoursePartialGrades = () => {
           <tbody>
             {tableData.map((item, idx) => {
               return (
-                <tr className="text-sm">
+                <tr key={idx} className="text-sm">
                   <td>{item.name}</td>
                   <td className="text-center">{item.dateDelivered}</td>
                   <td className="text-center">

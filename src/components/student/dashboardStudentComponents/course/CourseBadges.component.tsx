@@ -19,7 +19,7 @@ const CourseBadges = () => {
         {[...Array(8)].map((_item, idx) => {
           if (idx > 2) {
             return (
-              <div className="text-center flex flex-col items-center gap-2">
+              <div key={idx} className="text-center flex flex-col items-center gap-2">
                 <Image src={Badge1} alt="" className="scale-90 grayscale blur-sm" />
                 <h1 className="text-sm text-gray-300">
                   Lorem ipsum, dolor sit amet
@@ -28,7 +28,7 @@ const CourseBadges = () => {
             );
           }
           return (
-            <div className="text-center flex flex-col items-center gap-2">
+            <div key={idx} className="text-center flex flex-col items-center gap-2">
               <Image src={Badge1} alt="" className="scale-90" />
               <h1 className="text-sm text-gray-700">
                 Lorem ipsum, dolor sit amet

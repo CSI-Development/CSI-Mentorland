@@ -50,7 +50,7 @@ const CourseReferrals = () => {
           <tbody>
             {tableData.map((item, idx) => {
               return (
-                <tr className="text-sm">
+                <tr key={idx} className="text-sm">
                   <td>{item.name}</td>
                   <td>{item.email}</td>
                   <td className="text-center grid place-items-center">

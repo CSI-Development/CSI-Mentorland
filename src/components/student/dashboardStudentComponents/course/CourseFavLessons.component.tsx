@@ -9,9 +9,9 @@ const CourseSection = () => {
         Section 1: INTRODUCTION
       </h1>
       <div className="w-full flex flex-col gap-1">
-        {[...Array(3)].map((i) => {
+        {[...Array(3)].map((item, i) => {
           return (
-            <div className="w-full gap-4 flex justify-between items-center">
+            <div key={i} className="w-full gap-4 flex justify-between items-center">
               <Icon icon="el:play-alt" />
               <h2 className="flex-1 text-sm font-bold text-gray-600">
                 Lorem ipsum dolor, sit{" "}
@@ -36,7 +36,7 @@ const CourseFavLessons = () => {
       </div>
       <div className="w-full flex flex-col gap-4 mt-4">
         {[...Array(2)].map((i, idx) => {
-          return <CourseSection />;
+          return <CourseSection key={idx} />;
         })}
       </div>
     </div>

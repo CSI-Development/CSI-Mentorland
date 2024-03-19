@@ -7,9 +7,11 @@ import CourseReferrals from "@/components/student/dashboardStudentComponents/cou
 import CourseSchedule from "@/components/student/dashboardStudentComponents/course/CourseSchedule.component";
 import CourseStudents from "@/components/student/dashboardStudentComponents/course/CourseStudents.component";
 import React from "react";
+import Layout from '../../../../components/Layouts/DashboardLayout'; // Adjust this path to the correct location of your layout.tsx file
 
 const CourseDashboard = () => {
   return (
+    <Layout showSidebar={true}>
     <div className="text-black w-full h-fit flex flex-col gap-2 px-4 p-2">
       <h1 className="text-primary font-bold">{"<< Back to Main Dashboard"}</h1>
       <div
@@ -52,6 +54,7 @@ const CourseDashboard = () => {
         </div>
       </div> */}
     </div>
+    </Layout>
   );
 };
 

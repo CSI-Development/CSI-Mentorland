@@ -43,7 +43,6 @@ function Wishlist() {
   return (
     <div className="text-black w-full ">
       <Breadcrumb titel="Wishlist" />
-      
       <div className="grid grid-cols-1 gap-3 gap-y-2 mt-8 md:grid-cols-2 h-[62vh] overflow-y-scroll ">
         {sampleData.map((data, index) => (
           <WishListCard

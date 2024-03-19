@@ -3,9 +3,11 @@ import React from "react";
 import AccessCard1 from "../../../../public/sampleImages/AccessCard3.svg";
 import Image from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import Layout from '../../../components/Layouts/DashboardLayout'; // Adjust this path to the correct location of your layout.tsx file
 
 const SellAccessCard = () => {
   return (
+    <Layout showSidebar={false}>
     <div className="w-full flex flex-col gap-6 p-5 px-20 h-screen bg-[#F7F9FB] text-black">
       <h1 className="text-primary font-semibold">{"<< Back"}</h1>
       <div className="flex gap-6">
@@ -68,6 +70,7 @@ const SellAccessCard = () => {
         </div>
       </div>
     </div>
+    </Layout>
   );
 };
 

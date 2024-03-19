@@ -7,7 +7,7 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-
+import Layout from '../../../../components/Layouts/DashboardLayout'; 
 import WalletEarnings from "@/components/student/dashboardStudentComponents/wallet/WalletEarnings.component";
 import WalletFundings from "@/components/student/dashboardStudentComponents/wallet/WalletFundings.component";
 import WalletAssets from "@/components/student/dashboardStudentComponents/wallet/WalletAssets.compnent";
@@ -29,6 +29,7 @@ const Wallet = () => {
     },
   ];
   return (
+    <Layout showSidebar={true}>
     <div className="text-black w-full h-full pt-5 px-3">
       <h1 className="font-bold text-xl mb-5 ">My Wallet</h1>
       <Tabs value={currentTab}>
@@ -72,6 +73,7 @@ const Wallet = () => {
         </TabsBody>
       </Tabs>
     </div>
+    </Layout>
   );
 };
 

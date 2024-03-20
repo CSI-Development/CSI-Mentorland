@@ -6,6 +6,7 @@ import Badge3 from "../../../../../public/studentDashboard/wallet/badge3.svg";
 import Image from "next/image";
 import AccessCard1 from "../../../../../public/studentDashboard/wallet/accesscard1.png";
 import AccessCard2 from "../../../../../public/studentDashboard/wallet/accesscard2.png";
+import Link from "next/link";
 
 const AccessCard = ({ idx }: { idx: number }) => {
   if (idx == 1) {
@@ -53,7 +54,9 @@ const CertificatedOfCompletion = () => {
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
         {[...Array(1)].map((item, idx) => (
-          <AccessCard  key={idx} idx={idx + 1} />
+          <Link href={'/student/dashboard/wallet/completionCertificate'}>
+            <AccessCard  key={idx} idx={idx + 1} />
+          </Link>
         ))}
       </div>
     </div>

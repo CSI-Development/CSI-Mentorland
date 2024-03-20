@@ -42,7 +42,7 @@ function completionCertificate() {
                 strife nuthouse a diamond geezer a fiver, blighty chuffed upper
                 class pants laughing gear Dr. Watson curtain twitching. Off with
                 her head upper class smeg head meat and two veg easy peasy
-                shepherd's pie fish and chips, squiffy golly gosh hard cheese
+                shepherds pie fish and chips, squiffy golly gosh hard cheese
                 old boy blimey
               </p>
             </div>
@@ -56,7 +56,7 @@ function completionCertificate() {
               <p className="font-bold text-xl text-black">Grades</p>
               <p className="text-[#5D6475] text-md">
                 Watson curtain twitching. Off with her head upper class smeg
-                head meat and two veg easy peasy shepherd's pie fish and chips,
+                head meat and two veg easy peasy shepherds pie fish and chips,
                 squiffy golly gosh hard cheese old boy blimey
               </p>
             </div>

@@ -45,8 +45,8 @@ const UserPofileCard = () => {
         <h1 className="text-sm font-semibold">Current Communities</h1>
         <div className="w-full flex flex-col gap-4 mb-5">
           {[...Array(2)].map((i) => (
-            <Link href="/student/dashboard/course">
-            <CourseOverview key={i} />
+            <Link key={i} href="/student/dashboard/course">
+            <CourseOverview  />
             </Link>
           ))}
         </div>

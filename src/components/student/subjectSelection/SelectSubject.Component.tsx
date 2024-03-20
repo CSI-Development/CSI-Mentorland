@@ -5,6 +5,7 @@ import sampleSubject2 from '../../../../public/selectSubject/subjectMentor.png';
 import MentorProfileCard from './MentorProfileCard.Component';
 import { Icon } from '@iconify/react/dist/iconify.js';
 import CourseCard from './CourseCard.Component';
+import Link from 'next/link';
 
 function SelectSubjectComponent() {
   const mentorData = [
@@ -96,10 +97,12 @@ function SelectSubjectComponent() {
           ))}
 
           <div className='flex gap-10 mt-6 justify-center bg-[#010d27] '>
-            <button className='bg-[#2668d8] py-1.5 px-4 flex text-xl rounded-lg'>
+            <Link href={'/student/dashboard'}>
+             <button className='bg-[#2668d8] py-1.5 px-4 flex text-xl rounded-lg'>
               <Icon className='text-3xl' icon='tabler:arrow-right' />
               Next
             </button>
+            </Link>
             <button className='text-xl text-[#b9baba] w-20'>Skip</button>
           </div>
         </div>

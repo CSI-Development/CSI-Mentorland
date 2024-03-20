@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 function CardPayment() {
@@ -84,7 +85,7 @@ function CardPayment() {
                         </div>
                     </div>
 
-                    <button className=' flex justify-center rounded-xl text-xl font-semibold py-1.5 px-5 mx-auto mt-5 bg-[#2668d8]'>Pay Now</button>
+                    <Link href={'/student/dashboard'}> <button className=' flex justify-center rounded-xl text-xl font-semibold py-1.5 px-5 mx-auto mt-5 bg-[#2668d8]'>Pay Now</button> </Link>
 
                 </div>
             </div>

@@ -34,10 +34,9 @@ const AccessCards = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
-        
         {[...Array(2)].map((item, idx) => (
-          <Link key={idx} href={'/student/accesscard'}>
-          <AccessCard  idx={idx + 1} />
+          <Link key={idx} href={"/student/accesscard"}>
+            <AccessCard idx={idx + 1} />
           </Link>
         ))}
       </div>
@@ -57,8 +56,11 @@ const CertificatedOfCompletion = () => {
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
         {[...Array(1)].map((item, idx) => (
-          <Link key={idx} href={'/student/dashboard/wallet/completionCertificate'}>
-            <AccessCard  idx={idx + 1} />
+          <Link
+            key={idx}
+            href={"/student/dashboard/wallet/completionCertificate"}
+          >
+            <AccessCard idx={idx + 1} />
           </Link>
         ))}
       </div>
@@ -96,7 +98,9 @@ const EnrichedPacks = () => {
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
         {[...Array(2)].map((item, idx) => (
-          <AccessCard  key={idx} idx={idx + 1} />
+          <Link key={idx} href={"/student/resellAccessCard"}>
+            <AccessCard idx={idx + 1} />
+          </Link>
         ))}
       </div>
     </div>
@@ -115,7 +119,7 @@ const EventCards = () => {
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
         {[...Array(2)].map((item, idx) => (
-          <AccessCard  key={idx} idx={idx + 1} />
+          <AccessCard key={idx} idx={idx + 1} />
         ))}
       </div>
     </div>

@@ -10,7 +10,7 @@ function page() {
   return (
     <Layout showSidebar={false}>
     <div className="w-full flex flex-col gap-6 p-5 px-16 h-screen bg-[#F7F9FB] text-black">
-      <Link href={'student/dashboard/wallet'}><h1 className="text-primary font-semibold">{"<< Back"}</h1></Link>
+      <Link href={'/student/dashboard/wallet'}><h1 className="text-primary font-semibold">{"<< Back"}</h1></Link>
       <h1 className="text-xl font-bold">
         Resell Acess Cards and Enrichment Cards
       </h1>

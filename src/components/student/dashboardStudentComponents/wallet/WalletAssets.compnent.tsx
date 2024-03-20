@@ -34,8 +34,11 @@ const AccessCards = () => {
         </span>
       </p>
       <div className="w-full grid grid-cols-5 gap-3">
+        
         {[...Array(2)].map((item, idx) => (
+          <Link href={'/student/accesscard'}>
           <AccessCard key={idx} idx={idx + 1} />
+          </Link>
         ))}
       </div>
     </div>

@@ -8,12 +8,13 @@ import CourseSchedule from "@/components/student/dashboardStudentComponents/cour
 import CourseStudents from "@/components/student/dashboardStudentComponents/course/CourseStudents.component";
 import React from "react";
 import Layout from '../../../../components/Layouts/DashboardLayout'; // Adjust this path to the correct location of your layout.tsx file
+import Link from "next/link";
 
 const CourseDashboard = () => {
   return (
     <Layout showSidebar={true}>
     <div className="text-black w-full h-fit flex flex-col gap-2 px-4 p-2">
-      <h1 className="text-primary font-bold">{"<< Back to Main Dashboard"}</h1>
+      <Link href={'/student/dashboard'}><h1 className="text-primary font-bold">{"<< Back to Main Dashboard"}</h1></Link>
       <div
         className="w-full relative h-48 rounded-lg overflow-hidden bg-center bg-cover object-cover flex flex-col justify-center p-8"
         style={{

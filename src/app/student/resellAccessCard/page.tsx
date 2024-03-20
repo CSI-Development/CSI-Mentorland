@@ -4,12 +4,13 @@ import CardResell1 from "../../../../public/sampleImages/CardResell1.png";
 import CardResell2 from "../../../../public/sampleImages/CardResell2.png";
 import CardResell3 from "../../../../public/sampleImages/CardResell3.png";
 import Layout from '../../../components/Layouts/DashboardLayout' // Adjust this path to the correct location of your layout.tsx file
+import Link from "next/link";
 
 function page() {
   return (
     <Layout showSidebar={false}>
     <div className="w-full flex flex-col gap-6 p-5 px-16 h-screen bg-[#F7F9FB] text-black">
-      <h1 className="text-primary font-semibold">{"<< Back"}</h1>
+      <Link href={'student/dashboard/wallet'}><h1 className="text-primary font-semibold">{"<< Back"}</h1></Link>
       <h1 className="text-xl font-bold">
         Resell Acess Cards and Enrichment Cards
       </h1>

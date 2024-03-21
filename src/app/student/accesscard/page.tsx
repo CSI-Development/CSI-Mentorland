@@ -4,12 +4,13 @@ import AccessCard1 from "../../../../public/sampleImages/AccessCard3.svg";
 import Image from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Layout from '../../../components/Layouts/DashboardLayout'; // Adjust this path to the correct location of your layout.tsx file
+import Link from "next/link";
 
 const SellAccessCard = () => {
   return (
     <Layout showSidebar={false}>
     <div className="w-full flex flex-col gap-6 p-5 px-20 h-screen bg-[#F7F9FB] text-black">
-      <h1 className="text-primary font-semibold">{"<< Back"}</h1>
+      <Link href={'/student/dashboard/wallet'}><h1 className="text-primary font-semibold">{"<< Back"}</h1></Link>
       <div className="flex gap-6">
         <div className="w-1/3 flex flex-col gap-6 items-center ">
           <div className="w-full h-fit p-5 bg0white rounded-lg shadow-md">
@@ -45,7 +46,7 @@ const SellAccessCard = () => {
             molestiae ab maiores, fuga, aperiam quae totam, iusto quibusdam
             soluta.
           </div>
-          <h1 className="font-bold mt-4">Access our Goated Channels</h1>
+          <h1 className="font-bold mt-4">Access our Gated Channels</h1>
           <div className="text-sm font-thin text-[#5D6475] ">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi harum
             eius quae ipsa, natus animi tempore. Consequatur neque, nisi commodi

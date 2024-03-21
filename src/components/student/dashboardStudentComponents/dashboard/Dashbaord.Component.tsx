@@ -3,6 +3,7 @@ import React from "react";
 import Sidebar from "../Sidebar.Component";
 import Navbar from "../Navbar.Component";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import Link from "next/link";
 
 const CourseOverview = () => {
   return (
@@ -44,7 +45,9 @@ const UserPofileCard = () => {
         <h1 className="text-sm font-semibold">Current Communities</h1>
         <div className="w-full flex flex-col gap-4 mb-5">
           {[...Array(2)].map((i) => (
-            <CourseOverview key={i} />
+            <Link key={i} href="/student/dashboard/course">
+            <CourseOverview  />
+            </Link>
           ))}
         </div>
       </div>

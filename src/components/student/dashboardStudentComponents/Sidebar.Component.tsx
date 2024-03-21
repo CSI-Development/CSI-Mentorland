@@ -1,20 +1,29 @@
 "use client";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
-import React, { useState } from "react";
+import { usePathname } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
 
 function Sidebar() {
+  const pathname = usePathname();
+  
+ 
+  
   const [selectedSidebarOption, setSelectedSidebarOption] =
     useState("dashboard");
+
+
   return (
     <div className="w-1/5 h-full bg-[#fffefe] pt-24 border-r-2">
       <Link href="/student/dashboard">
-        <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-          ${
-            selectedSidebarOption === "dashboard" ? `bg-[#90A4B6]` : `null `
-          }`}
-          onClick={() => setSelectedSidebarOption("dashboard")}
+        <div // Use <a> tag for the Link component's child element
+          className={`flex items-center gap-2 px-8 py-2 text-black justify-start 
+            ${
+              pathname.includes("/student/dashboard") &&
+              !pathname.includes("/student/dashboard/") // Check if pathname is exactly "/student/dashboard"
+                ? "bg-[#90A4B6] text-white" // Selected style
+                : "" // Default style
+            }`}
         >
           <Icon icon="mdi-light:view-dashboard" className="text-3xl" />
           <p className="text-lg my-auto">Dashboard</p>
@@ -22,24 +31,24 @@ function Sidebar() {
       </Link>
 
       <Link href="/student/dashboard/communities">
-        <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "communities" ? `bg-[#90A4B6]` : `null `}`}
-          onClick={() => setSelectedSidebarOption("communities")}
+        <div // Use <a> tag for the Link component's child element
+          className={`flex items-center gap-2 px-8 py-2 text-black justify-start 
+            ${
+              pathname.includes("/student/dashboard/communities")
+                ? "bg-[#90A4B6] text-white" // Selected style
+                : "" // Default style
+            }`}
         >
-          <Icon
-            icon="fluent:people-community-20-regular"
-            className="text-3xl"
-          />
+          <Icon icon="fluent:people-community-20-regular" className="text-3xl" />
           <p className="text-lg my-auto">My Communities</p>
         </div>
       </Link>
 
       <Link href="/student/dashboard/wallet">
-        <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "wallet" ? `bg-[#90A4B6]` : `null `}`}
-          onClick={() => setSelectedSidebarOption("wallet")}
+        <div // Use <a> tag for the Link component's child element
+          className={`flex items-center gap-2 px-8 py-2 text-black justify-start 
+            ${pathname === "/student/dashboard/wallet" ? "bg-[#90A4B6]  text-white" : ""}
+          `}
         >
           <Icon icon="f7:wallet" className="text-3xl" />
           <p className="text-lg my-auto">My Wallet</p>
@@ -47,10 +56,10 @@ function Sidebar() {
       </Link>
 
       <Link href="/student/dashboard/notification">
-        <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "notification" ? `bg-[#90A4B6]` : `null `}`}
-          onClick={() => setSelectedSidebarOption("notification")}
+        <div // Use an 'a' tag inside 'Link' for proper navigation
+          className={`flex items-center gap-2 px-8 py-2 text-black justify-start 
+          ${pathname === "/student/dashboard/notification" ? "bg-[#90A4B6] text-white" : ""}
+          `}
         >
           <Icon icon="ion:mail-outline" className="text-3xl" />
           <p className="text-lg my-auto">Notification</p>
@@ -58,10 +67,10 @@ function Sidebar() {
       </Link>
 
       <Link href="/student/dashboard/wishlist">
-        <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "wishlist" ? `bg-[#90A4B6]` : `null `}`}
-          onClick={() => setSelectedSidebarOption("wishlist")}
+        <div // Use an 'a' tag inside 'Link' for proper navigation
+          className={`flex items-center gap-2 px-8 py-2 text-black justify-start 
+            ${pathname === "/student/dashboard/wishlist" ? "bg-[#90A4B6] text-white" : ""}
+          `}
         >
           <Icon icon="solar:health-linear" className="text-3xl" />
           <p className="text-lg my-auto">Wishlist</p>
@@ -70,9 +79,9 @@ function Sidebar() {
 
       <Link href="/student/dashboard/schedule">
         <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "schedule" ? `bg-[#90A4B6]` : `null `}`}
-          onClick={() => setSelectedSidebarOption("schedule")}
+          className={`flex items-center gap-2 px-8 py-2 text-black justify-start 
+          ${pathname === "/student/dashboard/schedule" ? "bg-[#90A4B6] text-white" : ""}
+        `}
         >
           <Icon icon="uil:schedule" className="text-3xl" />
           <p className="text-lg my-auto">My Schedule</p>
@@ -81,9 +90,9 @@ function Sidebar() {
 
       <Link href="/student/dashboard/analytics">
         <div
-          className={`flex text-black justify-start gap-2 px-8 py-2 
-        ${selectedSidebarOption === "analytics" ? `bg-[#90A4B6]` : `null `}`}
-          onClick={() => setSelectedSidebarOption("analytics")}
+          className={`flex items-center gap-2 px-8 py-2 text-black justify-start 
+          ${pathname === "/student/dashboard/analytics" ? "bg-[#90A4B6] text-white" : ""}
+        `}
         >
           <Icon icon="uim:analytics" className="text-3xl" />
           <p className="text-lg my-auto">Analytics</p>

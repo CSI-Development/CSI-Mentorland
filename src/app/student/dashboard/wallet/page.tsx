@@ -13,7 +13,7 @@ import WalletFundings from "@/components/student/dashboardStudentComponents/wall
 import WalletAssets from "@/components/student/dashboardStudentComponents/wallet/WalletAssets.compnent";
 
 const Wallet = () => {
-  const [currentTab, setCurrentTab] = useState<string>("fundings");
+  const [currentTab, setCurrentTab] = useState<string>("assets");
   const tabData = [
     {
       label: "Assets",

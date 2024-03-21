@@ -3,10 +3,11 @@ import React from "react";
 import Image from "next/image";
 import Banner from "../../../../../public/community/CommunityFeedBanner.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import CommunityPost from "@/components/community/feed/CommunityPost.component";
 
 const CommunityFeed = () => {
   return (
-    <div className="w-full h-screen bg-white text-black">
+    <div className="w-full h-screen bg-white text-black overflow-y-auto">
       <Image src={Banner} alt="" className="w-full h-[65vh] object-cover" />
       <div className="w-full flex gap-4 mt-5">
         <div className="w-16">
@@ -47,6 +48,9 @@ const CommunityFeed = () => {
               </div>
             </div>
           </div>
+          {[...Array(3)].map((post, idx) => {
+            return <CommunityPost highlighted={idx === 2} />;
+          })}
         </div>
         <div className="w-1/3 bg-green-500">right content</div>
       </div>

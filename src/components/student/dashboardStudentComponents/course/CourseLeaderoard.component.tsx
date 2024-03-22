@@ -4,11 +4,19 @@ import Place2Logo from "../../../../../public/studentDashboard/course/Place2.svg
 import Place3Logo from "../../../../../public/studentDashboard/course/Place3.svg";
 import Image from "next/image";
 
-const CourseLeaderboard = () => {
+const CourseLeaderboard = ({ dashboard }: { dashboard?: boolean }) => {
   return (
-    <div className="w-full h-full p-3 bg-white rounded-lg shadow-md flex flex-col gap-4">
+    <div
+      className={`w-full ${
+        dashboard ? "h-fit" : "h-full"
+      } p-3 bg-white rounded-lg shadow-md flex flex-col gap-4`}
+    >
       <div className="w-full flex justify-between">
-        <h1 className="text-sm font-semibold text-gray-700">Leaderboard</h1>
+        {dashboard ? (
+          <h1 className="text-lg font-bold text-black">Leaderboard</h1>
+        ) : (
+          <h1 className="text-sm font-semibold text-gray-700">Leaderboard</h1>
+        )}
       </div>
       <h1>
         Monthly winners will be period regard sudden better. Decisively

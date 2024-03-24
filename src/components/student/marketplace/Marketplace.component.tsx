@@ -3,7 +3,7 @@ import marketplaceBg from "../../../../public/marketplace/marketplaceBackground.
 import marketplaceCard from "../../../../public/marketplace/marketplaceCard.png";
 import packsThumbnail from "../../../../public/marketplace/packsThumbnail.png";
 import Image from "next/image";
-import Card from "./Card";
+import Card from "./PacksCard.component";
 
 export interface PackCardType {
   name: string;
@@ -73,7 +73,7 @@ function Marketplace() {
         </div>
       </div>
 
-      <div className="my-8">
+      <div className="mt-8">
         <div className="container mx-auto px-20 py-6">
           <h1 className="text-black font-bold mb-5 text-2xl">
             Latest Enriched Packs
@@ -99,7 +99,7 @@ function Marketplace() {
         </div>
       </div>
 
-      <div className="my-8">
+      <div className="">
         <div className="container mx-auto px-20 py-6">
           <h1 className="text-black font-bold mb-5 text-2xl">
             Latest simple Packs
@@ -117,11 +117,7 @@ function Marketplace() {
               />
             ))}
           </div>
-          <div className="flex justify-center mt-4">
-            <button className="bg-[#2769D9] text-white font-bold rounded-lg pt-1.5 pb-2 px-8 text-xl">
-              Search the Marketplace
-            </button>
-          </div>
+          
         </div>
       </div>
     </div>

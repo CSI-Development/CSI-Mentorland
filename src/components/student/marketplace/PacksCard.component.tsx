@@ -13,7 +13,7 @@ const Star = ({ filled }: { filled: boolean }) => {
   );
 };
 
-const Card = ({
+const PackCard = ({
   name,
   mentorName,
   price,
@@ -54,4 +54,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default PackCard;

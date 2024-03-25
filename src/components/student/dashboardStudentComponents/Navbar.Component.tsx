@@ -5,6 +5,7 @@ import smallLogo from "../../../../public/mentorlandSmallLogo.png";
 import profile from "../../../../public/selectSubject/subjectMentor.png";
 import Image from "next/image";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import Link from "next/link";
 
 function Navbar() {
   return (
@@ -16,7 +17,9 @@ function Navbar() {
         </p>
       </div>
       <div className="flex text-[#2668d8] text-3xl gap-4 my-auto">
-        <Icon icon="fluent:building-shop-20-regular" />
+        <Link href="/student/marketplace">
+          <Icon icon="fluent:building-shop-20-regular" />
+        </Link>
         <Icon icon="ph:chats-duotone" />
         <Icon icon="material-symbols:translate" />
         <Icon icon="pepicons-pencil:bell" />

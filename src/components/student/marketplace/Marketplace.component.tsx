@@ -4,6 +4,7 @@ import marketplaceCard from "../../../../public/marketplace/marketplaceCard.png"
 import packsThumbnail from "../../../../public/marketplace/packsThumbnail.png";
 import Image from "next/image";
 import Card from "./PacksCard.component";
+import Link from "next/link";
 
 export interface PackCardType {
   name: string;
@@ -81,14 +82,16 @@ function Marketplace() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {/* Repeat your Card component for each card you want to display */}
             {latestEnrichedPacks.map((item, index) => (
-              <Card
-                key={index}
-                imagePath={item.imagePath}
-                mentorName={item.mentorName}
-                name={item.name}
-                price={item.price}
-                rating={item.rating}
-              />
+              <Link key={index} href="/student/marketplace/buypack">
+                <Card
+                  key={index}
+                  imagePath={item.imagePath}
+                  mentorName={item.mentorName}
+                  name={item.name}
+                  price={item.price}
+                  rating={item.rating}
+                />
+              </Link>
             ))}
           </div>
           <div className="flex justify-center mt-4">
@@ -107,17 +110,18 @@ function Marketplace() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
             {/* Repeat your Card component for each card you want to display */}
             {latestEnrichedPacks.map((item, index) => (
-              <Card
-                key={index}
-                imagePath={item.imagePath}
-                mentorName={item.mentorName}
-                name={item.name}
-                price={item.price}
-                rating={item.rating}
-              />
+              <Link key={index} href="/student/marketplace/buypack">
+                <Card
+                  key={index}
+                  imagePath={item.imagePath}
+                  mentorName={item.mentorName}
+                  name={item.name}
+                  price={item.price}
+                  rating={item.rating}
+                />
+              </Link>
             ))}
           </div>
-          
         </div>
       </div>
     </div>

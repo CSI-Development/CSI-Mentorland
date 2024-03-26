@@ -10,7 +10,7 @@ function DashboardLayout({ children, showSidebar = true }: { children: React.Rea
       <div className="flex h-full">
         {/* Conditionally render the Sidebar based on the showSidebar prop */}
         {showSidebar && <Sidebar />}
-        <div className={`w-full ${showSidebar ? 'flex-1' : 'w-full'} bg-[#F7F9FB] pt-20 overflow-y-auto`}>
+        <div className={`w-full ${showSidebar ? 'flex-1' : 'w-full'} bg-[#F7F9FB] pt-[72px] overflow-y-auto`}>
           {children}
         </div>
         {/* <Temp /> */}

@@ -22,9 +22,9 @@ const AskCourseMentor = () => {
           </div>
           <div className="w-full flex justify-end mt-12">
             <div className="w-[90%] 0 flex flex-col gap-6 py-5">
-              {[...Array(2)].map((item) => {
+              {[...Array(2)].map((item, i) => {
                 return (
-                  <div className="w-full bg-white shadow-md rounded-lg p-3 flex flex-col gap-3">
+                  <div key={i} className="w-full bg-white shadow-md rounded-lg p-3 flex flex-col gap-3">
                     <div className="w-full flex justify-between gap-3">
                       <img
                         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
@@ -128,10 +128,10 @@ const AskCourseMentor = () => {
         <div className="flex-1  flex flex-col items-center">
           <Image src={MentorCard} alt="" className="w-full h-[40vh]" />
           <div className="flex flex-col gap-3 mt-6">
-            <h1 className="font-semibold">Who's in this channel</h1>
-            {[...Array(6)].map((item) => {
+            <h1 className="font-semibold">{`Who's in this channel`}</h1>
+            {[...Array(6)].map((item,i) => {
               return (
-                <div className="flex gap-3 items-center">
+                <div key={i} className="flex gap-3 items-center">
                   <img
                     src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
                     alt=""

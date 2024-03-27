@@ -30,11 +30,11 @@ function PackOverview() {
 
           <p className="text-xl font-bold mt-4">Description</p>
           <p className="text-[#5D6475]">
-            Pommy ipsum Geordie pork scratchings down the local trouble and
+            {`Pommy ipsum Geordie pork scratchings down the local trouble and
             strife nuthouse a diamond geezer a fiver, blighty chuffed upper
             class pants laughing gear Dr. Watson curtain twitching. Off with her
             head upper class smeg head meat and two veg easy peasy shepherd's
-            pie fish and chips, squiffy golly gosh hard cheese old boy blimey
+            pie fish and chips, squiffy golly gosh hard cheese old boy blimey`}
           </p>
 
           <p className="text-[#5D6475] text-lg mt-4">Price</p>

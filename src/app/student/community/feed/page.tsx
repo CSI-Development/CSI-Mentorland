@@ -51,7 +51,7 @@ const CommunityFeed = () => {
             </div>
           </div>
           {[...Array(3)].map((post, idx) => {
-            return <CommunityPost highlighted={idx === 2} />;
+            return <CommunityPost key={idx} highlighted={idx === 2} />;
           })}
         </div>
         <div className="w-1/3 pr-20 flex flex-col gap-6">
@@ -141,7 +141,7 @@ const CommunityFeed = () => {
           <div className="w-full h-fit flex p-5 flex-col gap-4 bg-white shadow-md rounded-lg">
             <h1 className="text-lg font-bold">My Progress</h1>
             <div>
-              You've <span className="font-mediun">ONLY</span> got 13 lessons to
+              {`You've`} <span className="font-mediun">ONLY</span> got 13 lessons to
               go before you get your certificate and{" "}
               <span className="font-medium">UNLOCK</span> the VIP referral
               community access

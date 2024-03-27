@@ -58,10 +58,10 @@ function Marketplace() {
             <div className="w-1/2 my-auto ">
               <h1 className="text-3xl font-bold mb-5 ">{`Welcome to Mentorland's Marketplace`}</h1>
               <p className="text-lg leading-6 mb-3">
-                The old bill driving a mini bloody shambles the black death on
+                {`The old bill driving a mini bloody shambles the black death on
                 his bill willy it's cracking flags, doolally wind up doing my
                 nut in by 'eck love on a stag do complete mare, a bottle of
-                plonk chinwag some mothers do 'ave 'em what a doddle tosser.
+                plonk chinwag some mothers do 'ave 'em what a doddle tosser.`}
               </p>
               <Link href="/student/marketplace/searchresult">
               <button className="bg-[#2769D9] font-bold rounded-lg pt-1.5 pb-2 px-10">

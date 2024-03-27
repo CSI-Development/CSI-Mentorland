@@ -63,9 +63,11 @@ function Marketplace() {
                 nut in by 'eck love on a stag do complete mare, a bottle of
                 plonk chinwag some mothers do 'ave 'em what a doddle tosser.
               </p>
+              <Link href="/student/marketplace/searchresult">
               <button className="bg-[#2769D9] font-bold rounded-lg pt-1.5 pb-2 px-10">
                 Search for Access Cards
               </button>
+              </Link>
             </div>
             <div className="h-full  flex justify-center items-center ">
               <Image alt="card" src={marketplaceCard} className="w-10/12 " />

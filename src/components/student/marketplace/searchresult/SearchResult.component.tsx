@@ -52,9 +52,11 @@ function SearchResult() {
             ))}
           </div>
           <div className="flex justify-center mt-10">
+            <Link href="/student/marketplace">
             <button className="bg-[#2769D9] text-white font-bold rounded-lg pt-1.5 pb-2 px-8 text-xl">
               Back to Marketplace
             </button>
+            </Link>
           </div>
         </div>
       </div>

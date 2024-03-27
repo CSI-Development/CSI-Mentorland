@@ -40,6 +40,7 @@ function SearchResult() {
             {latestEnrichedPacks.map((item, index) => (
               <Link key={index} href="/student/marketplace/buypack">
                 <PackCard
+                // 0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359
                   key={index}
                   imagePath={item.imagePath}
                   mentorName={item.mentorName}

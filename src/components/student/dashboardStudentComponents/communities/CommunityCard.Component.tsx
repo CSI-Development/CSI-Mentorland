@@ -54,7 +54,9 @@ function CommunityCard(props: CommunityCardProps) {
               trailColor="#ffffff"
             />
 
-            <p className="text-sm text-[#5D6475]">{props.classesLeft} Classes left</p>
+            <p className="text-sm text-[#5D6475]">
+              {props.classesLeft} Classes left
+            </p>
           </div>
           <button className="bg-[#2769D9] font-bold rounded-lg  text-white px-5 py-2 h-fit my-auto">
             GO TO COURSE

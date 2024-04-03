@@ -40,7 +40,7 @@ function SearchResult() {
             {latestEnrichedPacks.map((item, index) => (
               <Link key={index} href="/student/marketplace/buypack">
                 <PackCard
-                // 0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359
+                  // 0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359
                   key={index}
                   imagePath={item.imagePath}
                   mentorName={item.mentorName}
@@ -53,9 +53,9 @@ function SearchResult() {
           </div>
           <div className="flex justify-center mt-10">
             <Link href="/student/marketplace">
-            <button className="bg-[#2769D9] text-white font-bold rounded-lg pt-1.5 pb-2 px-8 text-xl">
-              Back to Marketplace
-            </button>
+              <button className="bg-[#2769D9] text-white font-bold rounded-lg pt-1.5 pb-2 px-8 text-xl">
+                Back to Marketplace
+              </button>
             </Link>
           </div>
         </div>

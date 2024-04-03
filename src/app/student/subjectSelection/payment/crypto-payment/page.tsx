@@ -1,14 +1,14 @@
-import Header from '@/components/commonComponents/Header.Component'
-import CryptoPayment from '@/components/student/subjectSelection/payment/cryptoPayment/CryptoPayment.Component'
-import React from 'react'
+import Header from "@/components/commonComponents/Header.Component";
+import CryptoPayment from "@/components/student/subjectSelection/payment/cryptoPayment/CryptoPayment.Component";
+import React from "react";
 
-function  cryptoPayment () {
+function cryptoPayment() {
   return (
     <>
-    <Header />
-    <CryptoPayment/>
+      <Header />
+      <CryptoPayment />
     </>
-  )
+  );
 }
 
-export default  cryptoPayment 
+export default cryptoPayment;

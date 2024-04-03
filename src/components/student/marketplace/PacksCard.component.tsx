@@ -48,7 +48,7 @@ const PackCard = ({
             <Star key={i} filled={false} />
           ))}
         </div>
-            <p className="text-xl font-bold text-[#2769D9] mt-1">{price}</p>
+        <p className="text-xl font-bold text-[#2769D9] mt-1">{price}</p>
       </div>
     </div>
   );

@@ -141,8 +141,8 @@ const CommunityFeed = () => {
           <div className="w-full h-fit flex p-5 flex-col gap-4 bg-white shadow-md rounded-lg">
             <h1 className="text-lg font-bold">My Progress</h1>
             <div>
-              {`You've`} <span className="font-mediun">ONLY</span> got 13 lessons to
-              go before you get your certificate and{" "}
+              {`You've`} <span className="font-mediun">ONLY</span> got 13
+              lessons to go before you get your certificate and{" "}
               <span className="font-medium">UNLOCK</span> the VIP referral
               community access
             </div>

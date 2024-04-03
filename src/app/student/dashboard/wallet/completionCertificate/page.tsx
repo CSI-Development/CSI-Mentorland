@@ -10,8 +10,8 @@ function completionCertificate() {
   return (
     <Layout showSidebar={false}>
       <div className="px-12">
-        <Link href={'/student/dashboard/wallet'}>
-        <button className="text-[#2769D9] font-semibold mt-1" >{`<< Back`}</button>
+        <Link href={"/student/dashboard/wallet"}>
+          <button className="text-[#2769D9] font-semibold mt-1">{`<< Back`}</button>
         </Link>
         <div className="flex gap-10">
           <div className="w-4/12">
@@ -42,8 +42,8 @@ function completionCertificate() {
                 strife nuthouse a diamond geezer a fiver, blighty chuffed upper
                 class pants laughing gear Dr. Watson curtain twitching. Off with
                 her head upper class smeg head meat and two veg easy peasy
-                shepherds pie fish and chips, squiffy golly gosh hard cheese
-                old boy blimey
+                shepherds pie fish and chips, squiffy golly gosh hard cheese old
+                boy blimey
               </p>
             </div>
             <div className="">

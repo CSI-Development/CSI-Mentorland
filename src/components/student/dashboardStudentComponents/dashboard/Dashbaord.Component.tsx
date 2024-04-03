@@ -46,7 +46,7 @@ const UserPofileCard = () => {
         <div className="w-full flex flex-col gap-4 mb-5">
           {[...Array(2)].map((i) => (
             <Link key={i} href="/student/dashboard/course">
-            <CourseOverview  />
+              <CourseOverview />
             </Link>
           ))}
         </div>
@@ -119,7 +119,10 @@ function Dashbaord() {
             <h1 className="text-md font-bold">Favorite Mentors</h1>
             <div className="w-full grid grid-cols-4 gap-3 ">
               {[...Array(8)].map((i) => (
-                <div key={i} className="flex flex-col text-center items-center gap-1">
+                <div
+                  key={i}
+                  className="flex flex-col text-center items-center gap-1"
+                >
                   <img
                     src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dXNlcnxlbnwwfHwwfHx8MA%3D%3D"
                     alt=""

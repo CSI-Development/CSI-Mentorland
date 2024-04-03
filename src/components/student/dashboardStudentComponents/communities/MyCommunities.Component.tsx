@@ -141,7 +141,6 @@ function MyCommunities() {
             classesLeft={data.classesLeft}
           />
         ))}
-        
       </div>
     </div>
   );

@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function resellAccessCard() {
-  return (
-    <div>resellAccessCard</div>
-  )
+  return <div>resellAccessCard</div>;
 }
 
-export default resellAccessCard
+export default resellAccessCard;

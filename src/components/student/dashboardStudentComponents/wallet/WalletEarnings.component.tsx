@@ -72,7 +72,7 @@ const WalletEarnings = () => {
           <th className="text-start">STATUS</th>
         </thead>
         <tbody className="w-full">
-          {tableData.map((earning,i) => (
+          {tableData.map((earning, i) => (
             <tr key={i} className="w-full mt-6">
               <td>{earning.action}</td>
               <td className="w-1/3">

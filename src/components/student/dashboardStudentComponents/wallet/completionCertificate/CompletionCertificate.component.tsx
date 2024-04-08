@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function CompletionCertificate() {
-  return (
-    <div>CompletionCertificate</div>
-  )
+  return <div>CompletionCertificate</div>;
 }
 
-export default CompletionCertificate
+export default CompletionCertificate;

@@ -1,6 +1,6 @@
-import Layout from '../../../../components/Layouts/DashboardLayout'; 
-import Wishlist from '@/components/student/dashboardStudentComponents/wishlist/Wishlist.Component';
-import React from 'react';
+import Layout from "../../../../components/Layouts/DashboardLayout";
+import Wishlist from "@/components/student/dashboardStudentComponents/wishlist/Wishlist.Component";
+import React from "react";
 
 function Page() {
   return (

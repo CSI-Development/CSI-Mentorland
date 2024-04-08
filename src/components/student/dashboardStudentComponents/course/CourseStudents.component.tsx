@@ -15,7 +15,7 @@ const CourseStudents = () => {
                 alt=""
                 className="w-12 h-12 rounded-full object-cover"
               />
-              <h1 className="text-sm font-medium" >Carlos J Olivo</h1>
+              <h1 className="text-sm font-medium">Carlos J Olivo</h1>
             </div>
           );
         })}

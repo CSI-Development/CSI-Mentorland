@@ -1,6 +1,6 @@
 import MyCommunities from "@/components/student/dashboardStudentComponents/communities/MyCommunities.Component";
 import React from "react";
-import Layout from '../../../../components/Layouts/DashboardLayout'; // Adjust this path to the correct location of your layout.tsx file
+import Layout from "../../../../components/Layouts/DashboardLayout"; // Adjust this path to the correct location of your layout.tsx file
 
 function communities() {
   return (
@@ -8,7 +8,7 @@ function communities() {
       <div className="h-full px-4 w-full  ">
         <MyCommunities />
       </div>
-      </Layout>
+    </Layout>
   );
 }
 

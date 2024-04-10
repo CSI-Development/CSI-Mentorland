@@ -30,11 +30,10 @@ function SignUpForm() {
     onSuccess: (e) => {
       console.log("success", e);
 
-      //remaining: after success user must be redirect somewhere. 
-
+      //remaining: after success user must be redirect somewhere.
     },
     onError: (e: AxiosError<{ error: { message: string } }>) => {
-      if(e.response?.data?.error?.message==="Email already exists"){
+      if (e.response?.data?.error?.message === "Email already exists") {
         setEmailIdError("Email already exists");
       }
       console.log("error", e.response?.data?.error?.message);
@@ -151,18 +150,30 @@ function SignUpForm() {
               <p className="text-[#1b448f] mb-1 text-lg">Email Address</p>
               <input
                 {...register("email")}
-                type="email"
                 placeholder="newuser@myemail.com"
-                className="w-full border-2 rounded-lg outline-none border-[#b9baba] py-3 px-5"
+                className={`w-full border-2 rounded-lg outline-none py-3 px-5 `
+                  .concat(
+                    errors.email
+                      ? " border-[#FF007A]"
+                      : " border-[#b9baba]"
+                  )
+                  .concat(
+                    emailIdError !== ""
+                      ? " border-[#FF007A]"
+                      : " border-[#b9baba]"
+                  )
+              }
               ></input>
               {errors.email && (
-                <p className="text-red-400 text-xs ml-1 mt-1">
+                <p className="text-white text-xs p-1.5 rounded-md bg-[#FF007A]">
                   {errors.email.message}
                 </p>
               )}
-              {emailIdError !==""&& (<p className="text-red-400 text-xs ml-1 mt-1">
+              {emailIdError !== "" && (
+                <p className="text-white text-xs p-1.5 rounded-md bg-[#FF007A]">
                   {emailIdError}
-              </p>)}
+                </p>
+              )}
             </div>
             <div className="mt-3">
               <p className="text-[#1b448f] mb-1 text-lg">Password</p>
@@ -170,10 +181,16 @@ function SignUpForm() {
                 {...register("password")}
                 type="password"
                 placeholder="password"
-                className="w-full border-2 outline-none rounded-lg border-[#b9baba] py-3 px-5"
+                className={`w-full border-2 rounded-lg outline-none py-3 px-5 `
+                  .concat(
+                    errors.password
+                      ? " border-[#FF007A]"
+                      : " border-[#b9baba]"
+                  )
+              }
               ></input>
               {errors.password && (
-                <p className="text-red-400 text-xs ml-1 mt-1">
+                <p className="text-white text-xs p-1.5 rounded-md bg-[#FF007A]">
                   {errors.password.message}
                 </p>
               )}

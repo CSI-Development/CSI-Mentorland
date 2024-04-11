@@ -129,7 +129,7 @@ const Content: React.FC = () => {
                 <p className="text-4xl font-bold">
                 LEARN FACE TO FACE WITH THE BEST INSIDE THEIR LIVE COMMUNITIES
                 </p>
-                <Link href={"/signup"}>
+                <Link href={"/auth/signup"}>
                   <button className="mt-6 bg-[#2769d8] px-3 py-2 text-lg rounded-lg">
                     Sign Up
                   </button>

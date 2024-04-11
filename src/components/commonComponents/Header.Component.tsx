@@ -1,8 +1,9 @@
-'use client';
+"use client";
 import Image from "next/image";
 import React, { useState } from "react";
 import Logo from "../../../public/logo.png";
 import LoginDialog from "../loginDialog/LoginDialog";
+import Link from "next/link";
 
 function Header() {
   const [isOpenLoginDialog, setIsOpenLoginDialog] = useState(false);
@@ -15,10 +16,15 @@ function Header() {
         <button>What we do</button>
         <button>Categories</button>
         <button>Search</button>
-        <button>Sign Up</button>
-        <button onClick={()=>setIsOpenLoginDialog(true)}>Log In</button>
+        <Link className="my-auto" href={"/auth/signup"}>
+          <button>Sign Up</button>
+        </Link>
+        <button onClick={() => setIsOpenLoginDialog(true)}>Log In</button>
       </div>
-      <LoginDialog OpenDialog={isOpenLoginDialog} setOpenDialog={setIsOpenLoginDialog} />
+      <LoginDialog
+        OpenDialog={isOpenLoginDialog}
+        setOpenDialog={setIsOpenLoginDialog}
+      />
     </nav>
   );
 }

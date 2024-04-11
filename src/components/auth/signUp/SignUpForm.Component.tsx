@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import Logo from "../../../public/logoDark.png";
+import Logo from "../../../../public/logoDark.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import { ISignUp, SignUp } from "@/schema/signup/signup.schema";
@@ -11,6 +11,8 @@ import { useMutation } from "@tanstack/react-query";
 import { signupApi } from "@/api/signup/signup.api";
 import { set } from "zod";
 import { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+
 
 function SignUpForm() {
   const [role, setrole] = useState<string>("");
@@ -25,11 +27,13 @@ function SignUpForm() {
     resolver: zodResolver(SignUp),
   });
 
+  const router = useRouter();
+
   const { mutate } = useMutation({
     mutationFn: signupApi,
     onSuccess: (e) => {
       console.log("success", e);
-
+      router.push("/auth/verify-email");
       //remaining: after success user must be redirect somewhere.
     },
     onError: (e: AxiosError<{ error: { message: string } }>) => {
@@ -46,16 +50,10 @@ function SignUpForm() {
     mutate(data);
   };
 
-  const o = () => {
-    console.log(getValues("email"));
-    console.log(getValues("password"));
-    console.log(getValues("role"));
-  };
-
   return (
     <>
       <div className="mt-5 w-full flex justify-center">
-        <Image onClick={o} alt="logo" src={Logo} />
+        <Image alt="logo" src={Logo} />
       </div>
       <div className="flex justify-center mt-6 text-black">
         <div className="w-5/12  ">

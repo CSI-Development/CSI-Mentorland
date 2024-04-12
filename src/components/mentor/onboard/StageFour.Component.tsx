@@ -14,7 +14,7 @@ function StageFour() {
       </p>
 
       {/* <div className="flex flex-col gap-3"> */}
-      <div className="flex flex-col gap-4" >
+      <div className="flex flex-col gap-4">
         <div className="grid grid-cols-[30%_30%_20%_10%] gap-3">
           {/* <div className="flex gap-4"> */}
           <h1 className="text-sm">Subject</h1>
@@ -36,7 +36,7 @@ function StageFour() {
             placeholder="Subject"
             className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-full"
           ></input>
-          <button className="bg-primary w-fit py-1 px-5 rounded-lg font-semibold text-white">
+          <button className="bg-primary w-full py-1 px-5 rounded-lg font-semibold text-white">
             Add
           </button>
           {/* </div> */}
@@ -46,7 +46,13 @@ function StageFour() {
           <h1>Superiour minds college</h1>
           <h1>2001</h1>
 
-          <Icon icon="material-symbols:close" className="w-4 h-4" />
+          <div className=" flex items-center justify-end" >
+            <Icon
+              icon="mingcute:close-fill"
+              className="w-5 h-5"
+              color="#FFD600"
+            />
+          </div>
         </div>
       </div>
     </div>

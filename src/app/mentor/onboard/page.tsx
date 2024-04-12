@@ -8,6 +8,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import StageTwo from "@/components/mentor/onboard/StageTwo.Component";
 import StageThree from "@/components/mentor/onboard/StageThree.Component";
 import StageFour from "@/components/mentor/onboard/StageFour.Component";
+import StageFive from "@/components/student/onboard/StageFive.component";
 import Link from "next/link";
 
 const MentorOnboarding = () => {
@@ -29,23 +30,24 @@ const MentorOnboarding = () => {
       {stage === 2 && <StageTwo />}
       {stage === 3 && <StageThree />}
       {stage === 4 && <StageFour />}
-      {stage < 4 ? (
-        <div className="flex gap-10 mt-6 justify-center bg-[#010d27] ">
-          <button
-            onClick={() => updateStage()}
-            className="bg-[#2668d8] py-1.5 px-4 flex text-lg rounded-lg font-semibold"
-          >
-            <Icon className="w-7 h-7" icon="tabler:arrow-right" />
-            Next
-          </button>
-          <button
-            onClick={() => updateStage()}
-            className="text-xl text-[#b9baba] w-20 font-semibold"
-          >
-            Skip
-          </button>
-        </div>
-      ) : (
+      {stage === 5 && <StageFive />}
+      {/* {stage < 4 ? ( */}
+      <div className="flex gap-10 mt-6 justify-center bg-[#010d27] ">
+        <button
+          onClick={() => updateStage()}
+          className="bg-[#2668d8] py-1.5 px-4 flex text-lg rounded-lg font-semibold"
+        >
+          <Icon className="w-7 h-7" icon="tabler:arrow-right" />
+          Next
+        </button>
+        <button
+          onClick={() => updateStage()}
+          className="text-xl text-[#b9baba] w-20 font-semibold"
+        >
+          Skip
+        </button>
+      </div>
+      {/* ) : (
         <div className="flex gap-10 mt-6 justify-center bg-[#010d27] ">
           <Link href={"/student/mentorselection"}>
             <button
@@ -57,7 +59,7 @@ const MentorOnboarding = () => {
             </button>
           </Link>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

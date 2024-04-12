@@ -7,7 +7,7 @@ import background from "../../../public/landingPage/LandingBg1.png";
 import cards from "../../../public/landingPage/CascadingCard.png";
 import Image from "next/image";
 import Link from "next/link";
-import landingSection1 from "../../../public/landingPage/landingSection1.png";
+import landingSection1 from "../../../public/landingPage/landingSection1.jpeg";
 import landingSection2 from "../../../public/landingPage/landingSection2.png";
 import landingSection3 from "../../../public/landingPage/landingSection3.png";
 import landingSection4 from "../../../public/landingPage/landingSection4.png";
@@ -129,7 +129,7 @@ const Content: React.FC = () => {
                 <p className="text-4xl font-bold">
                 LEARN FACE TO FACE WITH THE BEST INSIDE THEIR LIVE COMMUNITIES
                 </p>
-                <Link href={"/signup"}>
+                <Link href={"/auth/signup"}>
                   <button className="mt-6 bg-[#2769d8] px-3 py-2 text-lg rounded-lg">
                     Sign Up
                   </button>

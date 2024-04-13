@@ -1,4 +1,5 @@
-import React from "react";
+'use client';
+import React, { useEffect, useState } from "react";
 import Logo from "../../../../public/logoDark.png";
 import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";
@@ -6,6 +7,7 @@ import { resendEmail } from "@/api/resendEmail/resendEmail.api";
 import { AxiosError } from "axios";
 
 function VerifyEmail() {
+  const [email,setEmail] = useState<string>("");
   const { mutate } = useMutation({
     mutationFn: resendEmail,
     onSuccess: (e) => {
@@ -16,8 +18,12 @@ function VerifyEmail() {
       console.log(e);
     },
   });
-  const email = new URLSearchParams(window.location.search).get("email") || '';
-  return (
+  useEffect(() => {
+    const query = new URLSearchParams(window.location.search);
+    const emailParam = query.get('email') || '';
+    setEmail(emailParam);
+  }, []);
+    return (
     <>
       <div className="mt-5 w-full flex justify-center">
         <Image alt="logo" src={Logo} />

@@ -33,7 +33,7 @@ function SignUpForm() {
     mutationFn: signupApi,
     onSuccess: (e) => {
       console.log("success", e);
-      router.push("/auth/verify-email");
+      router.push("/auth/verify-email" + "?email=" + getValues("email"));
       //remaining: after success user must be redirect somewhere.
     },
     onError: (e: AxiosError<{ error: { message: string } }>) => {

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import Logo from "../../../public/logo.png";
-import LoginDialog from "../loginDialog/LoginDialog";
+import LoginDialog from "../loginDialog/LoginDialog.component";
 import Link from "next/link";
 
 function Header() {

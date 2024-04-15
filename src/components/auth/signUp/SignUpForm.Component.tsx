@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../../../public/logoDark.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
@@ -12,7 +12,8 @@ import { signupApi } from "@/api/signup/signup.api";
 import { set } from "zod";
 import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-
+import { verifyToken } from "@/utils/jwtAuth.api";
+import { useMyStore } from "@/store/store";
 
 function SignUpForm() {
   const [role, setrole] = useState<string>("");
@@ -32,9 +33,13 @@ function SignUpForm() {
   const { mutate } = useMutation({
     mutationFn: signupApi,
     onSuccess: (e) => {
+      useMyStore
+        .getState()
+        .setUser({ ...useMyStore.getState().user, email: getValues("email") });
+      //here will store the email id along with ither existing fields into store for further refrence
       console.log("success", e);
       router.push("/auth/verify-email" + "?email=" + getValues("email"));
-      //remaining: after success user must be redirect somewhere.
+      //here will redirect to the email verification page
     },
     onError: (e: AxiosError<{ error: { message: string } }>) => {
       if (e.response?.data?.error?.message === "Email already exists") {
@@ -46,9 +51,19 @@ function SignUpForm() {
   });
 
   const onSubmit: SubmitHandler<ISignUp> = async (data: ISignUp) => {
-    console.log(data);
     mutate(data);
   };
+
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   console.log(token);
+
+  //   const initAuth = async () => {
+  //     const a = await verifyToken();
+  //     console.log(a);
+  //   };
+  //   initAuth();
+  // }, []);
 
   return (
     <>
@@ -151,16 +166,13 @@ function SignUpForm() {
                 placeholder="newuser@myemail.com"
                 className={`w-full border-2 rounded-lg outline-none py-3 px-5 `
                   .concat(
-                    errors.email
-                      ? " border-[#FF007A]"
-                      : " border-[#b9baba]"
+                    errors.email ? " border-[#FF007A]" : " border-[#b9baba]"
                   )
                   .concat(
                     emailIdError !== ""
                       ? " border-[#FF007A]"
                       : " border-[#b9baba]"
-                  )
-              }
+                  )}
               ></input>
               {errors.email && (
                 <p className="text-white text-xs p-1.5 rounded-md bg-[#FF007A]">
@@ -179,13 +191,9 @@ function SignUpForm() {
                 {...register("password")}
                 type="password"
                 placeholder="password"
-                className={`w-full border-2 rounded-lg outline-none py-3 px-5 `
-                  .concat(
-                    errors.password
-                      ? " border-[#FF007A]"
-                      : " border-[#b9baba]"
-                  )
-              }
+                className={`w-full border-2 rounded-lg outline-none py-3 px-5 `.concat(
+                  errors.password ? " border-[#FF007A]" : " border-[#b9baba]"
+                )}
               ></input>
               {errors.password && (
                 <p className="text-white text-xs p-1.5 rounded-md bg-[#FF007A]">

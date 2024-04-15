@@ -17,4 +17,6 @@ export const logInApi = async (data: ILogIn): Promise<ILogInResponse> => {
     data
   )) satisfies ILogInResponse as ILogInResponse;
   return res;
+  //if success user will get the jwt token which contains role and _id of user
+  //if error user will get "Invalid email or password" as a message
 };

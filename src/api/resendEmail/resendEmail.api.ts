@@ -18,4 +18,6 @@ export const resendEmail = async (email:string): Promise<IResendEmailRes> => {
         {email},
     )) satisfies IResendEmailRes as IResendEmailRes;
     return res;
+    //response will be like "mail sent"
+    //if email dosent exist then response will be "Email not found"
 };

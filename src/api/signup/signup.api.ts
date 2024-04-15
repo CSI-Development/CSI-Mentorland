@@ -16,4 +16,6 @@ export const signupApi = async (data: ISignUp): Promise<ISignupResponse> => {
     data
   )) satisfies ISignupResponse as ISignupResponse;
   return res;
+  //if success it will send "email verification link sent" to the user email id as a message
+  //if error it will send "Email already exists" as a message
 };

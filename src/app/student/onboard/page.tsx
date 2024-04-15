@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Logo from "../../../../public/logo.png";
 import Image from "next/image";
 import OnboardingPageTracker from "@/components/student/onboard/OnboardingPageTracker.Component";
@@ -9,56 +9,23 @@ import StageTwo from "@/components/student/onboard/StageTwo.Component";
 import StageThree from "@/components/student/onboard/StageThree.Component";
 import StageFour from "@/components/student/onboard/StageFour.Component";
 import Link from "next/link";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useMutation,
+} from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { decodeToken } from "@/utils/jwt";
+import { verifyEmail } from "@/api/verifyEmail/verifyEmail.api";
+import OnboardingMain from "@/components/student/onboard/OnboardingMain.component";
+
+export const queryClient = new QueryClient();
 
 function StudentOnboard() {
-  const [stage, setStage] = useState(1);
-  const updateStage = () => {
-    setStage(stage + 1);
-  };
   return (
-    <div className="w-screen h-screen  p-5 bg-[#010d27]">
-      <Image
-        className="mx-auto "
-        alt="logo"
-        src={Logo.src}
-        height={100}
-        width={320}
-      ></Image>
-      <OnboardingPageTracker stage={stage} />
-      {stage === 1 && <StageOne />}
-      {stage === 2 && <StageTwo />}
-      {stage === 3 && <StageThree />}
-      {stage === 4 && <StageFour />}
-      {stage < 4 ? (
-        <div className="flex gap-10 mt-6 justify-center bg-[#010d27] ">
-          <button
-            onClick={() => updateStage()}
-            className="bg-[#2668d8] py-1.5 px-4 flex text-xl rounded-lg"
-          >
-            <Icon className="text-3xl" icon="tabler:arrow-right" />
-            Next
-          </button>
-          <button
-            onClick={() => updateStage()}
-            className="text-xl text-[#b9baba] w-20"
-          >
-            Skip
-          </button>
-        </div>
-      ) : (
-        <div className="flex gap-10 mt-6 justify-center bg-[#010d27] ">
-          <Link href={"/student/mentorselection"}>
-            <button
-              onClick={() => updateStage()}
-              className="bg-[#2668d8] py-1.5 px-4 flex text-xl rounded-lg"
-            >
-              <Icon className="text-3xl" icon="tabler:arrow-right" />
-              Select Mentor
-            </button>
-          </Link>
-        </div>
-      )}
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <OnboardingMain />
+    </QueryClientProvider>
   );
 }
 

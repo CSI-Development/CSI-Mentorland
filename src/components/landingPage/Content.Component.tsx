@@ -110,7 +110,7 @@ const Content: React.FC = () => {
       thumbnailImg: course6,
       description:
         "consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
-      price: "$12,990",
+      price: "$12,990000000",
     },
   ]);
 

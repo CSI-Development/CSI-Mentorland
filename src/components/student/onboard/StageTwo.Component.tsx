@@ -2,11 +2,31 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 import React, { useState } from "react";
 import Logo from "../../../public/sampleImages/sampleImg1.png";
+import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
+import { uploadImage } from "@/api/uploadImage/uploadImage.api";
+import { setSession } from "@/utils/jwt";
+import { IUploadImage } from "@/schema/createStudent/uploadImage.schema";
+import { useFormContext } from "react-hook-form";
 
-function StageTwo() {
+function StageTwo(register: any) {
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
 
-  const handleImageInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const { setValue } = useFormContext();
+
+  const { mutate } = useMutation({
+    mutationFn: uploadImage,
+    onSuccess: (e) => {
+      console.log("success", e);
+      setSession(e.data.token); //here will set the token into the session for axios header
+      //remaining: after success user must be redirect somewhere. like dashboard or home page more details see console
+      setValue("studentAvatar", e.data.file.url, { shouldTouch: true });
+    },
+  });
+
+  const handleImageInput = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
@@ -14,8 +34,14 @@ function StageTwo() {
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
+      console.log(file, "imageee");
+      const formData = new FormData();
+      formData.append("file", file);
+      mutate(formData);
     }
   };
+
+  console.log("Push data")
 
   return (
     <div className="mt-20 ">

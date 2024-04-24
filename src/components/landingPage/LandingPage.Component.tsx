@@ -10,7 +10,6 @@ function LandingPage() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-
         <Header />
         <Content />
       </QueryClientProvider>

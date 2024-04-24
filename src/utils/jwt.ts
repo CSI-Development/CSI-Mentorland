@@ -13,9 +13,9 @@ export const setSession = (token: string | null): void => {
   if (token) {
     console.log(token);
     localStorage.setItem("token", token);
-    axios.defaults.headers.common.Authorization = token;
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   } else {
-    localStorage.removeItem("token");
+    // localStorage.removeItem("token");
     delete axios.defaults.headers.common.Authorization;
   }
 };

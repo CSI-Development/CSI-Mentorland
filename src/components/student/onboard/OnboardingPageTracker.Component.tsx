@@ -5,7 +5,7 @@ function OnboardingPageTracker(props: { stage: number }) {
     <div className=" my-5">
       <div className="flex w-fit  mx-auto">
         <p
-          className={` h-7 w-7 font-bold text-center rounded-full  ${
+          className={` h-7 w-7 flex justify-center items-center font-bold text-center rounded-full  ${
             0 >= props.stage ? ` bg-[#c0d6fe] ` : ` bg-[#2769d8] `
           }`}
         >
@@ -17,7 +17,7 @@ function OnboardingPageTracker(props: { stage: number }) {
           }`}
         ></div>
         <p
-          className={` h-7 w-7 font-bold text-center rounded-full  ${
+          className={` h-7 w-7 flex justify-center items-center font-bold text-center rounded-full  ${
             1 >= props.stage ? ` bg-[#c0d6fe] ` : ` bg-[#2769d8] `
           }`}
         >
@@ -29,7 +29,7 @@ function OnboardingPageTracker(props: { stage: number }) {
           }`}
         ></div>
         <p
-          className={` h-7 w-7 font-bold text-center rounded-full  ${
+          className={` h-7 w-7 flex justify-center items-center font-bold text-center rounded-full  ${
             2 >= props.stage ? ` bg-[#c0d6fe] ` : ` bg-[#2769d8] `
           }`}
         >
@@ -41,7 +41,7 @@ function OnboardingPageTracker(props: { stage: number }) {
           }`}
         ></div>
         <p
-          className={` h-7 w-7 font-bold text-center rounded-full  ${
+          className={` h-7 w-7 flex justify-center items-center font-bold text-center rounded-full  ${
             3 >= props.stage ? ` bg-[#c0d6fe] ` : ` bg-[#2769d8] `
           }`}
         >

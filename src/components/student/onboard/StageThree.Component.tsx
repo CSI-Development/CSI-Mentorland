@@ -1,20 +1,64 @@
 import React, { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
-function StageThree() {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+function StageThree({ register }: any) {
+  const [selectedOptions, setSelectedOptions] = useState([
+    {
+      id: 1,
+      value: "Inspiration and entertainment",
+      checked: false,
+    },
+    {
+      id: 2,
+      value: "To earn something new",
+      checked: false,
+    },
+    {
+      id: 3,
+      value: "To get better at something I do",
+      checked: false,
+    },
+    {
+      id: 4,
+      value: "To level up my team or organization",
+      checked: false,
+    },
+    {
+      id: 5,
+      value: "To browse around",
+      checked: false,
+    },
+    {
+      id: 6,
+      value: "All of the above",
+      checked: false,
+    },
+  ]);
+
+  const { setValue } = useFormContext();
 
   // Function to handle option selection
-  const handleOptionSelect = (option: string) => {
+  // const handleOptionSelect = (option: string) => {
+  //   // Toggle selection for the clicked option
+  //   setSelectedOptions((prevOptions) => {
+  //     if (prevOptions.includes(option)) {
+  //       // Remove the option if already selected
+  //       return prevOptions.filter((item) => item !== option);
+  //     } else {
+  //       // Add the option if not already selected
+  //       return [...prevOptions, option];
+  //     }
+  //   });
+  // };
+
+  const handleOptionSelect = (id: number) => {
     // Toggle selection for the clicked option
-    setSelectedOptions((prevOptions) => {
-      if (prevOptions.includes(option)) {
-        // Remove the option if already selected
-        return prevOptions.filter((item) => item !== option);
-      } else {
-        // Add the option if not already selected
-        return [...prevOptions, option];
-      }
-    });
+    const arr = selectedOptions.map((item: any) =>
+      item.id === id ? { ...item, checked: !item.checked } : item
+    );
+    setSelectedOptions(arr);
+    const val = arr.filter((item) => item.checked).map((ele)=> ele.value);
+    setValue("wantToAchieve", val, { shouldTouch: true });
   };
 
   return (
@@ -24,116 +68,27 @@ function StageThree() {
         and entertainment
       </p>
       <div className="flex flex-col gap-1 w-2/3 mx-auto py-3 text-[#fefffe]">
-        <div
-          className={`flex bg-[#1c2133] px-8 py-4 rounded-md ${
-            selectedOptions.includes("Inspiration and entertainment")
-              ? "bg-gray-700"
-              : ""
-          }`}
-          onClick={() => handleOptionSelect("Inspiration and entertainment")}
-        >
-          <input
-            type="checkbox"
-            value=""
-            className="w-4 mr-1 h-4 my-auto text-blue-600 bg-[#384256] rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-            checked={selectedOptions.includes("Inspiration and entertainment")}
-          />
-          <label className="ms-2 text-md font-medium text-gray-900 dark:text-gray-300">
-            Inspiration and entertainment
-          </label>
-        </div>
-        <div
-          className={`flex bg-[#1c2133] px-8 py-4 rounded-md ${
-            selectedOptions.includes("To earn something new")
-              ? "bg-gray-700"
-              : ""
-          }`}
-          onClick={() => handleOptionSelect("To earn something new")}
-        >
-          <input
-            type="checkbox"
-            value=""
-            className="w-4 mr-1 h-4 my-auto text-blue-600 bg-[#384256] rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-            checked={selectedOptions.includes("To earn something new")}
-          />
-          <label className="ms-2 text-md font-medium text-gray-900 dark:text-gray-300">
-            To earn something new
-          </label>
-        </div>
-        <div
-          className={`flex bg-[#1c2133] px-8 py-4 rounded-md ${
-            selectedOptions.includes("To get better at something I do")
-              ? "bg-gray-700"
-              : ""
-          }`}
-          onClick={() => handleOptionSelect("To get better at something I do")}
-        >
-          <input
-            type="checkbox"
-            value=""
-            className="w-4 mr-1 h-4 my-auto text-blue-600 bg-[#384256] rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-            checked={selectedOptions.includes(
-              "To get better at something I do"
-            )}
-          />
-          <label className="ms-2 text-md font-medium text-gray-900 dark:text-gray-300">
-            To get better at something I do
-          </label>
-        </div>
-        <div
-          className={`flex bg-[#1c2133] px-8 py-4 rounded-md ${
-            selectedOptions.includes("To level up my team or organization")
-              ? "bg-gray-700"
-              : ""
-          }`}
-          onClick={() =>
-            handleOptionSelect("To level up my team or organization")
-          }
-        >
-          <input
-            type="checkbox"
-            value=""
-            className="w-4 mr-1 h-4 my-auto text-blue-600 bg-[#384256] rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-            checked={selectedOptions.includes(
-              "To level up my team or organization"
-            )}
-          />
-          <label className="ms-2 text-md font-medium text-gray-900 dark:text-gray-300">
-            To level up my team or organization
-          </label>
-        </div>
-        <div
-          className={`flex bg-[#1c2133] px-8 py-4 rounded-md ${
-            selectedOptions.includes("To browse around") ? "bg-gray-700" : ""
-          }`}
-          onClick={() => handleOptionSelect("To browse around")}
-        >
-          <input
-            type="checkbox"
-            value=""
-            className="w-4 mr-1 h-4 my-auto text-blue-600 bg-[#384256] rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-            checked={selectedOptions.includes("To browse around")}
-          />
-          <label className="ms-2 text-md font-medium text-gray-900 dark:text-gray-300">
-            To browse around
-          </label>
-        </div>
-        <div
-          className={`flex bg-[#1c2133] px-8 py-4 rounded-md ${
-            selectedOptions.includes("All of the above") ? "bg-gray-700" : ""
-          }`}
-          onClick={() => handleOptionSelect("All of the above")}
-        >
-          <input
-            type="checkbox"
-            value=""
-            className="w-4 mr-1 h-4 my-auto text-blue-600 bg-[#384256] rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-            checked={selectedOptions.includes("All of the above")}
-          />
-          <label className="ms-2 text-md font-medium text-gray-900 dark:text-gray-300">
-            All of the above
-          </label>
-        </div>
+        {selectedOptions.map((val, i) => (
+          <div
+            className={`flex bg-[#1c2133] px-8 py-4 rounded-md ${
+              val.checked ? "bg-gray-700" : ""
+            }`}
+            onClick={() => handleOptionSelect(val.id)}
+            key={i}
+          >
+            <input
+              type="checkbox"
+              // {...register(`wantToAchieve[${val.value}]`)}
+              // name={`wantToAchieve[${val.value}]`}
+              className="w-4 mr-1 h-4 my-auto text-blue-600 bg-[#384256] rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+              checked={val.checked}
+              onChange={() => handleOptionSelect(val.id)}
+            />
+            <label className="ms-2 text-md font-medium text-gray-300">
+              {val.value}
+            </label>
+          </div>
+        ))}
       </div>
     </div>
   );

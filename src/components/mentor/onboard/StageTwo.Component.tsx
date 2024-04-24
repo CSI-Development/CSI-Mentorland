@@ -1,7 +1,7 @@
+import { uploadApi } from "@/api/file/upload.api";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Image from "next/image";
 import React, { useState } from "react";
-import Logo from "../../../public/sampleImages/sampleImg1.png";
 
 function StageTwo() {
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
@@ -10,8 +10,13 @@ function StageTwo() {
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
-      reader.onloadend = () => {
+      reader.onloadend = async () => {
         setImage(reader.result);
+        const form = new FormData();
+        form.append('file', file);
+        console.log(form);
+        const res = await uploadApi(form);
+        console.log(res);
       };
       reader.readAsDataURL(file);
     }

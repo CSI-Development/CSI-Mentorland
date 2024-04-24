@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { setSession } from "@/utils/jwt";
+
 function LoginDialog({
   OpenDialog,
   setOpenDialog,
@@ -29,8 +30,8 @@ function LoginDialog({
     mutationFn: logInApi,
     onSuccess: (e) => {
       console.log("success", e);
-      setSession(e.data.token) //here will set the token into the session for axios header
-      //remaining: after success user must be redirect somewhere. like dashboard or home page more details see console
+      setSession(e.data.token);
+      setOpenDialog(false);
     },
     onError: (e: AxiosError<{ error: { message: string } }>) => {
       setLogInErrror(

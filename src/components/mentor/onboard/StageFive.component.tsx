@@ -1,12 +1,21 @@
-"use client";
-import React from "react";
-import { Icon } from "@iconify/react/dist/iconify.js";
+'use client';
+import React, { useState } from 'react';
+import { Icon } from '@iconify/react/dist/iconify.js';
 
 function StageFive() {
+  const [link, setLink] = useState('');
+  const [links, setLinks] = useState<Array<string>>([]);
+
+  const handleAddClick = () => {
+    const updated = [...links, link];
+    setLinks(updated);
+    setLink('');
+  };
+
   return (
-    <div className="w-8/12 mx-auto mt-10  h-fit flex flex-col  justify-center">
+    <div className="w-8/12 mx-auto mt-10  h-fit flex flex-col justify-center">
       <p className="text-center font-semibold text-2xl">
-        Have you don any educational videos recently
+        Have you done any educational videos recently
       </p>
 
       <p className="text-[#fefffe] text-center mt-8 mb-3">
@@ -21,13 +30,17 @@ function StageFive() {
             type="text"
             placeholder="http:"
             className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-full"
+            onChange={(e) => setLink(e.target.value)}
           ></input>
-          <button className="bg-primary text-white rounded-lg py-1 px-4 font-semibold">
+          <button
+            className="bg-primary text-white rounded-lg py-1 px-4 font-semibold"
+            onClick={handleAddClick}
+          >
             Add
           </button>
         </div>
         <div className="flex flex-col gap-3">
-          {[...Array(1)].map((item) => {
+          {links.map((item) => {
             return (
               <div className="flex justify-between items-center gap-4">
                 <img
@@ -35,7 +48,7 @@ function StageFive() {
                   alt=""
                   className="w-2/12 h-12 object-cover"
                 />
-                <h1 className="flex-1">How to grow your business</h1>
+                <h1 className="flex-1">{item}</h1>
 
                 <Icon
                   icon="mingcute:close-fill"

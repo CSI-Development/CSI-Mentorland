@@ -13,7 +13,7 @@ interface ISignupResponse extends AxiosResponse {
 export const signupApi = async (data: ISignUp): Promise<ISignupResponse> => {
   const res = (await axiosInstance.post(
     "/auth/register",
-    data
+    data,
   )) satisfies ISignupResponse as ISignupResponse;
   return res;
   //if success it will send "email verification link sent" to the user email id as a message

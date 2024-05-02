@@ -3,9 +3,10 @@ import { useMyStore } from "@/store/store";
 import axiosInstance from "@/utils/axiosInstance";
 import { decodeToken, setSession } from "@/utils/jwt";
 import { QueryFunctionContext } from "@tanstack/react-query";
+import { getCookie } from "cookies-next";
 
 export const verifyToken = async (): Promise<boolean> => {
-  const token = localStorage.getItem('token');
+  const token = getCookie('token');
   if (!token) return false;
 
   setSession(token);  // Update axios headers

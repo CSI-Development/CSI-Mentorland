@@ -1,15 +1,26 @@
-'use client';
-import React, { useState } from 'react';
-import { Icon } from '@iconify/react/dist/iconify.js';
+"use client";
+import React, { useState } from "react";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import { useFormContext } from "react-hook-form";
 
 function StageFive() {
-  const [link, setLink] = useState('');
+  const { setValue } = useFormContext();
+
+  const [link, setLink] = useState("");
   const [links, setLinks] = useState<Array<string>>([]);
 
   const handleAddClick = () => {
     const updated = [...links, link];
     setLinks(updated);
-    setLink('');
+    setLink("");
+    setValue("recentVideoLink", updated, { shouldTouch: true });
+    console.log(updated, "links");
+  };
+
+  const handleCancel = (indexToRemove: any) => {
+    setLinks((prevTodos) =>
+      prevTodos.filter((_, index) => index !== indexToRemove)
+    );
   };
 
   return (
@@ -29,10 +40,11 @@ function StageFive() {
           <input
             type="text"
             placeholder="http:"
-            className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-full"
+            className="border text-[#B9BABA] rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-full"
             onChange={(e) => setLink(e.target.value)}
           ></input>
           <button
+            type="button"
             className="bg-primary text-white rounded-lg py-1 px-4 font-semibold"
             onClick={handleAddClick}
           >
@@ -40,20 +52,28 @@ function StageFive() {
           </button>
         </div>
         <div className="flex flex-col gap-3">
-          {links.map((item) => {
+          {links.map((item, index) => {
             return (
-              <div className="flex justify-between items-center gap-4">
-                <img
-                  src="https://images.unsplash.com/photo-1692090383808-84faed4b35a5?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt=""
+              <div
+                className="flex justify-between items-center gap-4"
+                key={index}
+              >
+                {/* <video
+                  src={item}
                   className="w-2/12 h-12 object-cover"
-                />
+                  controls
+                /> */}
+                <embed
+                  src={item}
+                  className="w-[108px] h-[60px]"
+                ></embed>
                 <h1 className="flex-1">{item}</h1>
 
                 <Icon
                   icon="mingcute:close-fill"
                   className="w-5 h-5"
                   color="#FFD600"
+                  onClick={() => handleCancel(index)}
                 />
               </div>
             );

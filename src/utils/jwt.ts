@@ -1,18 +1,21 @@
 import { jwtDecode } from "jwt-decode";
 import axios from "./axiosInstance";
 import { useMyStore } from "@/store/store";
+import { setCookie } from "cookies-next";
 
-interface DecodedToken {
+export interface DecodedToken {
   _id: string;
   email?: string;
   name?: string;
   role: string;
+  exp: number;
 }
 
 export const setSession = (token: string | null): void => {
   if (token) {
-    console.log(token);
-    localStorage.setItem("token", token);
+    console.log(token, { expires: new Date(jwtDecode<DecodedToken>(token).exp*1000) });
+    setCookie("token", token, { expires: new Date(jwtDecode<DecodedToken>(token).exp*1000) });
+    setCookie("role", jwtDecode<DecodedToken>(token).role, { expires: new Date(jwtDecode<DecodedToken>(token).exp*1000) });
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   } else {
     // localStorage.removeItem("token");
@@ -47,9 +50,7 @@ export const storeUserData = (userDetails: userDetails) => {
   ) {
     useMyStore.getState().setRole(userDetails?.role);
   }
-  
+
   useMyStore.getState().setUser({ ...useMyStore.getState().user, userDetails });
   console.log(useMyStore.getState(), "store");
-  
-
 };

@@ -1,7 +1,11 @@
 import { Icon } from '@iconify/react/dist/iconify.js';
 import React, { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 
 function StageThree() {
+
+  const { setValue } = useFormContext();
+
   const [subjectStr, setSubjectStr] = useState('');
   const [subjects, setSubjects] = useState<Array<any>>([]);
 
@@ -25,9 +29,17 @@ function StageThree() {
       .split(',')
       .filter((item) => item.trim())
       .map((item, index) => ({ id: index, label: item.trim() }));
+      
+      setSubjects(subjects);
+      const sub = subjects.map((item) => item.label)
+      console.log(subjects, sub,"subjects...")
+    setValue("subjectsFromMentor", sub , { shouldTouch: true });
 
-    setSubjects(subjects);
   };
+
+  const handleCancel = (indexToRemove: any) =>{
+    setSubjects(prevTodos => prevTodos.filter((_, index) => index !== indexToRemove));
+  }
 
   return (
     <div className="w-5/12 mx-auto mt-10  h-fit flex flex-col  justify-center">
@@ -46,13 +58,13 @@ function StageThree() {
           onChange={handleSubjectStrChange}
         ></input>
         <div className="flex gap-2 items-center  ">
-          {subjects.map((subject) => (
+          {subjects.map((subject, index) => (
             <div
               key={subject.id}
               className="w-fit px-3 py-1 text-xs text-[#FFD600] bg-[#2E344D] border-[2px] border-[#464C63] flex gap-2 justify-between items-center "
             >
               <h1 className="font-medium">{subject.label}</h1>
-              <Icon icon="material-symbols:close" className="w-4 h-4" />
+              <Icon icon="material-symbols:close" className="w-4 h-4" onClick={() => handleCancel(index)}/>
             </div>
           ))}
         </div>

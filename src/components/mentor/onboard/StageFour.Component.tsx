@@ -1,19 +1,30 @@
-'use client';
-import React, { useState } from 'react';
-import { Icon } from '@iconify/react/dist/iconify.js';
+"use client";
+import React, { useState } from "react";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import { useFormContext } from "react-hook-form";
 
 function StageFour() {
+  const { setValue } = useFormContext();
+
   const [qualifications, setQualifications] = useState<Array<any>>([]);
-  const [subject, setSubject] = useState('');
-  const [institution, setInstitution] = useState('');
-  const [year, setYear] = useState('');
+  const [subject, setSubject] = useState("");
+  const [institution, setInstitution] = useState("");
+  const [year, setYear] = useState(1990);
 
   const handleAddClick = () => {
-    const updated = [...qualifications, { subject, institution, year }];
+    const updated = [...qualifications, { subject, institution, year: Number(year) }];
+    console.log(updated, "qualification");
     setQualifications(updated);
-    setSubject('');
-    setInstitution('');
-    setYear('');
+    setValue("verifiableQualifications", updated, { shouldTouch: true });
+    setSubject("");
+    setInstitution("");
+    setYear(0);
+  };
+
+  const handleCancel = (indexToRemove: any) => {
+    setQualifications((prevTodos) =>
+      prevTodos.filter((_, index) => index !== indexToRemove)
+    );
   };
 
   return (
@@ -43,19 +54,22 @@ function StageFour() {
           ></input>
           <input
             type="text"
-            placeholder="Subject"
+            placeholder="Institution"
             className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-full"
             value={institution}
             onChange={(e) => setInstitution(e.target.value)}
           ></input>
           <input
-            type="text"
-            placeholder="Subject"
+            type="number"
+            min="2001"
+            max="2100"
+            placeholder="Year"
             className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-full"
             value={year}
             onChange={(e) => setYear(e.target.value)}
           ></input>
           <button
+            type="button"
             className="bg-primary w-full py-1 px-5 rounded-lg font-semibold text-white"
             onClick={handleAddClick}
           >
@@ -74,6 +88,7 @@ function StageFour() {
                 icon="mingcute:close-fill"
                 className="w-5 h-5"
                 color="#FFD600"
+                onClick={() => handleCancel(index)}
               />
             </div>
           </div>

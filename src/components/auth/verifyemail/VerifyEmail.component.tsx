@@ -1,22 +1,26 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Logo from "../../../../public/logoDark.png";
 import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";
 import { resendEmail } from "@/api/resendEmail/resendEmail.api";
 import { AxiosError } from "axios";
+import { AppContext } from "@/providers/ContextProvider";
 
 function VerifyEmail() {
+  const {setLoading} = useContext(AppContext)
   const [email, setEmail] = useState<string>("");
   const { mutate } = useMutation({
     mutationFn: resendEmail,
     onSuccess: (e) => {
       console.log("success", e);
+      setLoading(false)
       //if email is sent successfully and if user clicks on it then it will be redirected to the onboarding page along with token
     },
     onError: (e: AxiosError<{ error: { message: string } }>) => {
       console.log("error", e.response?.data?.error?.message);
       console.log(e);
+      setLoading(false)
     },
   });
   useEffect(() => {
@@ -38,7 +42,7 @@ function VerifyEmail() {
           <p className="text-center text-sm mt-12 text-[#90A4B6]">{`Didn't receive it?`}</p>
           <button
             type="submit"
-            onClick={() => mutate(email)} //if user want to resend the email
+            onClick={() => { mutate(email), setLoading(true)}} //if user want to resend the email
             className={` rounded-lg w-full py-2.5 text-lg my-2 font-semibold text-white bg-[#2668d8] `}
           >
             Resend It

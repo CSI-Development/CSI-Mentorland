@@ -8,6 +8,7 @@ import { uploadImage } from "@/api/uploadImage/uploadImage.api";
 import { setSession } from "@/utils/jwt";
 import { IUploadImage } from "@/schema/createStudent/uploadImage.schema";
 import { useFormContext } from "react-hook-form";
+import { toast } from "react-toastify";
 
 function StageTwo(register: any) {
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
@@ -18,6 +19,7 @@ function StageTwo(register: any) {
     mutationFn: uploadImage,
     onSuccess: (e) => {
       console.log("success", e);
+      toast.success("Image Upload Successfully")
       setSession(e.data.token); //here will set the token into the session for axios header
       //remaining: after success user must be redirect somewhere. like dashboard or home page more details see console
       setValue("studentAvatar", e.data.file.url, { shouldTouch: true });
@@ -35,7 +37,7 @@ function StageTwo(register: any) {
       };
       reader.readAsDataURL(file);
       console.log(file, "imageee");
-      const formData = new FormData();
+      const formData: any = new FormData();
       formData.append("file", file);
       mutate(formData);
     }

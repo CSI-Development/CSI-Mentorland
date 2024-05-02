@@ -134,9 +134,9 @@ function SelectmentorComponent() {
   // };
 
   return (
-    <div className="overflow-hidden bg-[#010d27]">
+    <div className="overflow-hidden bg-[#010d27] scrollbar-hide">
       <div className="h-screen pt-20">
-        <div className="w-full h-full overflow-y-scroll pb-5">
+        <div className="w-full h-full overflow-y-scroll scrollbar-hide pb-5">
           <p className="text-center font-semibold text-2xl mt-4">
             We have {selectedMentors.length} Mentors that might interest you
           </p>
@@ -168,15 +168,6 @@ function SelectmentorComponent() {
                 />
               </div>
             ))}
-          </div>
-          <div className="flex gap-10 mt-6 justify-center bg-[#010d27] ">
-            <Link href={"/student/subjectSelection"}>
-              <button className="bg-[#2668d8] py-1.5 px-4 flex text-xl rounded-lg">
-                <Icon className="text-3xl" icon="tabler:arrow-right" />
-                Next
-              </button>
-            </Link>
-            <button className="text-xl text-[#b9baba] w-20">Skip</button>
           </div>
         </div>
       </div>

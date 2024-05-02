@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import Loader from "../components/Loader";
+import ContextProvider from "@/providers/ContextProvider";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +21,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="text-[#fefffe]">{children}</body>
+      <body className="text-[#fefffe]">
+        <ContextProvider>
+          <ReactQueryProvider>
+            <main>
+              <Loader />
+              {children}
+            </main>
+          </ReactQueryProvider>
+            <ToastContainer />
+        </ContextProvider>
+      </body>
     </html>
   );
 }

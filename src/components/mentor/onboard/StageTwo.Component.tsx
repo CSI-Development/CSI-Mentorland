@@ -1,10 +1,29 @@
 import { uploadApi } from "@/api/file/upload.api";
+import { setSession } from "@/utils/jwt";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import React, { useState } from "react";
+import { uploadImage } from "@/api/uploadImage/uploadImage.api";
+import { useFormContext } from "react-hook-form";
+import { toast } from "react-toastify";
 
 function StageTwo() {
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
+
+  const { setValue } = useFormContext();
+
+  const { mutate } = useMutation({
+    mutationFn: uploadImage,
+    onSuccess: (e) => {
+      toast.success("Image Upload Successfully")
+      console.log("success", e);
+      setSession(e.data.token); //here will set the token into the session for axios header
+      //remaining: after success user must be redirect somewhere. like dashboard or home page more details see console
+      setValue("mentorAvatar", e.data.file.url, { shouldTouch: true });
+    },
+  });
+
 
   const handleImageInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -19,6 +38,9 @@ function StageTwo() {
         console.log(res);
       };
       reader.readAsDataURL(file);
+      const formData: any = new FormData();
+      formData.append("file", file);
+      mutate(formData);
     }
   };
 

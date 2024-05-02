@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/auth/verify-email"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/auth/verify-email", "src/app/mentor/dashboard/page.js", "src/components/mentor/dashboardMentorComponents/footer.jsx", "src/components/mentor/dashboardMentorComponents/communities/index.jsx", "src/components/mentor/dashboardMentorComponents/communities/Community.Component.jsx"],
   "exclude": ["node_modules"]
 }

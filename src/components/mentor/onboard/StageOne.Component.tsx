@@ -1,4 +1,4 @@
-function StageOne() {
+function StageOne({ register }: any) {
   return (
     <div className="w-5/12 mx-auto mt-16  h-[25rem] flex flex-col  justify-center">
       <p className="text-center font-semibold text-2xl">
@@ -10,15 +10,15 @@ function StageOne() {
       <div className="flex gap-5 mt-1">
         <input
           type="text"
+          {...register("firstName")}
           placeholder="First Name"
           className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-1/2"
-          // {...register('firstName')}
         ></input>
         <input
           type="text"
+          {...register("lastName")}
           placeholder="Last Name"
           className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-1/2"
-          // {...register('lastName')}
         ></input>
       </div>
     </div>

@@ -1,8 +1,11 @@
 import { ICreateStudent } from "@/schema/createStudent/createStudent.schema";
 import axiosInstance from "@/utils/axiosInstance";
+import { DecodedToken } from "@/utils/jwt";
 import { AxiosResponse } from "axios";
 import { profile } from "console";
+import { getCookie } from "cookies-next";
 import { promises } from "dns";
+import { jwtDecode } from "jwt-decode";
 
 interface ICreateStudentResponse extends AxiosResponse {
   message?: string;
@@ -12,12 +15,16 @@ interface ICreateStudentResponse extends AxiosResponse {
 }
 
 export const createStudent = async (
-  data: ICreateStudent,
+  data: ICreateStudent
 ): Promise<ICreateStudentResponse> => {
-  console.log(data, "rexjk");
+  const token  = getCookie('token')?? ""
+  // const role =jwtDecode<DecodedToken>(e.data.token).role
+  const id =jwtDecode<DecodedToken>(token)._id
+  console.log(id,"userid....")
+  // console.log(data, "rexjk");
   const res = (await axiosInstance.post("student/createStudent", {
     ...data,
-    userId: "662634208ef5c16f662cb017",
+    userId: id
   })) satisfies ICreateStudentResponse as ICreateStudentResponse;
   return res;
   //if success it will send "email verification link sent" to the user email id as a message

@@ -1,14 +1,19 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Dialog } from "@material-tailwind/react";
 import { useForm } from "react-hook-form";
 import { ILogIn, LogIn } from "@/schema/login/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { logInApi } from "@/api/login/login.api";
 import { useMutation } from "@tanstack/react-query";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { setSession } from "@/utils/jwt";
+import { DecodedToken, setSession } from "@/utils/jwt";
+import { useRouter } from "next/navigation";
+import { AppContext } from "@/providers/ContextProvider";
+import { jwtDecode } from "jwt-decode";
+import { getCookie } from "cookies-next";
+
 
 function LoginDialog({
   OpenDialog,
@@ -17,6 +22,9 @@ function LoginDialog({
   OpenDialog: boolean;
   setOpenDialog: Function;
 }) {
+  const {setLoading} = useContext(AppContext)
+  
+
   const [loginError, setLogInErrror] = useState<string>("");
   const {
     register,
@@ -29,11 +37,16 @@ function LoginDialog({
   const { mutate } = useMutation({
     mutationFn: logInApi,
     onSuccess: (e) => {
+      setLoading(false)
       console.log("success", e);
       setSession(e.data.token);
+      const role = jwtDecode<DecodedToken>(e.data.token).role
+      const id = jwtDecode<DecodedToken>(e.data.token)._id
       setOpenDialog(false);
+      router.push(`/${role}/dashboard?id=${id}`);
     },
     onError: (e: AxiosError<{ error: { message: string } }>) => {
+      setLoading(false)
       setLogInErrror(
         e.response?.data?.error?.message ||
           "Something went wrong. Please try again."
@@ -42,8 +55,10 @@ function LoginDialog({
       console.log(e);
     },
   });
+  const router = useRouter()
 
   const onSubmit = async (data: ILogIn) => {
+    setLoading(true)
     mutate(data); //here will send the data to the login api
   };
 

@@ -4,14 +4,11 @@ import React, { useState } from "react";
 import Logo from "../../../public/logo.png";
 import LoginDialog from "../loginDialog/LoginDialog.component";
 import Link from "next/link";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-export const queryClient = new QueryClient();
 
 function Header() {
   const [isOpenLoginDialog, setIsOpenLoginDialog] = useState(false);
   return (
-    <QueryClientProvider client={queryClient}>
       <nav className="w-full flex bg-[#010d27] py-5 px-10 fixed justify-between">
         <div>
           <Image alt="logo" src={Logo} />
@@ -30,7 +27,6 @@ function Header() {
           setOpenDialog={setIsOpenLoginDialog}
         />
       </nav>
-    </QueryClientProvider>
   );
 }
 

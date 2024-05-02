@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Logo from "../../../../public/logoDark.png";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
@@ -9,13 +9,19 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { signupApi } from "@/api/signup/signup.api";
-import { set } from "zod";
-import { AxiosError } from "axios";
+import { any, set } from "zod";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { verifyToken } from "@/utils/jwtAuth.api";
 import { useMyStore } from "@/store/store";
+import { useGoogleLogin } from "@react-oauth/google";
+import { AppContext } from "@/providers/ContextProvider";
+import FacebookLogin from "react-facebook-login";
+import { toast } from "react-toastify";
+// import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
 
 function SignUpForm() {
+  const { setLoading } = useContext(AppContext);
   const [role, setrole] = useState<string>("");
   const [emailIdError, setEmailIdError] = useState<string>("");
   const {
@@ -36,12 +42,14 @@ function SignUpForm() {
       useMyStore
         .getState()
         .setUser({ ...useMyStore.getState().user, email: getValues("email") });
+      setLoading(false);
       //here will store the email id along with ither existing fields into store for further refrence
       console.log("success", e);
       router.push("/auth/verify-email" + "?email=" + getValues("email"));
       //here will redirect to the email verification page
     },
     onError: (e: AxiosError<{ error: { message: string } }>) => {
+      setLoading(false);
       if (e.response?.data?.error?.message === "Email already exists") {
         setEmailIdError("Email already exists");
       }
@@ -51,7 +59,58 @@ function SignUpForm() {
   });
 
   const onSubmit: SubmitHandler<ISignUp> = async (data: ISignUp) => {
+    setLoading(true);
     mutate(data);
+  };
+
+  //signup With google
+
+  const handleGoogleSignUp = () => {
+    if (role) {
+      login();
+    } else {
+      toast.error("Please select a role");
+      return;
+    }
+  };
+
+  const login = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      console.log(tokenResponse);
+      // fetching userinfo can be done on the client or the server
+      const userData = await axios
+        .get("https://www.googleapis.com/oauth2/v3/userinfo", {
+          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        })
+        .then((res) => res.data);
+
+      axios
+        .post("http://localhost:5000/auth/googleAuth", {
+          role: role,
+          email: userData.email,
+          emailVerified: userData.email_verified,
+          // headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+        })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    },
+  });
+
+  /// facebook signup auth
+
+  const responseFacebook = (response: any) => {
+    console.log(response);
+  };
+
+  const handleFacebookSignUp = () => {
+    if (!role) {
+      toast.error("Please select a role");
+      return;
+    }
   };
 
   // useEffect(() => {
@@ -133,6 +192,8 @@ function SignUpForm() {
             </div>
 
             <button
+              type="button"
+              onClick={handleGoogleSignUp}
               className={`mt-6 flex py-2 justify-center w-8/12 mx-auto  gap-2 border-2 rounded-lg border-[#b9baba] ${
                 role === "" ? ` text-[#b9baba] ` : ` text-black `
               }`}
@@ -144,7 +205,28 @@ function SignUpForm() {
               )}
               Sign up with Google
             </button>
-            <button
+            <FacebookLogin
+              appId="785104936432032"
+              autoLoad={false}
+              isDisabled={!role}
+              fields="name,email,picture"
+              textButton="Sign up with facebook"
+              callback={responseFacebook}
+              onClick={handleFacebookSignUp}
+              cssClass={`my-facebook-button-class flex border-2 rounded-lg border-[#b9baba] py-2 w-8/12 mx-auto gap-2 justify-center mt-2 cursor-pointer ${
+                role === "" ? ` text-[#b9baba] ` : ` text-black `
+              }`}
+              icon={
+                role === "" ? (
+                  <Icon className="text-2xl" icon="simple-icons:facebook" />
+                ) : (
+                  <Icon className="text-2xl" icon="logos:facebook" />
+                )
+              }
+            />
+            {/* <button
+            type="button"
+              // onClick={handleFacebookSignUp}
               className={` mt-2 flex py-2 justify-center w-8/12 mx-auto gap-2 border-2 rounded-lg border-[#b9baba] ${
                 role === "" ? ` text-[#b9baba] ` : ` text-black `
               }`}
@@ -155,7 +237,7 @@ function SignUpForm() {
                 <Icon className="text-2xl" icon="logos:facebook" />
               )}
               Sign up with Facebook
-            </button>
+            </button> */}
 
             <p className="text-black text-center my-2">- OR -</p>
 

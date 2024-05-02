@@ -1,8 +1,8 @@
 import axios from "axios";
 import { ApiError } from "next/dist/server/api-utils";
 
-// let baseURL = "http://18.221.74.118/api";
-
+// export let baseURL = "http://18.221.74.118/api";
+console.log(process.env.NEXT_PUBLIC_BASEURL,'enf')
 export let baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
 // if(process.env.NODE_ENV==='production'){

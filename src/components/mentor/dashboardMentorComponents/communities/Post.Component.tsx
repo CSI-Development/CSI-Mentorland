@@ -23,7 +23,7 @@ export default function CreatePost() {
   const [stage, setStage] = useState(1);
 
   const [postText, setPostText] = useState("");
-  const quillRef = useRef(null);
+  const quillRef = useRef<any>();
   console.log(postText, "postText");
 
   const { register, handleSubmit, setValue } = useForm<ICreateCommunityPost>();

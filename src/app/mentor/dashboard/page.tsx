@@ -2,7 +2,7 @@ import GeneralDashboard from "@/components/mentor/dashboardMentorComponents/dash
 import React from "react";
 import MentorDashboardLayout from "@/components/Layouts/mentorDashboardLayout";
 
-function generateTimeIntervals(startHour, numberOfIntervals) {
+function generateTimeIntervals(startHour: any, numberOfIntervals: any) {
     const timeIntervals = [];
   
     for (let i = 0; i < numberOfIntervals; i++) {

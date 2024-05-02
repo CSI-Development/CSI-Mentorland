@@ -120,19 +120,6 @@ function SelectmentorComponent() {
     setValue("selectedMentors", val, { shouldTouch: true });
   };
 
-
-  // const toggleSelectMentor = (mentor: StaticImageData) => {
-  //   if (selectedMentors.includes(mentor)) {
-  //     // If mentor is already selected, remove it
-  //     setSelectedMentors((prevSelected) =>
-  //       prevSelected.filter((item) => item !== mentor)
-  //     );
-  //   } else {
-  //     // If mentor is not selected, add it
-  //     setSelectedMentors((prevSelected) => [...prevSelected, mentor]);
-  //   }
-  // };
-
   return (
     <div className="overflow-hidden bg-[#010d27] scrollbar-hide">
       <div className="h-screen pt-20">

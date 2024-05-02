@@ -18,6 +18,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { AppContext } from "@/providers/ContextProvider";
 import FacebookLogin from "react-facebook-login";
 import { toast } from "react-toastify";
+import { baseURL } from "@/utils/axiosInstance";
 // import TiSocialFacebookCircular from 'react-icons/lib/ti/social-facebook-circular';
 
 function SignUpForm() {
@@ -85,7 +86,7 @@ function SignUpForm() {
         .then((res) => res.data);
 
       axios
-        .post("http://localhost:5000/auth/googleAuth", {
+        .post(`${baseURL}/auth/googleAuth`, {
           role: role,
           email: userData.email,
           emailVerified: userData.email_verified,

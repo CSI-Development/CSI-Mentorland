@@ -3,7 +3,7 @@ import { ApiError } from "next/dist/server/api-utils";
 
 // let baseURL = "http://18.221.74.118/api";
 
-let baseURL = "http://localhost:5000/api";
+export let baseURL = process.env.NEXT_PUBLIC_BASEURL;
 
 // if(process.env.NODE_ENV==='production'){
 //     // baseUrl='http://localhost:3000/api'

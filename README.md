@@ -1,6 +1,6 @@
 # CSI-Mentorland
-Mentorland App - A
-Learning Management System based on the Credentialing Standards Institute core LMS Products<br>
+Mentorland App
+Learning Management System Based On CSI Core LMS Product<br>
 Mentorland is a website and web3 application for Students and Mentors to connect, communicate and learn new skills.<br><br>
 
 <h1>Requirements:</h1>

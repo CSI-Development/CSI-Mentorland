@@ -5,8 +5,8 @@ Mentorland is a website and web3 application for Students and Mentors to connect
 
 <h1>Requirements:</h1>
 
-<H2>Create Components Of CSI Learning Management Application</H2>
-**All Engineers Must Know Components Requirements**<br>
+<H2>Components Of Mentorland Learning Management System (LMS) </H2>
+<br>
 a. Front End Design: Logo & Assets - Develop FE of the Figma File<br>
 b. Dashboards For: Admin and Teacher Users<br>
 c. Dashboard For: Student and Free Members<br>

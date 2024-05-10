@@ -7,8 +7,8 @@ function Loader() {
   const { loading } = useContext(AppContext);
   return (
     <div
-      className={`${loading ? "flex" : "hidden"} fixed z-50 h-screen w-full items-center justify-center backdrop-blur-lg`}
-      style={{background: "#0008"}}
+      className={`${loading ? "flex" : "hidden"} fixed z-50 h-screen w-full items-center justify-center`}
+      style={{ background: "#0007" }}
     >
       <Image
         src="/mentorlandSmallLogo.png"

@@ -1,27 +1,115 @@
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import { courseGetApi } from "@/app/api/createCourse/getCourse.api";
+import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 function CourseSection() {
+  const { data } = useQuery({
+    queryKey: ["courses"],
+    queryFn: () => courseGetApi(),
+  });
 
-    const router = useRouter();
+  console.log(data, "course data");
 
-    const createCourse = () => {
-        router.push("createCourse");
-    }
+  const router = useRouter();
+
+  const createCourse = () => {
+    router.push("createCourse");
+  };
+
   return (
     <div className="w-full text-black">
-      <div className="w-full h-[585px] bg-[#E8ECF3] flex justify-center items-center">
+      <div className="flex h-[585px] w-full items-center justify-center bg-[#E8ECF3]"></div>
 
-      </div>
-      <div className="w-full flex justify-center items-center text-center mt-10 ">
-        <div>
-            <h1 className="text-[#5D6475] text-3xl font-semibold">Start Creating your course</h1>
-            <p className="text-[#5D6475] text-xl mt-4">If you need help with it, we’ve made a tutorial for that. Have a look here.</p>
-            <button type="button" className=" bg-[#2769D9] mt-10 py-[9px] px-[14px] rounded-lg font-bold text-white" onClick={createCourse}>Create your first  Course</button>
-        </div>
-      </div>
+      {
+        data ?
+          <div className="mt-10 w-full">
+            <div className="w-full text-center">
+              <h1 className="text-4xl font-bold">My Courses</h1>
+            </div>
+            <div className="w-full flex justify-end p-10">
+              <button type="button" className=" mt-10 rounded-lg bg-[#2769D9] px-[14px] py-[9px] font-bold text-white" onClick={createCourse}>Create another Courses</button>
+            </div>
+            <div className="grid grid-cols-3 place-items-center gap-10 p-10	">
+              {data?.courses?.length > 0 &&
+                data?.courses?.map((val: any, i: number) => (
+                  <div
+                    className="max-w-sm rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800"
+                    key={i}
+                  >
+
+                    <Image
+                      className="rounded-t-lg"
+                      src={val.logo}
+                      width={1000}
+                      height={1000}
+                      objectFit="cover"
+                      alt=""
+                    />
+                    <div className="p-5">
+                      <p className="p-1 bg-[#E8ECF3] w-fit rounded text-sm text-primary">{val.category}</p>
+                      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        {val.name}
+                      </h5>
+                      <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 h-10 overflow-hidden text-ellipsis w-full">
+                        {val.description}
+                      </p>
+
+                      <Link href={`/mentor/dashboard/community/course/${val._id}`}
+                        className="inline-flex items-center rounded-lg bg-blue-700 px-3 py-2 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+
+                      >
+
+                        Go to Course{" "}
+                        <svg
+                          className="ms-2 h-3.5 w-3.5 rtl:rotate-180"
+                          aria-hidden="true"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 14 10"
+                        >
+                          <path
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9"
+                          />
+                        </svg>
+                      </Link>
+                    </div>
+
+                  </div>
+                ))}
+            </div>
+          </div> :
+          <div className="mt-10 flex w-full items-center justify-center text-center ">
+            <div>
+              <h1 className="text-3xl font-semibold text-[#5D6475]">
+                Start Creating your course
+              </h1>
+              <p className="mt-4 text-xl text-[#5D6475]">
+                If you need help with it, we’ve made a tutorial for that. Have a
+                look here.
+              </p>
+              <button
+                type="button"
+                className=" mt-10 rounded-lg bg-[#2769D9] px-[14px] py-[9px] font-bold text-white"
+                onClick={createCourse}
+              >
+                Create your first Course
+              </button>
+            </div>
+          </div>
+      }
     </div>
   );
 }
-
 export default CourseSection;

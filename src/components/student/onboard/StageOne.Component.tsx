@@ -26,7 +26,7 @@ function StageOne({register}:any) {
         ></input>
       </div>
 
-      <div className="border rounded-lg mt-5 bg-[#384256] py-2 px-5">
+      {/* <div className="border rounded-lg mt-5 bg-[#384256] py-2 px-5">
         <div className="flex justify-center">
           <Icon className="text-3xl" icon="mdi:incognito" />
           <p className="font-sans text-lg mx-2">
@@ -60,7 +60,7 @@ function StageOne({register}:any) {
             ></input>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

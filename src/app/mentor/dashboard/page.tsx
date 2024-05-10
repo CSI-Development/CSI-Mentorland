@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+"use client"
 import { IoMdTime } from "react-icons/io";
 import Image from "next/image";
 import { TiArrowBack } from "react-icons/ti";
@@ -6,28 +9,34 @@ import { IoFlag } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import MentorDashboardLayout from "@/layouts/mentorDashboardLayout";
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { mentorDetailsApi } from "@/app/api/mentorDetails/mentorDetails.api";
 
-function generateTimeIntervals(startHour: number, numberOfIntervals: number) {
-  const timeIntervals = [];
+const Page = () => {
+  const { data } = useQuery({
+    queryKey: ["mentorDetails"],
+    queryFn: () => mentorDetailsApi(),
+  });
 
-  for (let i = 0; i < numberOfIntervals; i++) {
-    const currentHour = (startHour + i) % 24;
-    const formattedHour = currentHour.toString().padStart(2, "0");
+  function generateTimeIntervals(startHour: number, numberOfIntervals: number) {
+    const timeIntervals = [];
 
-    const timeString = `${formattedHour}:00`;
+    for (let i = 0; i < numberOfIntervals; i++) {
+      const currentHour = (startHour + i) % 24;
+      const formattedHour = currentHour.toString().padStart(2, "0");
 
-    timeIntervals.push(timeString);
+      const timeString = `${formattedHour}:00`;
+
+      timeIntervals.push(timeString);
+    }
+
+    return timeIntervals;
   }
 
-  return timeIntervals;
-}
+  const startHour = 9; // Start from 09:00
+  const numberOfIntervals = 8; // Generate 5 intervals (09:00, 10:00, 11:00, 12:00, 13:00)
 
-const startHour = 9; // Start from 09:00
-const numberOfIntervals = 8; // Generate 5 intervals (09:00, 10:00, 11:00, 12:00, 13:00)
-
-const timeIntervals = generateTimeIntervals(startHour, numberOfIntervals);
-
-function page() {
+  const timeIntervals = generateTimeIntervals(startHour, numberOfIntervals);
   return (
     // <Dashbaord />
     <MentorDashboardLayout showSidebar={true}>
@@ -88,14 +97,14 @@ function page() {
               </div>
               <div className="flex w-full flex-col items-center justify-center">
                 <Image
-                  src="/svg/user.svg"
+                  src={data?.mentorAvatar ?? "/svg/user.svg"}
                   alt="user"
                   width={136}
                   height={136}
                   className="-mt-20 rounded-full bg-white p-[1px]"
                 />
                 <h1 className="text-2xl font-bold text-[#151B2B]">
-                  Cody Getchell
+                  {data?.firstName} {data?.lastName}
                 </h1>
               </div>
               <div className="mt-5 p-5">
@@ -348,6 +357,6 @@ function page() {
       </div>
     </MentorDashboardLayout>
   );
-}
+};
 
-export default page;
+export default Page;

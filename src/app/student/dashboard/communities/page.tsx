@@ -21,7 +21,7 @@ function Communities() {
       memberImage: mentor1,
       courseImg: subjectCoverImg,
       courseName: "Course make millions initial course",
-      progress: 75,
+      progress: 100,
       classesLeft: 15,
     },
     {

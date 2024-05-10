@@ -8,7 +8,8 @@ interface CourseCardProps {
   title: string;
   description: string;
   imageUrl: string;
-  price: string;
+  // price: string;
+  id: string;
 }
 
 function CourseCard(props: CourseCardProps) {
@@ -18,38 +19,44 @@ function CourseCard(props: CourseCardProps) {
     setExpanded(!expanded);
   };
 
-  const { title, description, imageUrl, price } = props;
+  const { title, description, imageUrl, id } = props;
 
   const truncatedText = expanded
     ? description
-    : `${description.slice(0, 600)}...`;
+    : description.length > 600
+      ? `${description?.slice(0, 600)}...`
+      : description;
 
   return (
-    <div className="w-8/12 mx-auto mt-4">
-      <p className="font-semibold text-xl">{title}</p>
-      <div className="flex gap-8 mt-5">
+    <div className="mx-auto mt-4 w-8/12">
+      <p className="text-xl font-semibold">{title}</p>
+      <div className="mt-5 flex gap-8">
         <Image
-          width={100}
-          height={100}
+          width={80}
+          height={80}
           src={imageUrl}
           alt="subject"
           className="h-44 w-44 rounded-full"
         />
-        <div>
+        <div className="flex-1">
           <p>{truncatedText}</p>
-          {!expanded && (
+          {!expanded && description.length > 600 && (
             <button className="text-blue-500" onClick={toggleExpand}>
               Read More
             </button>
           )}
         </div>
         <div className="flex flex-col justify-center gap-2">
-          <p className="text-3xl font-bold text-center">{price}</p>
-          <Link href="/student/subjectSelection/payment">
-            <button className="bg-blue-500 text-white py-2 w-28 px-4 rounded-lg mt-4">
-              Join Now
-            </button>
+          <p className="text-center text-3xl font-bold">Free</p>
+          {/* <p className="text-center text-3xl font-bold">{price}</p> */}
+          {/* <Link href="/student/subjectSelection/payment"> */}
+          <Link
+            href={`/student/dashboard/community/course/${id}`}
+            className="mt-4  whitespace-nowrap rounded-lg bg-blue-500 px-4 py-2 text-white "
+          >
+            Go to Course
           </Link>
+          {/* </Link> */}
         </div>
       </div>
     </div>

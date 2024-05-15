@@ -7,9 +7,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { mentorDetailsApi } from "@/app/api/mentorDetails/mentorDetails.api";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import { useContext } from "react";
+import { AppContext } from "@/providers/ContextProvider";
 
 function Navbar() {
   const router = useRouter();
+  const {setOpenWallet} = useContext(AppContext)
 
   const { data } = useQuery({
     queryKey: ["mentorDetails"],
@@ -51,7 +55,7 @@ function Navbar() {
         <Image src="/svg/chat.svg" alt="store" width={30} height={30} />
         <Image src="/svg/language.svg" alt="store" width={30} height={30} />
         <Image src="/svg/bell.svg" alt="store" width={30} height={30} />
-        <Image src="/svg/Wallet.svg" alt="store" width={30} height={30} />
+        <Icon icon="uit:wallet" className="cursor-pointer" onClick={() => setOpenWallet(true)} />
         <Image
           src={data?.mentorAvatar ?? "/svg/user.svg"}
           alt="Profile"

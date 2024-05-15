@@ -106,11 +106,12 @@ function SelectSubjectComponent() {
                 {val?.courses?.map((ele: any, i: number) => (
                   <CourseCard
                     key={i}
-                    description={ele.description}
-                    imageUrl={ele.logo}
+                    mentorId={val?.user}
+                    description={ele?.description}
+                    imageUrl={ele?.logo}
                     // price={course.price.toString()}
-                    title={ele.name}
-                    id={ele._id}
+                    title={ele?.name}
+                    id={ele?._id}
                   />
                 ))}
               </div>

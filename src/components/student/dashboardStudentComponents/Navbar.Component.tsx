@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import smallLogo from "../../../../public/mentorlandSmallLogo.png";
 import profile from "../../../../public/selectSubject/subjectMentor.png";
 import Image from "next/image";
@@ -12,9 +12,12 @@ import { useRouter } from "next/navigation";
 import { deleteCookie } from "cookies-next";
 import { useQuery } from "@tanstack/react-query";
 import { useDetailsApi } from "@/app/api/userDetails/userDetails.api";
+import ConnectModal from "@/components/modals/connectModal";
+import { AppContext } from "@/providers/ContextProvider";
 
 function Navbar() {
   const router = useRouter();
+  const {setOpenWallet} = useContext(AppContext)
 
   const { data } = useQuery({
     queryKey: ["userdetails"],
@@ -42,7 +45,7 @@ function Navbar() {
         <Icon icon="ph:chats-duotone" />
         <Icon icon="material-symbols:translate" />
         <Icon icon="pepicons-pencil:bell" />
-        <Icon icon="uit:wallet" />
+        <Icon icon="uit:wallet" className="cursor-pointer" onClick={() => setOpenWallet(true)} />
         <Image
           src={data?.studentAvatar ?? profile}
           alt="Profile"
@@ -59,6 +62,7 @@ function Navbar() {
           </button>
         </div>
       </div>
+      <ConnectModal />
     </nav>
   );
 }

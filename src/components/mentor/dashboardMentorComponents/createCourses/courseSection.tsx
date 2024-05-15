@@ -51,6 +51,7 @@ function CourseSection() {
                       width={1000}
                       height={1000}
                       objectFit="cover"
+                      style={{ aspectRatio: '3/2', objectFit: 'contain' }}
                       alt=""
                     />
                     <div className="p-5">

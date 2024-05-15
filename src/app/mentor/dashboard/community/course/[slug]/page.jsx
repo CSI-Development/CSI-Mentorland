@@ -29,11 +29,9 @@ function WatchCourse() {
         data.sections[0].lectures &&
         data.sections[0].lectures.length > 0
       ) {
-        setActiveLecture({
-          url: data.sections[0].lectures[0].url,
-          description: data.sections[0].lectures[0].description,
-        });
-      }
+        const updatedActive = [data.sections[0].lectures[0],data.sections[0]];
+        setActiveLecture(updatedActive);
+      } 
     }
   }, [isLoading, data]);
 

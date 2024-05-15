@@ -7,6 +7,7 @@ import ContextProvider from "@/providers/ContextProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SessionWrapper from "@/providers/SessionWrapper";
+import MagicProvider from "@/providers/MagicProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,15 +28,17 @@ export default function RootLayout({
     <SessionWrapper>
       <html lang="en">
         <body className={`${poppins.className} text-[#fefffe]`}>
-          <ContextProvider>
-            <ReactQueryProvider>
-              <main>
-                <Loader />
-                {children}
-              </main>
-            </ReactQueryProvider>
-            <ToastContainer />
-          </ContextProvider>
+          <MagicProvider>
+            <ContextProvider>
+              <ReactQueryProvider>
+                <main>
+                  <Loader />
+                  {children}
+                </main>
+              </ReactQueryProvider>
+              <ToastContainer />
+            </ContextProvider>
+          </MagicProvider>
         </body>
       </html>
     </SessionWrapper>

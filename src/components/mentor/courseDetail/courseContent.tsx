@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { FaPlayCircle } from "react-icons/fa";
+import DurationComponent from "./durationComponent";
 
 function CourseContent({ data, activeLecture, setActiveLecture }: any) {
   const [courseData, setCourseData] = useState<any>();
@@ -20,8 +21,10 @@ function CourseContent({ data, activeLecture, setActiveLecture }: any) {
     setIsOpen((prevState) => !prevState);
   };
 
-  const handleActiveLecture = (lecture: any) => {
-    setActiveLecture(lecture);
+  const handleActiveLecture = (lecture: any, section: any) => {
+    const updatedActive = [lecture, section];
+    setActiveLecture(updatedActive);
+    // setActiveLecture(!activeLecture)
   };
 
   useEffect(() => {
@@ -31,6 +34,7 @@ function CourseContent({ data, activeLecture, setActiveLecture }: any) {
   }, [data]);
 
   useEffect(() => {
+    setOpenSectionIndex(0);
     const handleOutsideClick = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
@@ -45,15 +49,76 @@ function CourseContent({ data, activeLecture, setActiveLecture }: any) {
     };
   }, []);
 
-  const [openSectionIndex, setOpenSectionIndex] = useState();
+  const [openSectionIndex, setOpenSectionIndex] = useState<number>();
 
   const toggleSection = (index: any) => {
     setOpenSectionIndex((prevIndex: any) =>
       prevIndex === index ? null : index,
     );
   };
+
+
   return (
     <div className=" grid grid-cols-1 gap-10 py-20 pr-20">
+      <div>
+        <h1 className="text-2xl font-bold text-[#2769D9]">
+          {courseData?.name}
+        </h1>
+        <div className="mt-5 grid grid-cols-1 gap-5">
+          <p>{courseData?.description}</p>
+        </div>
+      </div>
+      <div>
+        <h1 className="text-2xl font-bold text-[#2769D9]">Course Content</h1>
+        <div className="mt-8 grid grid-cols-1 gap-5 bg-[#F3F5FA] p-3">
+          <div>
+            {courseData?.sections?.map((section: any, index: number) => (
+              <div key={index}>
+                <div
+                  className="flex cursor-pointer text-[]"
+                  onClick={() => toggleSection(index)}
+                >
+                  <h1 className="text-xl font-bold">{section.title}</h1>
+                  {openSectionIndex === index ? (
+                    <MdKeyboardArrowUp className="text-4xl font-bold text-[#2769d9]" />
+                  ) : (
+                    <MdKeyboardArrowDown className="text-4xl font-bold text-[#2769d9]" />
+                  )}
+                </div>
+                {/* Render content only if the section is open */}
+                {openSectionIndex === index && (
+                  <div className="z-10 mt-2 w-full rounded bg-white p-5">
+                    <ul className="grid grid-cols-1 gap-10 py-2">
+                      {section.lectures.map(
+                        (lecture: any, lectureIndex: number) => (
+                          <li key={lectureIndex}>
+                            <div className="flex">
+                              <input
+                                type="checkbox"
+                                checked={activeLecture}
+                                height={20}
+                                width={20}
+                                className="h-[20px] w-[20px] border-2 border-[#1A458F]"
+                              />
+                              <div className="ml-4 text-[#90A4B6]">
+                                <p onClick={() => handleActiveLecture(lecture, section)}>
+                                  {lecture.title}
+                                </p>
+                                <DurationComponent duration={lecture.duration} />
+                              </div>
+                            </div>
+                          </li>
+                        ),
+                      )}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div className="">
         <h1 className="text-2xl font-bold text-[#2769D9]">
           Watched this Lesson
@@ -106,66 +171,7 @@ function CourseContent({ data, activeLecture, setActiveLecture }: any) {
           </div>
         </div>
       </div>
-      <div>
-        <h1 className="text-2xl font-bold text-[#2769D9]">Course Content</h1>
-        <div className="mt-8 grid grid-cols-1 gap-5 bg-[#F3F5FA] p-3">
-          <div>
-            {courseData?.sections?.map((section: any, index: number) => (
-              <div key={index}>
-                <div
-                  className="flex cursor-pointer text-[]"
-                  onClick={() => toggleSection(index)}
-                >
-                  <h1 className="text-xl font-bold">{section.title}</h1>
-                  {openSectionIndex === index ? (
-                    <MdKeyboardArrowUp className="text-4xl font-bold text-[#2769d9]" />
-                  ) : (
-                    <MdKeyboardArrowDown className="text-4xl font-bold text-[#2769d9]" />
-                  )}
-                </div>
-                {/* Render content only if the section is open */}
-                {openSectionIndex === index && (
-                  <div className="z-10 mt-2 w-full rounded bg-white p-5">
-                    <ul className="grid grid-cols-1 gap-10 py-2">
-                      {section.lectures.map(
-                        (lecture: any, lectureIndex: number) => (
-                          <li key={lectureIndex}>
-                            <div className="flex">
-                              <input
-                                type="checkbox"
-                                height={20}
-                                width={20}
-                                className="h-[20px] w-[20px] border-2 border-[#1A458F]"
-                              />
-                              <div className="ml-4 text-[#90A4B6]">
-                                <p onClick={() => handleActiveLecture(lecture)}>
-                                  {lecture.description}
-                                </p>
-                                <p className="m-1 flex">
-                                  <FaPlayCircle className="mr-1 mt-1 text-black" />{" "}
-                                  {lecture.duration}
-                                </p>
-                              </div>
-                            </div>
-                          </li>
-                        ),
-                      )}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-      <div>
-        <h1 className="text-2xl font-bold text-[#2769D9]">
-          {courseData?.name}
-        </h1>
-        <div className="mt-5 grid grid-cols-1 gap-5">
-          <p>{courseData?.description}</p>
-        </div>
-      </div>
+
     </div>
   );
 }

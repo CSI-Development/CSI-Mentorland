@@ -69,7 +69,7 @@ function StageTwo(register: any) {
       <input
         id="imageInput"
         type="file"
-        accept="image/*"
+        accept="image/jpeg,image/png,image/jpg"
         className="hidden"
         onChange={handleImageInput}
       />

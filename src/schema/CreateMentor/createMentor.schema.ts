@@ -1,4 +1,4 @@
-import z from "zod";
+import z, { string } from "zod";
 
 export const createMentorData = z.object({
   firstName: z.string(),
@@ -10,9 +10,14 @@ export const createMentorData = z.object({
       subject: z.string(),
       institution: z.string(),
       year: z.number(),
-    })
+    }),
   ),
-  recentVideoLink: z.string().array(),
+  recentVideoLink: z.array(
+    z.object({
+      url: z.string(),
+      thumbnail: z.string(),
+    }),
+  ),
 });
 
 export type ICreateMentor = z.TypeOf<typeof createMentorData>;

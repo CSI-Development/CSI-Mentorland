@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 import { type ICreateCourse } from "@/schema/createCourse/createCourse.schema";
 import axiosInstance from "@/utils/axiosInstance";
@@ -7,6 +8,8 @@ import { getCookie } from "cookies-next";
 import { jwtDecode } from "jwt-decode";
 
 interface ICreateCourseResponse extends AxiosResponse {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  course: any;
   message?: string;
   error?: {
     message: string;
@@ -15,7 +18,7 @@ interface ICreateCourseResponse extends AxiosResponse {
 
 export const createCourseApi = async (
   data: ICreateCourse
-): Promise<ICreateCourseResponse> => {
+): Promise<any> => {
   console.log(data, "createComunity");
   const token = getCookie("token")?? "";
   const id =jwtDecode<DecodedToken>(token)._id  // const userId =  localStorage.getItem("id")

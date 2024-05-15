@@ -57,23 +57,27 @@ function StageThree({ register }: any) {
   const handleOptionSelect = (id: number) => {
     // Toggle selection for the clicked option
     const arr = selectedOptions.map((item: any) =>
-      item.id === id ? { ...item, checked: !item.checked } : item
+      item.id === id
+        ? { ...item, checked: !item.checked }
+        : id === 6
+          ? { ...item, checked: true }
+          : item,
     );
     setSelectedOptions(arr);
-    const val = arr.filter((item) => item.checked).map((ele)=> ele.value);
+    const val = arr.filter((item) => item.checked).map((ele) => ele.value);
     setValue("wantToAchieve", val, { shouldTouch: true });
   };
 
   return (
-    <div className="w-5/12 mx-auto mt-10  h-fit flex flex-col  justify-center">
-      <p className="text-center font-semibold text-2xl">
+    <div className="mx-auto mt-10 flex  h-fit w-5/12 flex-col  justify-center">
+      <p className="text-center text-2xl font-semibold">
         Thanks Nick, what would you like to achieve at MentorLand? Inspiration
         and entertainment
       </p>
-      <div className="flex flex-col gap-1 w-2/3 mx-auto py-3 text-[#fefffe]">
+      <div className="mx-auto flex w-2/3 flex-col gap-1 py-3 text-[#fefffe]">
         {selectedOptions.map((val, i) => (
           <div
-            className={`flex bg-[#1c2133] px-8 py-4 rounded-md ${
+            className={`flex rounded-md bg-[#1c2133] px-8 py-4 ${
               val.checked ? "bg-gray-700" : ""
             }`}
             onClick={() => handleOptionSelect(val.id)}
@@ -83,11 +87,11 @@ function StageThree({ register }: any) {
               type="checkbox"
               // {...register(`wantToAchieve[${val.value}]`)}
               // name={`wantToAchieve[${val.value}]`}
-              className="w-4 mr-1 h-4 my-auto text-blue-600 bg-[#384256] rounded dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
+              className="my-auto mr-1 h-4 w-4 rounded bg-[#384256] text-blue-600 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
               checked={val.checked}
               onChange={() => handleOptionSelect(val.id)}
             />
-            <label className="ms-2 text-md font-medium text-gray-300">
+            <label className="text-md ms-2 font-medium text-gray-300">
               {val.value}
             </label>
           </div>

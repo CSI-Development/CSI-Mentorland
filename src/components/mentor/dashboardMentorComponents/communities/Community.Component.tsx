@@ -65,9 +65,14 @@ export const Card = () => {
 };
 
 export const MainCommunityFeed = () => {
-  const router = useRouter();
 
-  const [post, setPost] = useState(false);
+  const { data } = useQuery({
+    queryKey: ["userpost"],
+    queryFn: () => communityGetApi(),
+  });
+
+  console.log(data, "post data here")
+  const router = useRouter();
 
   const createPost = () => {
     router.push("/mentor/dashboard/community/createPost");
@@ -75,9 +80,9 @@ export const MainCommunityFeed = () => {
 
   return (
     <div className=" flex justify-between w-[80%] px-10">
-      {post ? (
-        <Feeds />
-      ) : (
+      {data?.length > 0 ?
+        <Feeds data={data}/>
+       : (
         <div className=" w-[626px] h-full  flex justify-center mt-40">
           <div className=" w-full h-[70px] gap-5 my-3 text-center">
             <h3 className=" text-[31px] leading-[46px] font-bold text-[#5D6475] text-center ">
@@ -104,10 +109,10 @@ export const InitialFeed = () => {
   return <div className=" w-full h-[232px] bg-[#93B6FB]"></div>;
 };
 
-export const Feeds = () => {
+export const Feeds = ({data}: any) => {
   return (
     <div className=" w-[836px] flex flex-col gap-7">
-      <SingleFeed />
+      <SingleFeed data={data} />
       {/* Banner */}
       <div className=" w-full h-[232px] flex items-center">
         <Image
@@ -122,13 +127,7 @@ export const Feeds = () => {
   );
 };
 
-export const SingleFeed = () => {
-  const { data } = useQuery({
-    queryKey: ["userpost"],
-    queryFn: () => communityGetApi(),
-  });
-
-  console.log(data, "api get data");
+export const SingleFeed = ({data}: any) => {
 
   return (
     <div className=" w-full grid grid-cols-1 gap-4">

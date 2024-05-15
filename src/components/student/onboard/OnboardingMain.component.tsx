@@ -27,6 +27,8 @@ import { AppContext } from "@/providers/ContextProvider";
 import { ApiError } from "next/dist/server/api-utils";
 import { createStudent } from "@/app/api/createStudent/createStudent.api";
 import { verifyEmail } from "@/app/api/verifyEmail/verifyEmail.api";
+
+
 export interface userDetails {
   role?: string;
   _id?: string;
@@ -113,7 +115,7 @@ function OnboardingMain() {
     const firstName = values.firstName;
     const lastName = values.lastName;
     const wantToAchieve = values.wantToAchieve;
-    const userNameOrHandler = values.userNameOrHandler;
+    // const userNameOrHandler = values.userNameOrHandler;
     const studentAvatar = values.studentAvatar;
     const subjectWantToLearn = values.subjectWantToLearn;
     console.log(values, "values");
@@ -122,18 +124,16 @@ function OnboardingMain() {
       toast.error("Please enter both First and Last names.");
       return;
     }
-    if (stage === 1 && !userNameOrHandler) {
-      toast.error("Please enter the username");
-      return;
-    }
+    // if (stage === 1 && !userNameOrHandler) {
+    //   toast.error("Please enter the username");
+    //   return;
+    // }
     if (stage === 2 && !studentAvatar) {
       toast.error("Please add the Avtar");
       return;
     }
 
     if (stage === 3 && wantToAchieve.length === 0) {
-      console.log(stage, "stagethree");
-      console.log(wantToAchieve, "want toavhieve");
       toast.error("Please add your purpose");
       return;
     }
@@ -185,7 +185,7 @@ function OnboardingMain() {
           {stage === 1 && <StageOne register={methods.register} />}
           {stage === 2 && <StageTwo register={methods.register} />}
           {stage === 3 && <StageThree register={methods.register} />}
-          {stage === 4 && <StageFour />}
+          {stage === 4 && <StageFour updateStage={updateStage}/>}
           {stage === 5 && (
             <>
               <SelectmentorComponent />
@@ -210,7 +210,7 @@ function OnboardingMain() {
               type="button"
               onClick={() => updateStage()}
               className={`bg-[#2668d8] py-1.5 px-4 flex text-xl rounded-lg  mt-10 ${
-                stage === 5 ? "hidden" : "block"
+                stage === 5 || stage === 4 ? "hidden" : "block"
               }`}
             >
               <Icon className="text-3xl" icon="tabler:arrow-right" />

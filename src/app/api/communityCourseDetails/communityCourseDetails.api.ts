@@ -13,7 +13,7 @@ interface ICommunityGetResponse extends AxiosResponse {
 
 export const communityCourseDetailsAPI = async (id: string): Promise<any> => {
   const token = getCookie("token") ?? "";
-  const res = (await axiosInstance.get(`/student/getViewCourse/${id}`, {
+  const res = (await axiosInstance.get(`/student/getViewCourse?courseId=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

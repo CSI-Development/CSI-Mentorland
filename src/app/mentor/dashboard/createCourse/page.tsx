@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import MentorDashboardLayout from "@/layouts/mentorDashboardLayout";
 import { FormProvider, useForm } from "react-hook-form";
 import {
@@ -18,6 +18,9 @@ import { setSession } from "@/utils/jwt";
 import { type AxiosError } from "axios";
 import StepOne from "@/components/mentor/dashboardMentorComponents/createCourses/form/stepOne";
 import StepFour from "@/components/mentor/dashboardMentorComponents/createCourses/form/stepFour";
+import { useMagic } from "@/providers/MagicProvider";
+import { createLCErtAddress } from "@/utils/contractMethods";
+import { AppContext } from "@/providers/ContextProvider";
 
 function CourseCreate() {
   const methods = useForm<ICreateCourse>({
@@ -29,6 +32,10 @@ function CourseCreate() {
     },
     resolver: zodResolver(createCourseData),
   });
+
+  const { setLoading } = useContext(AppContext);
+
+  const { web3 } = useMagic();
 
   const [step, setStep] = useState(1);
 
@@ -49,29 +56,35 @@ function CourseCreate() {
     //   toast.error("Please enter the Course Description")
     // }
     setStep(step + 1);
-  
   };
 
   const handlePrevStep = () => {
     if (step === 2) setStep(1);
   };
 
-  const { mutate } = useMutation({
+  const { mutateAsync } = useMutation({
     mutationFn: createCourseApi,
-    onSuccess: (e) => {
+    onSuccess: async (e) => {
       //   setLoading(false);
-      localStorage.setItem('courseId', e.course._id)
+      console.log(e, "mint");
+      await createLCErtAddress(
+        web3,
+        e.course.name,
+        e.course.name.substring(0, 4),
+      );
+      localStorage.setItem("courseId", e.course._id);
       setStep(2);
-      console.log("success", e);
-      localStorage.setItem('courseId',e.course._id)
+
+      setLoading(false);
     },
     onError: (e: AxiosError<{ error: { message: string } }>) => {
-      //   setLoading(false);
+      setLoading(false);
       console.log(e);
     },
   });
 
   const onSubmit = async (data: ICreateCourse) => {
+    setLoading(true);
     const values = methods.getValues();
     const name = values.name;
     const category = values.category;
@@ -79,22 +92,26 @@ function CourseCreate() {
     const logo = values.logo;
     if (step === 1 && !name) {
       toast.error("Please enter the Course");
+      setLoading(false);
       return;
     }
-    if(step === 1 && !category){
+    if (step === 1 && !category) {
       toast.error("Please enter the Course Category");
+      setLoading(false);
       return;
     }
-    if(step === 1 && !description){
-      toast.error("Please enter the Course Description")
+    if (step === 1 && !description) {
+      toast.error("Please enter the Course Description");
+      setLoading(false);
       return;
     }
-    if(step === 1 && !logo){
-      toast.error("Please Add the Banner")
+    if (step === 1 && !logo) {
+      toast.error("Please Add the Banner");
+      setLoading(false);
       return;
     }
+    await mutateAsync(data); //here will send the data to the login api
     // setLoading(true);
-    mutate(data); //here will send the data to the login api
   };
 
   return (

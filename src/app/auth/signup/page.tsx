@@ -102,7 +102,7 @@ const Signup = () => {
   //     },
   //   });
 
-  /// facebook signup auth
+  //// facebook signup auth
 
   //   const responseFacebook = (response: any) => {
   //     console.log(response);
@@ -157,7 +157,7 @@ const Signup = () => {
 
                 <div
                   className={` w-40 rounded-lg px-7 py-2 ${
-                    getValues("role") === "mentor"
+                    role === "mentor"
                       ? " bg-[#2668d9] "
                       : " bg-[#5d6574] "
                   }`}
@@ -250,7 +250,7 @@ const Signup = () => {
                         ? " border-[#FF007A]"
                         : " border-[#b9baba]",
                     )}
-                ></input>
+                />
                 {errors.email && (
                   <p className="rounded-md bg-[#FF007A] p-1.5 text-xs text-white">
                     {errors.email.message}
@@ -271,7 +271,7 @@ const Signup = () => {
                   className={`w-full rounded-lg border-2 px-5 py-3 outline-none `.concat(
                     errors.password ? " border-[#FF007A]" : " border-[#b9baba]",
                   )}
-                ></input>
+                />
                 {errors.password && (
                   <p className="rounded-md bg-[#FF007A] p-1.5 text-xs text-white">
                     {errors.password.message}

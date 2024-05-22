@@ -43,13 +43,16 @@ function CourseContent({ data, activeLecture, setActiveLecture }: any) {
         setIsOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleOutsideClick);
+    if(document){
+
+      document.addEventListener("mousedown", handleOutsideClick);
+    }
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, []);
 
-  const [openSectionIndex, setOpenSectionIndex] = useState<number>();
+  const [openSectionIndex, setOpenSectionIndex] = useState<any>();
 
   const toggleSection = (index: any) => {
     setOpenSectionIndex((prevIndex: any) =>

@@ -10,23 +10,25 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import axios, { AxiosError } from "axios";
+import axios, { type AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { AppContext } from "@/providers/ContextProvider";
 import { toast } from "react-toastify";
 import { baseURL } from "@/utils/axiosInstance";
 import { useSession, signIn } from "next-auth/react";
-import { ILogIn, LogIn } from "@/schema/login/login.schema";
-import { DecodedToken, setSession } from "@/utils/jwt";
+import { type ILogIn, LogIn } from "@/schema/login/login.schema";
+import { type DecodedToken, setSession } from "@/utils/jwt";
 import { jwtDecode } from "jwt-decode";
 import { getCookie } from "cookies-next";
 import { logInApi } from "@/app/api/login/login.api";
+import ForgotPassword from "@/components/forgotPassword";
 // import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // type Props = {};
 // export const queryClient = new QueryClient();
 
 function SignIn() {
   const [role, setrole] = useState<string>("student");
+  const [isOpenCommunityDialog, setIsOpenCommunityDialog] = useState<boolean>(false);
   const [emailIdError, setEmailIdError] = useState<string>("");
 
   //signup With google
@@ -69,7 +71,7 @@ function SignIn() {
   //   },
   // });
 
-  /// facebook signup auth
+  //// facebook signup auth
 
   // const responseFacebook = (response: any) => {
   //   console.log(response);
@@ -128,8 +130,9 @@ function SignIn() {
 
   return (
     // <QueryClientProvider client={queryClient}>
+    <>
     <div className="flex w-full bg-white">
-      <img className="h-screen" src={sideCoverImage.src} />
+      <img className="h-screen" src={sideCoverImage.src} alt="" />
       <div className="h-screen w-full overflow-y-scroll ">
         <div className="mt-5 flex w-full justify-center">
           <Image alt="logo" src={Logo} />
@@ -146,7 +149,7 @@ function SignIn() {
                     role === "student" ? " bg-[#2668d9] " : " bg-[#5d6574] "
                   }`}
                   onClick={() => {
-                    //   setValue("role", "student");
+                    setValue("role", "student");
                     setrole("student");
                   }}
                 >
@@ -170,9 +173,7 @@ function SignIn() {
 
                 <div
                   className={` w-40 rounded-lg px-7 py-2 ${
-                    getValues("role") === "mentor"
-                      ? " bg-[#2668d9] "
-                      : " bg-[#5d6574] "
+                    role === "mentor" ? " bg-[#2668d9] " : " bg-[#5d6574] "
                   }`}
                   onClick={() => {
                     setValue("role", "mentor");
@@ -261,7 +262,7 @@ function SignIn() {
                     className={`w-full rounded-lg border-2 px-5 py-3 outline-none `.concat(
                       errors.email ? " border-[#FF007A]" : " border-[#b9baba]",
                     )}
-                  ></input>
+                  />
                   {errors.email && (
                     <p className="rounded-md bg-[#FF007A] p-1.5 text-xs text-white">
                       {errors.email.message}
@@ -275,7 +276,7 @@ function SignIn() {
                     type="password"
                     placeholder="password"
                     className="w-full rounded-lg border-2 border-[#b9baba] px-5 py-3 outline-none"
-                  ></input>
+                  />
                   {errors.password && (
                     <p
                       className={`w-full rounded-lg border-2 px-5 py-3 outline-none `.concat(
@@ -289,15 +290,14 @@ function SignIn() {
                   )}
                   <div className="my-2 flex gap-1 text-[#5D6475]">
                     <p>Forgot your password? Please</p>
-                    <p className="text-[#1b448f]">click here</p>
+                    <p className="text-[#1b448f]"><button type="button" onClick={() => setIsOpenCommunityDialog(true)}>click here</button></p>
                     <p>to reset it.</p>
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className={` mt-2 w-full rounded-lg bg-[#2668d8] py-2.5 text-lg  font-semibold text-white
-              `}
+                  className={` mt-2 w-full rounded-lg bg-[#2668d8] py-2.5 text-lg  font-semibold text-white`}
                 >
                   Log In
                 </button>
@@ -314,6 +314,11 @@ function SignIn() {
         </div>
       </div>
     </div>
+    <ForgotPassword
+        OpenDialog={isOpenCommunityDialog}
+        setOpenDialog={setIsOpenCommunityDialog}
+      />
+      </>
     // </QueryClientProvider>
   );
 }

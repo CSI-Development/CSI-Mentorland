@@ -37,7 +37,7 @@ function Sidebar() {
             icon="fluent:people-community-20-regular"
             className="text-3xl"
           />
-          <p className="text-lg my-auto">My Communities</p>
+          <p className="text-lg my-auto">My Courses</p>
         </div>
       </Link>
 

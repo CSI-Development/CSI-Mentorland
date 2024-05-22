@@ -9,6 +9,12 @@
     "lint": "next lint",
     "start": "next start"
   },
+  "eslintConfig": {
+    "extends": "next",
+    "rules": {
+      "@typescript-eslint/no-unused-vars": "off"
+    }
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
     "@iconify/react": "^4.1.1",

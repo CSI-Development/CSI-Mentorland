@@ -58,7 +58,7 @@ function StageThree() {
           className="w-full rounded-lg border border-[#3c4252] bg-[#141b2b] px-4 py-3"
           value={subjectStr}
           onChange={handleSubjectStrChange}
-        ></input>
+        />
         <div className="flex items-center gap-2  ">
           {subjects.map((subject, index) => (
             <div

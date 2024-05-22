@@ -91,7 +91,7 @@ function LoginDialog({
               className={`w-full rounded-lg border-2 px-5 py-3 outline-none `.concat(
                 errors.email ? " border-[#FF007A]" : " border-[#b9baba]",
               )}
-            ></input>
+            />
             {errors.email && (
               <p className="rounded-md bg-[#FF007A] p-1.5 text-xs text-white">
                 {errors.email.message}
@@ -105,7 +105,7 @@ function LoginDialog({
               type="password"
               placeholder="password"
               className="w-full rounded-lg border-2 border-[#b9baba] px-5 py-3 outline-none"
-            ></input>
+            />
             {errors.password && (
               <p
                 className={`w-full rounded-lg border-2 px-5 py-3 outline-none `.concat(

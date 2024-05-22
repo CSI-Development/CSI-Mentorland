@@ -15,13 +15,13 @@ function StageOne({ register }: any) {
           {...register("firstName")}
           placeholder="First Name"
           className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-1/2"
-        ></input>
+        />
         <input
           type="text"
           {...register("lastName")}
           placeholder="Last Name"
           className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-1/2"
-        ></input>
+        />
       </div>
     </div>
   );

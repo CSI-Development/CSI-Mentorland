@@ -6,6 +6,7 @@
 import { communityPostApi } from "@/app/api/communityPost/communityPost.api";
 import { communityRulesApi } from "@/app/api/communityRules/communityRules.api";
 import { communityRulesGetApi } from "@/app/api/communityRules/getCommunityRules.api";
+import { mentorDetailsApi } from "@/app/api/mentorDetails/mentorDetails.api";
 import { uploadImage } from "@/app/api/uploadImage/uploadImage.api";
 import { type ICreateCommunityRules } from "@/schema/communityRules/communityRules.schema";
 import {
@@ -14,14 +15,17 @@ import {
 } from "@/schema/createCommunityPost/createCommunityPost.schema";
 import { setSession } from "@/utils/jwt";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { step } from "@material-tailwind/react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useMemo, useRef, useState } from "react";
 import { SubmitHandler, useForm, useFormContext } from "react-hook-form";
 // import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "react-toastify";
+
 
 export default function CreatePost() {
   const ReactQuill = useMemo(
@@ -33,21 +37,39 @@ export default function CreatePost() {
   const [postText, setPostText] = useState("");
   // const quillRef = useRef<any>(null);
   console.log(postText, "postText");
+  const router = useRouter();
 
-  const { register, handleSubmit, setValue } = useForm<ICreateCommunityPost>();
+  const { register, handleSubmit, setValue, getValues } = useForm<ICreateCommunityPost>();
 
   const { mutate: postData } = useMutation({
     mutationFn: communityPostApi,
     onSuccess: (e) => {
+      toast.success("Post Created Successfully");
+      router.push("/mentor/dashboard/community");
       console.log("success", e);
       setValue("multimedia", e.data.file.url, { shouldTouch: true });
       setSession(e.data.token); //here will set the token into the session for axios header
-      toast.success("Post Created Successfully");
       //remaining: after success user must be redirect somewhere. like dashboard or home page more details see console
     },
   });
 
   const onSubmit = async (data: ICreateCommunityPost) => {
+    const values = getValues();
+    const title = values.title;
+    const description = values.postText;
+    const media = values.multimedia;
+    if(stage === 1 && !title){
+      toast.error("Plese enter the Title")
+      return;
+    }
+    if(stage === 1 && !description){
+      toast.error("Please enter Post Text")
+      return;
+    }
+    if(stage === 1 && !media){
+      toast.error("Please add the Multimedia")
+      return;
+    }
     postData(data);
     // console.log(getValues(), quillRef.current.getEditor(), "something in post");
   };
@@ -150,9 +172,9 @@ export default function CreatePost() {
                       <>
                         <input
                           type="text"
-                          placeholder="Title"
+                          placeholder="Enter the post title"
                           {...register("title")}
-                          className="h-[56px] w-full rounded-md border border-gray-300 px-3 py-2 placeholder-black outline-none"
+                          className="h-[56px] w-full rounded-md border border-gray-300 px-3 py-2 placeholder-[grey] outline-none"
                         />
                         <div className="bg-white">
                           <ReactQuill

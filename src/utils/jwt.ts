@@ -19,6 +19,7 @@ export const setSession = (token: string | null): void => {
     console.log(token, { expires: new Date(jwtDecode<DecodedToken>(token).exp*1000) });
     setCookie("token", token, { expires: new Date(jwtDecode<DecodedToken>(token).exp*1000) });
     setCookie("role", jwtDecode<DecodedToken>(token).role, { expires: new Date(jwtDecode<DecodedToken>(token).exp*1000) });
+    setCookie("user_email", jwtDecode<DecodedToken>(token).email, { expires: new Date(jwtDecode<DecodedToken>(token).exp*1000) });
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   } else {
     // localStorage.removeItem("token");

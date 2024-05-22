@@ -51,14 +51,14 @@ function StageFour() {
             className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-full"
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
-          ></input>
+          />
           <input
             type="text"
             placeholder="Institution"
             className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-full"
             value={institution}
             onChange={(e) => setInstitution(e.target.value)}
-          ></input>
+          />
           <input
             type="number"
             min="2001"
@@ -67,7 +67,7 @@ function StageFour() {
             className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-3 px-4 w-full"
             value={year}
             onChange={(e) => setYear(Number(e.target.value))}
-          ></input>
+          />
           <button
             type="button"
             className="bg-primary w-full py-1 px-5 rounded-lg font-semibold text-white"

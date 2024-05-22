@@ -17,13 +17,13 @@ function StageOne({register}:any) {
           {...register("firstName")}
           placeholder="First Name"
           className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-1.5 px-4 w-1/2"
-        ></input>
+        />
         <input
           type="text"
           {...register("lastName")}
           placeholder="Last Name"
           className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-1.5 px-4 w-1/2"
-        ></input>
+        />
       </div>
 
       {/* <div className="border rounded-lg mt-5 bg-[#384256] py-2 px-5">
@@ -57,7 +57,7 @@ function StageOne({register}:any) {
               {...register("userNameOrHandler")}
               placeholder="Username or Handler"
               className="border rounded-lg border-[#3c4252] bg-[#141b2b] py-1.5 px-4 w-full"
-            ></input>
+            />
           </div>
         </div>
       </div> */}

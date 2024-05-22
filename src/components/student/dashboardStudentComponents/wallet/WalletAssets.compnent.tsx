@@ -47,7 +47,7 @@ const AccessCards = () => {
 const CertificatedOfCompletion = () => {
   return (
     <div className="w-full h-fit flex flex-col gap-2 bg-white shadow-md rounded-lg p-3 py-5 text-black">
-      <h1 className="text-lg font-semibold">Your Certificates Of Completion</h1>
+      <h1 className="text-lg font-semibold">Your Certificates of Completion</h1>
       <p>
         Once you’ve finished with these cards, you can sell them in our
         marketplace, read{" "}

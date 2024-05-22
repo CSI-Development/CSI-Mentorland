@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-optional-chain */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -16,37 +17,46 @@ import { useRouter } from "next/navigation";
 import { getCookie, setCookie } from "cookies-next";
 import { communityGetApi } from "@/app/api/communityPost/getCommunityPost.api";
 import { uploadImage } from "@/app/api/uploadImage/uploadImage.api";
+import { mentorDetailsApi } from "@/app/api/mentorDetails/mentorDetails.api";
+import EditSectionDialog from "@/components/editSectionDialog/editSectionDialog";
 
 // import Link from "next/link";
 
 export const Card = () => {
+  const [isOpenCommunityDialog, setIsOpenCommunityDialog] = useState<boolean>(false);
+
+  const { data } = useQuery({
+    queryKey: ["mentorDetails"],
+    queryFn: () => mentorDetailsApi(),
+  });
+
   return (
-    <div className=" w-[30%] h-[80%] ">
+    <div className=" h-[80%] w-[30%] ">
       <div className="m-3">
-        <h1 className="font-bold text-lg">Mentor</h1>
+        <h1 className="text-lg font-bold">Mentor</h1>
       </div>
-      <div className="flex w-full justify-around border-b-2 pt-4 pb-6 px-3 items-center">
-        <Image src="/svg/user.svg" alt="" width={136} height={136} />
+      <div className="flex w-full items-center justify-around border-b-2 px-3 pb-6 pt-4">
+        <Image src={data?.mentorAvatar} alt="" width={136} height={136} />
         <div>
-          <h1 className="font-bold text-2xl">Cody Getchell</h1>
+          <h1 className="text-2xl font-bold">{data?.firstName + " " +  data?.lastName}</h1>
           <p>MARKETING • SALES</p>
         </div>
       </div>
-      <div className="flex justify-around w-full py-6 text-center">
+      <div className="flex w-full justify-around py-6 text-center">
         <div className="">
-          <h1 className="font-bold text-2xl">0</h1>
+          <h1 className="text-2xl font-bold">0</h1>
           <p>Students</p>
         </div>
         <div>
-          <h1 className="font-bold text-2xl">0</h1>
+          <h1 className="text-2xl font-bold">0</h1>
           <p>Online</p>
         </div>
         <div>
-          <h1 className="font-bold text-2xl">0</h1>
+          <h1 className="text-2xl font-bold">0</h1>
           <p>Rules</p>
         </div>
       </div>
-      <div className="w-full items-center mt-4">
+      <div className="mt-4 w-full items-center">
         <div className="h-[155px] w-[405px] bg-white px-6 py-3">
           <h1 className="font-bold">Leaderboard</h1>
           <p>
@@ -56,22 +66,25 @@ export const Card = () => {
         </div>
       </div>
       <div className="w-full text-center">
-        <button className=" bg-[#2769D9] w-auto py-[9px] px-[14px] mt-4 rounded-lg font-bold text-white">
+        <button type="button" onClick={()=> setIsOpenCommunityDialog(true)} className=" mt-4 w-auto rounded-lg bg-[#2769D9] px-[14px] py-[9px] font-bold text-white">
           Edit Sections
         </button>
       </div>
+      <EditSectionDialog
+        OpenDialog={isOpenCommunityDialog}
+        setOpenDialog={setIsOpenCommunityDialog}
+      />
     </div>
   );
 };
 
 export const MainCommunityFeed = () => {
-
   const { data } = useQuery({
     queryKey: ["userpost"],
     queryFn: () => communityGetApi(),
   });
 
-  console.log(data, "post data here")
+  console.log(data, "post data here");
   const router = useRouter();
 
   const createPost = () => {
@@ -79,22 +92,22 @@ export const MainCommunityFeed = () => {
   };
 
   return (
-    <div className=" flex justify-between w-[80%] px-10">
-      {data?.length > 0 ?
-        <Feeds data={data}/>
-       : (
-        <div className=" w-[626px] h-full  flex justify-center mt-40">
-          <div className=" w-full h-[70px] gap-5 my-3 text-center">
-            <h3 className=" text-[31px] leading-[46px] font-bold text-[#5D6475] text-center ">
+    <div className=" flex w-[80%] justify-between px-10">
+      {data?.length > 0 ? (
+        <Feeds data={data} />
+      ) : (
+        <div className=" mt-40 flex  h-full w-[626px] justify-center">
+          <div className=" my-3 h-[70px] w-full gap-5 text-center">
+            <h3 className=" text-center text-[31px] font-bold leading-[46px] text-[#5D6475] ">
               Hey, welcome to your new community!
             </h3>
-            <p className=" text-[16px] leading-5 text-center text-[#5D6475] tracking-tighter">
+            <p className=" text-center text-[16px] leading-5 tracking-tighter text-[#5D6475]">
               Now, you can create the first post and share it with the world!{" "}
             </p>
             <button
               type="button"
               onClick={createPost}
-              className=" bg-[#2769D9] w-auto py-[9px] px-[14px] mt-4 rounded-lg font-bold text-white"
+              className=" mt-4 w-auto rounded-lg bg-[#2769D9] px-[14px] py-[9px] font-bold text-white"
             >
               Create your first post
             </button>
@@ -106,15 +119,15 @@ export const MainCommunityFeed = () => {
 };
 
 export const InitialFeed = () => {
-  return <div className=" w-full h-[232px] bg-[#93B6FB]"></div>;
+  return <div className=" h-[232px] w-full bg-[#93B6FB]"></div>;
 };
 
-export const Feeds = ({data}: any) => {
+export const Feeds = ({ data }: any) => {
   return (
-    <div className=" w-[836px] flex flex-col gap-7">
+    <div className=" flex w-[836px] flex-col gap-7">
       <SingleFeed data={data} />
       {/* Banner */}
-      <div className=" w-full h-[232px] flex items-center">
+      <div className=" flex h-[232px] w-full items-center">
         <Image
           src="/feeds-svg/feed-banner.png"
           alt="banner"
@@ -127,86 +140,109 @@ export const Feeds = ({data}: any) => {
   );
 };
 
-export const SingleFeed = ({data}: any) => {
+export const SingleFeed = ({ data }: any) => {
+  const router = useRouter();
+  const { data: userDetails } = useQuery({
+    queryKey: ["mentorDetails"],
+    queryFn: () => mentorDetailsApi(),
+  });
 
+  const createPost = () => {
+    router.push("/mentor/dashboard/community/createPost");
+  };
   return (
-    <div className=" w-full grid grid-cols-1 gap-4">
+    <div className=" grid w-full grid-cols-1 gap-4">
+      <div>
+        <button
+          type="button"
+          onClick={createPost}
+          className=" mt-4 w-auto rounded-lg bg-[#2769D9] px-[14px] py-[9px] font-bold text-white"
+        >
+          Add New Post
+        </button>
+      </div>
       {data?.map((val: any, i: number) => (
-          <>
-            <div
-              className=" w-full bg-white rounded-md flex flex-col gap-[7px] p-[25px]   border"
-              key={i}
-            >
-              {/* head */}
-              <div className=" flex  justify-between items-center">
-                <div className="flex w-[45%] gap-5 items-center">
-                  <Image
-                    src="/feeds-svg/Ellipse.svg"
-                    alt=""
-                    width={50}
-                    height={50}
-                  />
-                  <div>
-                    <h1 className=" text-xl">Cody Getchell</h1>
-                    <p className=" text-xl">PSYCHOLOGIST • COACH</p>
-                  </div>
-                </div>
-                <div className=" h-full flex items-center">
-                  <button className=" bg-[#2769D9] py-[14px] text-nowrap px-[14px] rounded-lg font-bold text-white">
-                    Click Here
-                  </button>
-                </div>
-              </div>
-              <div className=" flex flex-col gap-2">
-                <h2 className=" font-bold text-3xl">{val.title}</h2>
-                <p>{val.postText}</p>
+        <>
+          <div
+            className=" flex w-full flex-col gap-[7px] rounded-md border bg-white   p-[25px]"
+            key={i}
+          >
+            {/* head */}
+            <div className=" flex  items-center justify-between">
+              <div className="flex w-[45%] items-center gap-5">
                 <Image
-                  src={val.multimedia}
-                  alt="rectangle"
-                  width={776}
-                  height={263}
-                  className=" w-full  "
+                  src={userDetails?.mentorAvatar}
+                  alt=""
+                  width={50}
+                  height={50}
                 />
-                <p className=" text-sm text-[#5D6475]">Posted 20m ago</p>
-                <div className=" flex gap-4">
-                  <div className=" flex gap-2">
-                    <Image
-                      src="/feeds-svg/Frame.svg"
-                      alt="rectangle"
-                      width={20}
-                      height={20}
-                      className=" text-[#B9BABA] cursor-pointer"
-                    />
-                    <span>3</span>
-                  </div>
-                  <div className=" flex gap-2">
-                    <Image
-                      src="/feeds-svg/Vector.svg"
-                      alt="rectangle"
-                      width={20}
-                      height={20}
-                      className=" text-[#B9BABA] cursor-pointer"
-                    />
-                    <span>3</span>
-                  </div>
+                <div>
+                  <h1 className=" text-xl">{userDetails?.firstName + " " + userDetails?.lastName}</h1>
+                  <p className=" text-xl">PSYCHOLOGIST • COACH</p>
+                </div>
+              </div>
+              <div className=" flex h-full items-center">
+                <button className=" text-nowrap rounded-lg bg-[#2769D9] px-[14px] py-[14px] font-bold text-white">
+                  Click Here
+                </button>
+              </div>
+            </div>
+            <div className=" flex flex-col gap-2">
+              <h2 className=" text-3xl font-bold">{val.title}</h2>
+              <div
+                className=""
+                dangerouslySetInnerHTML={{
+                  __html: val.postText,
+                }}
+              ></div>
+              {/* <p>{val.postText}</p> */}
+              <Image
+                src={val.multimedia}
+                alt="rectangle"
+                width={776}
+                height={263}
+                className=" w-full "
+              />
+              <p className=" text-sm text-[#5D6475]">Posted 20m ago</p>
+              <div className=" flex gap-4">
+                <div className=" flex gap-2">
+                  <Image
+                    src="/feeds-svg/Frame.svg"
+                    alt="rectangle"
+                    width={20}
+                    height={20}
+                    className=" cursor-pointer text-[#B9BABA]"
+                  />
+                  <span>3</span>
+                </div>
+                <div className=" flex gap-2">
+                  <Image
+                    src="/feeds-svg/Vector.svg"
+                    alt="rectangle"
+                    width={20}
+                    height={20}
+                    className=" cursor-pointer text-[#B9BABA]"
+                  /> 
+                  <span>3</span>
                 </div>
               </div>
             </div>
-            <div className=" w-full h-[100px] bg-[#F3F5FA] gap-4 flex items-center p-4">
-              <Image
-                src="/finished-feed-svg/img2.png"
-                alt=""
-                width={30}
-                height={30}
-              />
-              <input
-                type="text"
-                placeholder="Reply to this comment"
-                className=" w-full h-[40px] bg-white border-none rounded-md px-4"
-              />
-            </div>
-          </>
-        ))}
+          </div>
+          <div className=" flex h-[100px] w-full items-center gap-4 bg-[#F3F5FA] p-4">
+            <Image
+              src="/svg/user.png"
+              alt=""
+              width={30}
+              height={30}
+            />
+            <input
+              type="text"
+              placeholder="Reply to this comment"
+              className=" h-[40px] w-full rounded-md border-none bg-white px-4"
+            />
+          </div>
+        </>
+      ))}
     </div>
   );
 };
@@ -271,7 +307,7 @@ export default function Community() {
       setSession(e.data.token); //here will set the token into the session for axios header
       //remaining: after success user must be redirect somewhere. like dashboard or home page more details see console
       // setValue("studentAvatar", e.data.file.url, { shouldTouch: true });
-      setImage(e.data.file.url)
+      setImage(e.data.file.url);
       const communityBanner = setCookie("communityBanner", e.data.file.url);
     },
   });
@@ -279,7 +315,7 @@ export default function Community() {
   console.log(getCookie("communityBanner"), "cookie banner");
 
   const handleImageInput = async (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     console.log(image, "image value");
     const file = event.target.files?.[0];
@@ -298,14 +334,14 @@ export default function Community() {
 
   return (
     <div className="text-black">
-      <div className="w-full h-[585px] bg-[#E8ECF3] flex justify-center items-center">
+      <div className="flex h-[585px] w-full items-center justify-center bg-[#E8ECF3]">
         {!showImage ? (
-          <div className="w-[490px] h-[350px] flex  flex-col">
-            <div className=" w-full h-[70px] gap-3 my-3">
-              <h3 className=" text-[31px] font-bold text-[#5D6475] text-center leading-10 ">
+          <div className="flex h-[350px] w-[490px]  flex-col">
+            <div className=" my-3 h-[70px] w-full gap-3">
+              <h3 className=" text-center text-[31px] font-bold leading-10 text-[#5D6475] ">
                 Your Community Main Banner
               </h3>
-              <p className=" text-[16px] leading-5 text-center text-[#5D6475] tracking-tighter">
+              <p className=" text-center text-[16px] leading-5 tracking-tighter text-[#5D6475]">
                 Please upload an jpg or png image that is 1500px wide x 600px
                 high.{" "}
               </p>
@@ -313,16 +349,16 @@ export default function Community() {
 
             {/* image update container  */}
             {loading ? (
-              <div className="w-full h-auto text-center flex flex-col gap-6">
+              <div className="flex h-auto w-full flex-col gap-6 text-center">
                 <h3>Uploading- 3/3 Files</h3>
-                <div className="w-full p-2 bg-white flex justify-between items-center overflow-hidden ">
+                <div className="flex w-full items-center justify-between overflow-hidden bg-white p-2 ">
                   <p>{image as string}</p>
                   <Image
                     src="/remove.svg"
                     alt="upload cancel"
                     width={16}
                     height={16}
-                    className=" text-[#E6E6E6] cursor-pointer"
+                    className=" cursor-pointer text-[#E6E6E6]"
                     onClick={handleRemoveInput}
                   />
                 </div>
@@ -332,14 +368,14 @@ export default function Community() {
                 {image ? (
                   <img
                     src={image as string}
-                    className=" w-full mb-3"
+                    className=" mb-3 w-full"
                     alt="image"
                   />
                 ) : (
-                  <div className="relative w-full h-[191px] bg-white  mb-6 border-dashed border-2 border-[#B9BABA]">
+                  <div className="relative mb-6 h-[191px] w-full  border-2 border-dashed border-[#B9BABA] bg-white">
                     <label
                       htmlFor="file"
-                      className=" w-full h-full absolute flex justify-center flex-col gap-2 items-center p-4 "
+                      className=" absolute flex h-full w-full flex-col items-center justify-center gap-2 p-4 "
                     >
                       <Image
                         src="/Upload-icon.svg"
@@ -347,12 +383,12 @@ export default function Community() {
                         width={68}
                         height={60}
                       />
-                      <div className=" w-full h-16 flex flex-col gap-[10px]">
-                        <h5 className=" text-xl text-center font-bold">
+                      <div className=" flex h-16 w-full flex-col gap-[10px]">
+                        <h5 className=" text-center text-xl font-bold">
                           Drag & drop files or{" "}
                           <span className=" text-blue-600">Browse</span>
                         </h5>
-                        <p className=" text-[12px] leading-4 text-center text-[#5D6475] tracking-tighter">
+                        <p className=" text-center text-[12px] leading-4 tracking-tighter text-[#5D6475]">
                           Supported formats: JPEG, PNG, GIF, MP4, PDF, PSD, AI,
                           Word, PPT
                         </p>
@@ -362,12 +398,12 @@ export default function Community() {
                       type="file"
                       name="file"
                       onChange={handleImageInput}
-                      className=" w-full h-full absolute outline-none opacity-0 z-10 cursor-pointer"
+                      className=" absolute z-10 h-full w-full cursor-pointer opacity-0 outline-none"
                     />
                   </div>
                 )}
                 <button
-                  className=" bg-[#2769D9] w-full py-[9px] px-[14px] rounded-lg font-bold text-white"
+                  className=" w-full rounded-lg bg-[#2769D9] px-[14px] py-[9px] font-bold text-white"
                   onClick={handleBtnClick}
                 >
                   Upload Files
@@ -376,19 +412,19 @@ export default function Community() {
             )}
           </div>
         ) : (
-          <div className=" w-full h-full object-contain">
-            <img src={image as string} className=" w-full h-full" alt="image" />
+          <div className=" h-full w-full object-contain">
+            <img src={image as string} className=" h-full w-full" alt="image" />
           </div>
         )}
       </div>
 
-      <div className=" w-full py-10 flex gap-[10%] bg-[#f7f9fb] mb-9">
-        <div className="w-auto h-full ">
+      <div className=" mb-9 flex w-full gap-[10%] bg-[#f7f9fb] py-10">
+        <div className="h-full w-auto ">
           <TooltipBar />
         </div>
         {/* <MainCommunityFeed /> */}
 
-        <div className="flex justify-between w-[80%] px-10 pb-10">
+        <div className="flex w-[80%] justify-between px-10 pb-10">
           <MainCommunityFeed />
           <Card />
         </div>

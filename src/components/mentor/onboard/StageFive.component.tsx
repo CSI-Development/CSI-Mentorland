@@ -100,7 +100,7 @@ function StageFive() {
                 console.log(e);
                 setLink(e.target.value);
               }}
-            ></input>
+            />
             <div className="mt-1">
               <label htmlFor="description" className="text-base">
                 Thumbnail

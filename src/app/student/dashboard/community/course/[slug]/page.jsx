@@ -52,6 +52,7 @@ function WatchCourse() {
           <div className="w-[70%]">
               <VideoSection
                 // @ts-ignore
+                setQuizTest={setQuizTest}
                 data={data}
                 quizTest={quizTest}
                 activeLecture={activeLecture}

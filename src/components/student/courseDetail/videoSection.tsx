@@ -13,15 +13,19 @@ function VideoSection({ activeLecture, quizTest }: any) {
         <QuizTest activeLecture={activeLecture} />
       ) : (
         <div className="">
-          <iframe
+          <video
             title="Video Player"
             width={875}
             height={395}
             src={activeLecture[0]?.url}
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+            // frameBorder="0"
+            controls
+            autoPlay
+            controlsList="nodownload"
+            onContextMenu={e => e.preventDefault()}
+            // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            // allowFullScreen
+          ></video>
         </div>
       )}
       <div className="grid w-[70%] grid-cols-1 gap-8">

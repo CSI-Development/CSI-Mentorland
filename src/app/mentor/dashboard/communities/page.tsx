@@ -1,10 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MentorDashboardLayout from "@/layouts/mentorDashboardLayout";
 import CommunityPopup from "@/components/mentor/dashboardMentorComponents/communities/communityPopup/CommunityPopup.Component";
+import CommunitiesCard from "@/components/mentor/dashboardMentorComponents/communities/communitiesCard/CommunitiesCard";
+import { useQuery } from "@tanstack/react-query";
+import { getAllCommunityApi } from "@/app/api/createCommunity/getAllCommunity.api";
 
 const Communities = () => {
-  const [isOpenCommunityDialog, setIsOpenCommunityDialog] = useState<boolean>(false);
+  const [isOpenCommunityDialog, setIsOpenCommunityDialog] =
+    useState<boolean>(false);
+  const [communities, setCommunities] = useState<any>();
+  const { data } = useQuery({
+    queryKey: ["allCommunities"],
+    queryFn: () => getAllCommunityApi(),
+  });
+
+  useEffect(() => {
+    if (data) {
+      setCommunities(data);
+    }
+  }, [data]);
+  console.log(communities?.communityDetail, "DATATA");
   return (
     <MentorDashboardLayout showSidebar={true}>
       <div className="h-full w-full px-4  ">
@@ -16,7 +32,7 @@ const Communities = () => {
           </div>
           <div className="mt-20 w-full text-center text-[#5D6475]">
             <h1 className="mt-4 text-3xl font-bold">
-              Create your first Community
+              Create your Community
             </h1>
             <p className="mt-4 text-xl">
               Your courses will be kept inside your communities
@@ -32,6 +48,21 @@ const Communities = () => {
               OpenDialog={isOpenCommunityDialog}
               setOpenDialog={setIsOpenCommunityDialog}
             />
+          </div>
+          <div className="flex items-center justify-center w-full">
+            <div className="m-auto mb-32 mt-20 grid w-full grid-cols-3 gap-6 pb-28">
+              {communities?.communityDetail?.map((data: any, i: number) => {
+                console.log(data, "InnerDATA");
+                return (
+                  <CommunitiesCard
+                    key={i}
+                    name={data?.communityName}
+                    level={data?.communityLevel}
+                    index={i}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

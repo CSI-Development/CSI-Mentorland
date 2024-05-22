@@ -33,86 +33,12 @@ function Communities() {
   }, [data]);
   console.log(data, "DATA");
 
-  const sampleData = [
-    {
-      memberName: "Cody Getchell",
-      memberRole: "Psychologist, Coach",
-      memberImage: mentor1,
-      courseImg: subjectCoverImg,
-      courseName: "Course make millions initial course",
-      progress: 100,
-      classesLeft: 15,
-    },
-    {
-      memberName: "Martilouytica Mini",
-      memberRole: "Psychologist, Coach",
-      memberImage: mentor2,
-      courseImg: subjectCoverImg,
-      courseName: "Course make millions initial course",
-      progress: 35,
-      classesLeft: 5,
-    },
-    {
-      memberName: "Cody Getchell",
-      memberRole: "Psychologist, Coach",
-      memberImage: mentor1,
-      courseImg: subjectCoverImg,
-      courseName: "Course make millions initial course",
-      progress: 75,
-      classesLeft: 15,
-    },
-    {
-      memberName: "Martilouytica Mini",
-      memberRole: "Psychologist, Coach",
-      memberImage: mentor2,
-      courseImg: subjectCoverImg,
-      courseName: "Course make millions initial course",
-      progress: 35,
-      classesLeft: 5,
-    },
-    {
-      memberName: "Cody Getchell",
-      memberRole: "Psychologist, Coach",
-      memberImage: mentor1,
-      courseImg: subjectCoverImg,
-      courseName: "Course make millions initial course",
-      progress: 75,
-      classesLeft: 15,
-    },
-    {
-      memberName: "Martilouytica Mini",
-      memberRole: "Psychologist, Coach",
-      memberImage: mentor2,
-      courseImg: subjectCoverImg,
-      courseName: "Course make millions initial course",
-      progress: 35,
-      classesLeft: 5,
-    },
-    {
-      memberName: "Cody Getchell",
-      memberRole: "Psychologist, Coach",
-      memberImage: mentor1,
-      courseImg: subjectCoverImg,
-      courseName: "Course make millions initial course",
-      progress: 75,
-      classesLeft: 15,
-    },
-    {
-      memberName: "Martilouytica Mini",
-      memberRole: "Psychologist, Coach",
-      memberImage: mentor2,
-      courseImg: subjectCoverImg,
-      courseName: "Course make millions initial course",
-      progress: 35,
-      classesLeft: 5,
-    },
-  ];
 
   return (
     <DashboardLayout showSidebar={true}>
       <div className="h-full w-full px-4  ">
         <div className="w-full text-black">
-          <Breadcrumb titel="My Communities" />
+          <Breadcrumb titel="My Courses" />
 
           <div className="mt-6 flex w-full gap-5">
             <div className="w-3/12">

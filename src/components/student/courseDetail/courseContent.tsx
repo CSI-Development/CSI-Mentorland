@@ -11,7 +11,12 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { FaPlayCircle } from "react-icons/fa";
 import DurationComponent from "@/components/mentor/courseDetail/durationComponent";
 
-function CourseContent({ data, activeLecture, setActiveLecture, setQuizTest }: any) {
+function CourseContent({
+  data,
+  activeLecture,
+  setActiveLecture,
+  setQuizTest,
+}: any) {
   const [courseData, setCourseData] = useState<any>();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -21,12 +26,12 @@ function CourseContent({ data, activeLecture, setActiveLecture, setQuizTest }: a
     setIsOpen((prevState) => !prevState);
   };
 
-  const handleActiveLecture = (lecture: any, section: any,quiz:any) => {
-    const updatedActive = [lecture, section,quiz];
+  const handleActiveLecture = (lecture: any, section: any, quiz: any) => {
+    const updatedActive = [lecture, section, quiz];
     console.log(updatedActive);
-    
+
     setActiveLecture(updatedActive);
-    setQuizTest(false)
+    setQuizTest(false);
 
     // setActiveLecture(!activeLecture)
   };
@@ -37,7 +42,7 @@ function CourseContent({ data, activeLecture, setActiveLecture, setQuizTest }: a
     }
   }, [data]);
 
-  const [openSectionIndex, setOpenSectionIndex] = useState<number>();
+  const [openSectionIndex, setOpenSectionIndex] = useState<any>();
 
   useEffect(() => {
     setOpenSectionIndex(0);
@@ -55,17 +60,15 @@ function CourseContent({ data, activeLecture, setActiveLecture, setQuizTest }: a
     };
   }, []);
 
-
   const toggleSection = (index: any) => {
     setOpenSectionIndex((prevIndex: any) =>
       prevIndex === index ? null : index,
     );
   };
 
-  const handleQuizTest = () =>{
-    setQuizTest(true)
-  }
-
+  const handleQuizTest = () => {
+    setQuizTest(true);
+  };
 
   return (
     <div className=" grid grid-cols-1 gap-10 py-20 pr-20">
@@ -84,10 +87,12 @@ function CourseContent({ data, activeLecture, setActiveLecture, setQuizTest }: a
             {courseData?.sections?.map((section: any, index: number) => (
               <div key={index} className="border-b border-[#B9BABA] py-4">
                 <div
-                  className="flex items-center justify-between cursor-pointer"
+                  className="flex cursor-pointer items-center justify-between"
                   onClick={() => toggleSection(index)}
                 >
-                  <h1 className="text-xl font-bold">Section {index+1}:{" "}{section.title}</h1>
+                  <h1 className="text-xl font-bold">
+                    Section {index + 1}: {section.title}
+                  </h1>
                   {openSectionIndex === index ? (
                     <MdKeyboardArrowUp className="text-4xl font-bold text-[#2769d9]" />
                   ) : (
@@ -101,42 +106,56 @@ function CourseContent({ data, activeLecture, setActiveLecture, setQuizTest }: a
                       {section.lectures.map(
                         (lecture: any, lectureIndex: number) => (
                           <>
-                          <li key={lectureIndex}>
-                            <div className="flex">
-                              <input
-                                type="checkbox"
-                                // checked={activeLecture}
-                                disabled
-                                height={20}
-                                width={20}
-                                className="h-[20px] w-[20px] border-2 border-[#1A458F]"
-                              />
-                              <div className="ml-4">
-                                <p onClick={() => handleActiveLecture(lecture, section,section.quiz)} className="cursor-pointer">
-                                  {lecture.title}
-                                </p>
-                                <DurationComponent duration={lecture.duration} />
+                            <li key={lectureIndex}>
+                              <div className="flex">
+                                <input
+                                  type="checkbox"
+                                  // checked={activeLecture}
+                                  disabled
+                                  height={20}
+                                  width={20}
+                                  className="h-[20px] w-[20px] border-2 border-[#1A458F]"
+                                />
+                                <div className="ml-4">
+                                  <p
+                                    onClick={() =>
+                                      handleActiveLecture(
+                                        lecture,
+                                        section,
+                                        section.quiz,
+                                      )
+                                    }
+                                    className="cursor-pointer"
+                                  >
+                                    {lecture.title}
+                                  </p>
+                                  <DurationComponent
+                                    duration={lecture.duration}
+                                  />
+                                </div>
                               </div>
-                            </div>
-                          </li>
-                           <li>
-                           <div className="flex">
-                             <input
-                               type="checkbox"
-                               disabled
-                              //  checked={activeLecture}
-                               height={20}
-                               width={20}
-                               className="h-[20px] w-[20px] border-2 border-[#1A458F]"
-                             />
-                             <div className="ml-4">
-                              <p onClick={() => handleQuizTest()} className="cursor-pointer">Quiz Test</p>
-                             </div>
-                           </div>
-                         </li>
-                         </>
+                            </li>
+                          </>
                         ),
                       )}
+                      <div className="flex">
+                        <input
+                          type="checkbox"
+                          disabled
+                          //  checked={activeLecture}
+                          height={20}
+                          width={20}
+                          className="h-[20px] w-[20px] border-2 border-[#1A458F]"
+                        />
+                        <div className="ml-4">
+                          <p
+                            onClick={() => handleQuizTest()}
+                            className="cursor-pointer"
+                          >
+                            Quiz Test
+                          </p>
+                        </div>
+                      </div>
                     </ul>
                   </div>
                 )}
@@ -198,7 +217,6 @@ function CourseContent({ data, activeLecture, setActiveLecture, setQuizTest }: a
           </div>
         </div>
       </div>
-
     </div>
   );
 }

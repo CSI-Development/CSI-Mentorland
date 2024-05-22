@@ -13,7 +13,7 @@ import { type Numbers } from "web3";
 const WalletInfo = () => {
   const { magic, web3 } = useMagic();
 
-  const { setMToken } = useContext(AppContext);
+  const { setMToken, setOpenWallet } = useContext(AppContext);
 
   const [balance, setBalance] = useState("...");
   const [copied, setCopied] = useState("Copy");
@@ -54,8 +54,9 @@ const WalletInfo = () => {
   const disconnect = useCallback(async () => {
     if (magic) {
       await logout(setMToken, magic);
+      setOpenWallet(false);
     }
-  }, [magic, setMToken]);
+  }, [magic, setMToken, setOpenWallet]);
 
   const copy = useCallback(() => {
     if (publicAddress && copied === "Copy") {
@@ -92,7 +93,7 @@ const WalletInfo = () => {
           </div>
         )}
       </div>
-      <div className="w-full break-words rounded-md border px-4 py-2 text-center bg-blue-gray-50">
+      <div className="w-full break-words rounded-md border bg-blue-gray-50 px-4 py-2 text-center">
         {publicAddress?.length == 0 ? "Fetching address.." : publicAddress}
       </div>
       <div className="flex w-full items-center justify-around gap-4">
@@ -108,7 +109,7 @@ const WalletInfo = () => {
           </div>
         )}
       </div>
-      <div className="w-full break-words rounded-md border px-4 py-2 text-center bg-blue-gray-50">
+      <div className="w-full break-words rounded-md border bg-blue-gray-50 px-4 py-2 text-center">
         {balance.substring(0, 7)} {getNetworkToken()}
       </div>
     </div>

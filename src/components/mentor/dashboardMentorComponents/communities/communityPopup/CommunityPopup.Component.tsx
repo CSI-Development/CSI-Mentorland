@@ -81,7 +81,7 @@ function CommunityPopup({
               //   type="email"
               placeholder="newuser@myemail.com"
               className={`w-full rounded-lg border-2 px-5 py-3 outline-none `}
-            ></input>
+            />
           </div>
           <div className="mt-3">
             <p className="mb-1 text-lg text-[#1b448f]">

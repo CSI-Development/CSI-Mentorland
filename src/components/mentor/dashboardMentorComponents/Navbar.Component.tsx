@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable react-hooks/rules-of-hooks */
@@ -10,19 +12,25 @@ import { mentorDetailsApi } from "@/app/api/mentorDetails/mentorDetails.api";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useContext } from "react";
 import { AppContext } from "@/providers/ContextProvider";
+import ConnectModal from "@/components/modals/connectModal";
+import { logout } from "@/utils/common";
+import { useMagic } from "@/providers/MagicProvider";
 
 function Navbar() {
   const router = useRouter();
-  const {setOpenWallet} = useContext(AppContext)
+  const { setOpenWallet, openWallet, setMToken } = useContext(AppContext);
+  const { magic } = useMagic();
 
   const { data } = useQuery({
     queryKey: ["mentorDetails"],
     queryFn: () => mentorDetailsApi(),
   });
-
-  const logOut = () => {
+  console.log(openWallet, "openWallet");
+  const logOut = async () => {
+    await logout(setMToken, magic);
     deleteCookie("token");
     deleteCookie("role");
+    deleteCookie("user_email");
     router.push("/");
   };
 
@@ -55,7 +63,15 @@ function Navbar() {
         <Image src="/svg/chat.svg" alt="store" width={30} height={30} />
         <Image src="/svg/language.svg" alt="store" width={30} height={30} />
         <Image src="/svg/bell.svg" alt="store" width={30} height={30} />
-        <Icon icon="uit:wallet" className="cursor-pointer" onClick={() => setOpenWallet(true)} />
+        <Icon
+          icon="uit:wallet"
+          className="cursor-pointer"
+          width={50}
+          height={50}
+          onClick={() => {
+            setOpenWallet(true);
+          }}
+        />
         <Image
           src={data?.mentorAvatar ?? "/svg/user.svg"}
           alt="Profile"
@@ -71,6 +87,7 @@ function Navbar() {
             LogOut
           </button>
         </div>
+        <ConnectModal />
       </div>
     </header>
   );

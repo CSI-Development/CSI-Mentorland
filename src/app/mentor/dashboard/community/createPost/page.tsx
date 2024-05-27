@@ -6,7 +6,7 @@ function CommunityPost() {
   return (
     <MentorDashboardLayout showSidebar={false}>
       <div className="h-full pt-10 w-full  ">
-        <CreatePost />
+        <CreatePost id={""} />
       </div>
     </MentorDashboardLayout>
   );

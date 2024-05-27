@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 "use client";
@@ -33,10 +34,10 @@ function CommunityPopup({
 
   const { mutate } = useMutation({
     mutationFn: createCommunityApi,
-    onSuccess: (e) => {
-      setOpenDialog(false);
+    onSuccess: (e: any) => {
       setLoading(false);
-      router.push("/mentor/dashboard/community");
+      setOpenDialog(false);
+      router.push(`/mentor/dashboard/community/${e.community._id}`);
       console.log("success", e);
       setSession(e.data.token);
     },

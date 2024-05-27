@@ -34,16 +34,39 @@ function Navbar() {
     deleteCookie("user_email");
     router.push("/");
   };
+  const handleChange = () => {
+    router.push("/student/posts");
+  };
 
   return (
     <nav className="fixed z-50 flex w-full justify-between border-b-2 border-[#2668d8] bg-[#fffefe] p-4">
       <div className="flex">
         <Image src={smallLogo} alt="Mentorland" />
-        <p className="my-auto border-r-2 border-gray-300 px-5 text-xl font-bold text-black ">
+        {/* <p className="my-auto border-r-2 border-gray-300 px-5 text-xl font-bold text-black ">
           General Dashboard
-        </p>
+        </p> */}
+        <div className="flex items-center gap-10">
+          <select
+            name="community"
+            id="community"
+            // Value="community"
+            className="w-100 ml-5 cursor-pointer border-0 bg-white text-base font-bold text-[#0E2245] outline-none"
+            onChange={handleChange}
+          >
+            <option value="home" className="border-none bg-white outline-none">
+              Home
+            </option>
+            <option
+              value="community"
+              className="border-none bg-white outline-none"
+              selected
+            >
+              General Dashboard
+            </option>
+          </select>
+        </div>
       </div>
-      <div className="my-auto flex items-center gap-4 text-3xl text-[#2668d8]">
+      <div className="flex items-center gap-4 text-3xl text-[#2668d8]">
         <Link href="/student/marketplace">
           <Icon icon="fluent:building-shop-20-regular" />
         </Link>
@@ -53,8 +76,8 @@ function Navbar() {
         <Icon
           icon="uit:wallet"
           className="cursor-pointer"
-          width={50}
-          height={50}
+          width={40}
+          height={40}
           onClick={() => setOpenWallet(true)}
         />
         <Image

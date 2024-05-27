@@ -76,9 +76,9 @@ function CourseContent({ data, activeLecture, setActiveLecture }: any) {
         <div className="mt-8 grid grid-cols-1 gap-5 bg-[#F3F5FA] p-3">
           <div>
             {courseData?.sections?.map((section: any, index: number) => (
-              <div key={index}>
+              <div key={index} className="border-b border-[#B9BABA] py-4">
                 <div
-                  className="flex cursor-pointer text-[]"
+                  className="flex items-center justify-between cursor-pointer text-[]"
                   onClick={() => toggleSection(index)}
                 >
                   <h1 className="text-xl font-bold">{section.title}</h1>
@@ -98,13 +98,14 @@ function CourseContent({ data, activeLecture, setActiveLecture }: any) {
                             <div className="flex">
                               <input
                                 type="checkbox"
-                                checked={activeLecture}
+                                // checked={activeLecture}
+                                disabled
                                 height={20}
                                 width={20}
                                 className="h-[20px] w-[20px] border-2 border-[#1A458F]"
                               />
                               <div className="ml-4 text-[#90A4B6]">
-                                <p onClick={() => handleActiveLecture(lecture, section)}>
+                                <p onClick={() => handleActiveLecture(lecture, section)} className="cursor-pointer">
                                   {lecture.title}
                                 </p>
                                 <DurationComponent duration={lecture.duration} />

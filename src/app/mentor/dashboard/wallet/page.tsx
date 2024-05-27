@@ -10,9 +10,9 @@ import {
 import WalletEarnings from "@/components/walletComponents/WalletEarnings.component";
 import WalletFundings from "@/components/walletComponents/WalletFundings.component";
 import WalletAssets from "@/components/walletComponents/WalletAssets.compnent";
-import DashboardLayout from "@/layouts/DashboardLayout";
+import MentorDashboardLayout from "@/layouts/mentorDashboardLayout";
 
-const Wallet = () => {
+const MentorWallet = () => {
   const [currentTab, setCurrentTab] = useState<string>("assets");
   const tabData = [
     {
@@ -29,8 +29,8 @@ const Wallet = () => {
     },
   ];
   return (
-    <DashboardLayout showSidebar={true}>
-      <div className="h-full w-full px-5 py-10 text-black">
+    <MentorDashboardLayout showSidebar={true}>
+      <div className="h-full w-full px-5 py-20 text-black">
         <h1 className="mb-5 text-xl font-bold ">My Wallet</h1>
         <Tabs value={currentTab}>
           <TabsHeader
@@ -79,8 +79,8 @@ const Wallet = () => {
           </TabsBody>
         </Tabs>
       </div>
-    </DashboardLayout>
+    </MentorDashboardLayout>
   );
 };
 
-export default Wallet;
+export default MentorWallet;

@@ -10,7 +10,7 @@ function completionCertificate() {
   return (
     <DashboardLayout showSidebar={false}>
       <div className="px-12 py-10">
-        <Link href={`/student/dashboard/wallet`}>
+        <Link href={`/mentor/dashboard/wallet`}>
           <button className="text-[#2769D9] font-semibold mt-1">{`<< Back`}</button>
         </Link>
         <div className="flex gap-10">

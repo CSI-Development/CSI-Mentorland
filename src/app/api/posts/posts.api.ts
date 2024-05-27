@@ -6,23 +6,20 @@ import { type AxiosResponse } from "axios";
 import { getCookie } from "cookies-next";
 import { jwtDecode } from "jwt-decode";
 
-interface ICommunityGetResponse extends AxiosResponse {
+interface IPostsResponse extends AxiosResponse {
   message?: string;
   error?: {
     message: string;
   };
 }
 
-export const communityGetApi = async (id: string): Promise<any> => {
+export const postsGetApi = async (): Promise<any> => {
   const token = getCookie("token") ?? "";
-  const res = (await axiosInstance.get(
-    `/communityPost/community-post/${id}?pageNumber=1&pageSize=1`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+  const res = (await axiosInstance.get("/student/posts", {
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-  )) satisfies ICommunityGetResponse;
+  })) satisfies IPostsResponse;
   return res.data;
   //if success it will send "email verification link sent" to the user email id as a message
   //if error it will send "Email already exists" as a message

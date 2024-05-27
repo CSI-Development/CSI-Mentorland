@@ -57,7 +57,7 @@ function Navbar() {
         </select>
       </div>
       <div></div>
-      <div className="flex gap-[30px] text-3xl text-[#2769D9]">
+      <div className="flex items-center gap-4 text-3xl text-[#2769D9]">
         <Image src="/svg/Store.svg" alt="store" width={30} height={30} />
         <Image src="/svg/Group.svg" alt="store" width={30} height={30} />
         <Image src="/svg/chat.svg" alt="store" width={30} height={30} />
@@ -66,8 +66,8 @@ function Navbar() {
         <Icon
           icon="uit:wallet"
           className="cursor-pointer"
-          width={50}
-          height={50}
+          width={40}
+          height={40}
           onClick={() => {
             setOpenWallet(true);
           }}

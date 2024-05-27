@@ -1,15 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const CommunitiesCard = ({ name, level, index }: any) => {
-    const router = useRouter();
-    const handleClick=()=>{
-        router.push("/mentor/dashboard/community");
-
-    }
+const CommunitiesCard = ({ name, level, id, index }: any) => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/mentor/dashboard/community/${id}`);
+  };
   console.log(name, level, "name");
   return (
-    <div className="flex h-[120px] w-[370px] items-center gap-3 rounded-xl bg-white p-5 text-black shadow-xl cursor-pointer" onClick={handleClick}>
+    <div
+      className="flex h-[120px] w-[370px] cursor-pointer items-center gap-3 rounded-xl bg-white p-5 text-black shadow-xl hover:shadow-md"
+      onClick={handleClick}
+    >
       <div className="w-full">
         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#1A458F] text-white">
           {index + 1}

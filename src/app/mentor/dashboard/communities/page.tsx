@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useState } from "react";
 import MentorDashboardLayout from "@/layouts/mentorDashboardLayout";
@@ -20,7 +24,7 @@ const Communities = () => {
       setCommunities(data);
     }
   }, [data]);
-  console.log(communities?.communityDetail, "DATATA");
+  console.log(communities, "DATATA");
   return (
     <MentorDashboardLayout showSidebar={true}>
       <div className="h-full w-full px-4  ">
@@ -51,13 +55,14 @@ const Communities = () => {
           </div>
           <div className="flex items-center justify-center w-full">
             <div className="m-auto mb-32 mt-20 grid w-full grid-cols-3 gap-6 pb-28">
-              {communities?.communityDetail?.map((data: any, i: number) => {
+              {communities?.map((data: any, i: number) => {
                 console.log(data, "InnerDATA");
                 return (
                   <CommunitiesCard
                     key={i}
                     name={data?.communityName}
                     level={data?.communityLevel}
+                    id={data?._id}
                     index={i}
                   />
                 );

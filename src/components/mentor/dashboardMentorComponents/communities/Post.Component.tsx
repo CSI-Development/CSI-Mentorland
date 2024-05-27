@@ -26,8 +26,7 @@ import { SubmitHandler, useForm, useFormContext } from "react-hook-form";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "react-toastify";
 
-
-export default function CreatePost() {
+export default function CreatePost({ id }: { id: string }) {
   const ReactQuill = useMemo(
     () => dynamic(() => import("react-quill"), { ssr: false }),
     [],
@@ -39,13 +38,14 @@ export default function CreatePost() {
   console.log(postText, "postText");
   const router = useRouter();
 
-  const { register, handleSubmit, setValue, getValues } = useForm<ICreateCommunityPost>();
+  const { register, handleSubmit, setValue, getValues } =
+    useForm<ICreateCommunityPost>();
 
   const { mutate: postData } = useMutation({
     mutationFn: communityPostApi,
     onSuccess: (e) => {
       toast.success("Post Created Successfully");
-      router.push("/mentor/dashboard/community");
+      router.push(`/mentor/dashboard/community/${id}`);
       console.log("success", e);
       setValue("multimedia", e.data.file.url, { shouldTouch: true });
       setSession(e.data.token); //here will set the token into the session for axios header
@@ -58,19 +58,19 @@ export default function CreatePost() {
     const title = values.title;
     const description = values.postText;
     const media = values.multimedia;
-    if(stage === 1 && !title){
-      toast.error("Plese enter the Title")
+    if (stage === 1 && !title) {
+      toast.error("Plese enter the Title");
       return;
     }
-    if(stage === 1 && !description){
-      toast.error("Please enter Post Text")
+    if (stage === 1 && !description) {
+      toast.error("Please enter Post Text");
       return;
     }
-    if(stage === 1 && !media){
-      toast.error("Please add the Multimedia")
+    if (stage === 1 && !media) {
+      toast.error("Please add the Multimedia");
       return;
     }
-    postData(data);
+    postData({data, id});
     // console.log(getValues(), quillRef.current.getEditor(), "something in post");
   };
 
@@ -186,7 +186,7 @@ export default function CreatePost() {
                               setPostText(e);
                               setValue(
                                 "postText",
-                                e
+                                e,
                                 // quillRef?.current?.getEditor().container
                                 //   .textContent,
                                 // {

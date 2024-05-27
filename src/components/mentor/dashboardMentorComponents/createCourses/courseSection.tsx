@@ -7,10 +7,11 @@ import { courseGetApi } from "@/app/api/createCourse/getCourse.api";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import React from "react";
+import CommunityBanner from "../communities/CommunityBanner.Component";
 
-function CourseSection() {
+function CourseSection({ cData, id, refetch }: any) {
   const { data } = useQuery({
     queryKey: ["courses"],
     queryFn: () => courseGetApi(),
@@ -18,15 +19,15 @@ function CourseSection() {
 
   console.log(data, "course data");
 
-  const router = useRouter();
+  // const router = useRouter();
 
-  const createCourse = () => {
-    router.push("createCourse");
-  };
+  // const createCourse = () => {
+  //   router.push("/mentor/dashboard/community/course/create");
+  // };
 
   return (
     <div className="w-full text-black">
-      <div className="flex h-[585px] w-full items-center justify-center bg-[#E8ECF3]"></div>
+      <CommunityBanner data={cData} id={id} refetch={refetch} />
 
       {data ? (
         <div className="mt-10 w-full">
@@ -34,13 +35,12 @@ function CourseSection() {
             <h1 className="text-4xl font-bold">My Courses</h1>
           </div>
           <div className="flex w-full justify-end p-10">
-            <button
-              type="button"
+            <Link
+              href="/mentor/dashboard/community/course/create"
               className=" mt-10 rounded-lg bg-[#2769D9] px-[14px] py-[9px] font-bold text-white"
-              onClick={createCourse}
             >
               Create another Courses
-            </button>
+            </Link>
           </div>
           <div className="grid grid-cols-3 place-items-center gap-10 p-10	">
             {data?.courses?.length > 0 &&
@@ -58,7 +58,7 @@ function CourseSection() {
                     style={{ aspectRatio: "3/2", objectFit: "contain" }}
                     alt=""
                   />
-                  <div className="p-5 h-64">
+                  <div className="h-64 p-5">
                     <p className="w-fit rounded bg-[#E8ECF3] p-1 text-sm text-primary">
                       {val.category}
                     </p>
@@ -116,13 +116,12 @@ function CourseSection() {
               If you need help with it, we’ve made a tutorial for that. Have a
               look here.
             </p>
-            <button
-              type="button"
+            <Link
+              href="/mentor/dashboard/community/course/create"
               className=" mt-10 rounded-lg bg-[#2769D9] px-[14px] py-[9px] font-bold text-white"
-              onClick={createCourse}
             >
               Create your first Course
-            </button>
+            </Link>
           </div>
         </div>
       )}

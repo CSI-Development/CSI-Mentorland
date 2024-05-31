@@ -150,7 +150,7 @@ function ResetPassword() {
                       type="email"
                     placeholder="2313#$#dxcvsd"
                     className={`w-full rounded-lg border-2 px-5 py-3 outline-none `.concat(
-                    //   errors.email ? " border-[#FF007A]" : " border-[#b9baba]",
+                    //   errors.email ? " -[#FF007A]" : " border-[#b9baba]",
                     )}
                   ></input>
                   <div className="py-5 text-[#B9BABA]">

@@ -124,7 +124,7 @@ function WatchCourse() {
     <MentorDashboardLayout showSidebar={false}>
       {!detailLoad && (
         <div
-          className="flex w-full bg-[#f7f9fb] px-20 text-black"
+          className="flex w-full bg-[#f7f9fb] px-20 pb-20 text-black"
           style={{ paddingTop: "120px" }}
         >
           <div className="w-[70%]">

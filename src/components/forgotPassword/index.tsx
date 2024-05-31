@@ -124,7 +124,7 @@ function ForgotPassword({
           )}
           <div className="mt-3">
             <div className="my-2 flex gap-1 text-[#5D6475]">
-              <p>Don,t have an account yet?</p>
+              <p>Don't have an account yet?</p>
               <Link className="my-auto" href={"/auth/signup"}>
                 <button className="text-[#2668d8]">Sign Up</button>
               </Link>

@@ -15,6 +15,7 @@ const config = withMT({
           'radial-gradient':'radial-gradient(ellipse at 47% 51%, rgba(255, 255, 255, 1) 0%, rgba(0, 32, 210, 1) 0%, rgba(39, 104, 217, 1) 0%, rgba(0, 13, 38, 1) 50%)',
           'access-gradient': 'linear-gradient(171deg, rgba(95, 63, 140, 1) 24%, rgba(0, 13, 38, 1) 65%)',
           "dimondBg": "url('/public/dimond.png')",
+          'user-bg': "url('https://i.pinimg.com/originals/4f/09/19/4f0919c6884ff016b6713c4881c93e70.jpg')",
       },
       colors: {
         primary: "#2769D9",

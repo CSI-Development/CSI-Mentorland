@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import axiosInstance from "@/utils/axiosInstance";
 import { AxiosResponse } from "axios";
 import { getCookie } from "cookies-next";

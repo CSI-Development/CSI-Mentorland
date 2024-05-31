@@ -33,6 +33,7 @@ const Posts = () => {
       classesLeft: "15 Classes left",
     },
   ];
+  console.log(userDetails, "USERDETAILS")
   return (
     <div className="flex h-screen flex-col gap-10 bg-[#fffefe]">
       <Navbar />
@@ -43,12 +44,13 @@ const Posts = () => {
               <div className="flex w-full flex-col gap-[7px] rounded-md border bg-white p-[25px]">
                 {/* head */}
                 <div className="flex items-center justify-between">
-                  <div className="flex w-[45%] items-center gap-5">
+                  <div className="flex items-center gap-5 object-cover">
                     <Image
                       src={val.user?.avatar}
                       alt=""
                       width={50}
                       height={50}
+                      className="object-cover"
                     />
                     <div>
                       <h1 className="text-xl">
@@ -65,12 +67,13 @@ const Posts = () => {
                       __html: val.postText,
                     }}
                   ></div>
-                  <div className="relative flex h-[500px] w-[600px] items-center justify-center">
+                  <div className="relative flex h-[500px]  items-center justify-center">
                     <Image
                       src={val.multimedia}
                       alt="rectangle"
                       //   width={600}
                       //   height={200}
+                      className="object-contain"
                       fill
                     />
                   </div>
@@ -83,74 +86,48 @@ const Posts = () => {
         </div>
         <div className="col-span-2">
           <UserPofileCard data={userDetails} post={"post"} />
-          <div className="mt-8 flex flex-col  gap-6 rounded-xl bg-white shadow-md p-5">
+          <div className="mt-8 flex flex-col  gap-6 rounded-xl bg-white p-5 shadow-md">
             <h2 className="text-xl font-bold">My Communities</h2>
-            <div className="flex justify-between w-full gap-8">
-              <div className="h-[100px] w-[100px]">
-                <Image
-                  src="/feeds-svg/img2.png"
-                  alt="Mentor"
-                  className="w-40"
-                  width={100}
-                  height={100}
-                />
-              </div>
-              <div className="flex w-full flex-col gap-4">
-                <h1 className="text-base font-medium">
-                  Courses Make Millions Initial
-                </h1>
-                <div className="flex h-fit w-full justify-between gap-4">
-                  <div className="w-full ">
-                    <p className="text-lg font-bold">Progress</p>
-                    <div className="h-3 w-full">
-                      <Line
-                        percent={100}
-                        strokeWidth={10}
-                        trailWidth={20}
-                        className="h-full rounded-xl border p-[1px]"
-                        strokeColor="#04D800"
-                        trailColor="#ffffff"
-                      />
-                    </div>
+            {userDetails?.communities?.map((item: any, i: any) => {
+              console.log(item, "ITEM");
+              return (
+                <div className="flex w-full justify-between gap-8" key={i}>
+                  <div className="h-[100px] w-[200px]">
+                    <Image
+                      src={item?.communityBanner}
+                      alt="Mentor"
+                      className="w-[100%] h-[100%]"
+                      width={100}
+                      height={100}
+                    />
+                  </div>
+                  <div className="flex w-full flex-col gap-4">
+                    <h1 className="text-base font-medium">
+                      {item?.communityName}
+                    </h1>
+                    <div className="flex h-fit w-full justify-between gap-4">
+                      <div className="w-full ">
+                        <p className="text-lg font-bold">Progress</p>
+                        <div className="h-3 w-full">
+                          <Line
+                            percent={100}
+                            strokeWidth={10}
+                            trailWidth={20}
+                            className="h-full rounded-xl border p-[1px]"
+                            strokeColor="#04D800"
+                            trailColor="#ffffff"
+                          />
+                        </div>
 
-                    <p className="text-sm text-[#5D6475]">10 Classes left</p>
+                        <p className="text-sm text-[#5D6475]">
+                          10 Classes left
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="flex justify-between w-full gap-8">
-              <div className="h-[100px] w-[100px]">
-                <Image
-                  src="/feeds-svg/img2.png"
-                  alt="Mentor"
-                  className="w-40"
-                  width={100}
-                  height={100}
-                />
-              </div>
-              <div className="flex w-full flex-col gap-4">
-                <h1 className="text-base font-medium">
-                  Courses Make Millions Initial
-                </h1>
-                <div className="flex h-fit w-full justify-between gap-4">
-                  <div className="w-full ">
-                    <p className="text-lg font-bold">Progress</p>
-                    <div className="h-3 w-full">
-                      <Line
-                        percent={100}
-                        strokeWidth={10}
-                        trailWidth={20}
-                        className="h-full rounded-xl border p-[1px]"
-                        strokeColor="#04D800"
-                        trailColor="#ffffff"
-                      />
-                    </div>
-
-                    <p className="text-sm text-[#5D6475]">10 Classes left</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>

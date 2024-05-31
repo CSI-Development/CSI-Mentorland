@@ -86,11 +86,11 @@ function Sidebar() {
         </div>
       </Link>
 
-      <Link href="/student/dashboard/schedule">
+      <Link href="/student/dashboard/mySchedule">
         <div
           className={`flex items-center gap-2 px-8 py-2 text-black justify-start 
           ${
-            pathname === "/student/dashboard/schedule"
+            pathname === "/student/dashboard/mySchedule"
               ? "bg-[#90A4B6] text-white"
               : ""
           }

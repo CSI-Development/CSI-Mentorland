@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-"use client"
+"use client";
 import { IoMdTime } from "react-icons/io";
 import Image from "next/image";
 import { TiArrowBack } from "react-icons/ti";
@@ -8,14 +10,31 @@ import { RiUserFill } from "react-icons/ri";
 import { IoFlag } from "react-icons/io5";
 import { IoIosAddCircle } from "react-icons/io";
 import MentorDashboardLayout from "@/layouts/mentorDashboardLayout";
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { mentorDetailsApi } from "@/app/api/mentorDetails/mentorDetails.api";
+import Link from "next/link";
+import EventScheduler from "@/components/scheduler/eventScheduler.Component";
+import { getMentorScheduleApi } from "@/app/api/schedule/getMentorSchedule.api";
+import ViewSupportTicket from "@/components/modals/viewSupportTicket";
+import { getSupportTicketApi } from "@/app/api/supportTicket/getSupportTicket";
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 const Page = () => {
+  const [isOpenTicketDialog, setIsOpenTicketDialog] = useState<boolean>(false);
+  const [selectedTicketData, setSelectedTicketData] = useState<any>(null);
   const { data } = useQuery({
     queryKey: ["mentorDetails"],
     queryFn: () => mentorDetailsApi(),
+  });
+
+  const { data: mentorSchedule } = useQuery({
+    queryKey: ["mentorSchedule"],
+    queryFn: () => getMentorScheduleApi(),
+  });
+  const { data: supportTicket, refetch } = useQuery({
+    queryKey: ["supportTicket"],
+    queryFn: () => getSupportTicketApi(),
   });
 
   function generateTimeIntervals(startHour: number, numberOfIntervals: number) {
@@ -37,6 +56,12 @@ const Page = () => {
   const numberOfIntervals = 8; // Generate 5 intervals (09:00, 10:00, 11:00, 12:00, 13:00)
 
   const timeIntervals = generateTimeIntervals(startHour, numberOfIntervals);
+
+  // console.log(data?.favoriteStudents[0]?.studnets[0], "student data fghjkl");
+  const truncateAddress = (address = "") => {
+    return address?.slice(0, 2) + "..." + address?.slice(address?.length - 4);
+  };
+
   return (
     // <Dashbaord />
     <MentorDashboardLayout showSidebar={true}>
@@ -47,41 +72,25 @@ const Page = () => {
           </h1>
         </div>
         <div className="mt-5 flex w-full justify-between">
-          <div className="h-[475px] w-[60%] rounded-lg bg-white p-5 shadow-lg">
+          <div className="h-[475px] w-[60%] overflow-scroll rounded-lg bg-white p-5 shadow-lg">
             <div className="flex items-center justify-between">
               <h1 className="font-bold text-[#151B2B]">Today Schedule</h1>
-              <h1 className="font-bold text-[#2769D9]">
+              <Link
+                href="/mentor/dashboard/schedule"
+                className="font-bold text-[#2769D9]"
+              >
                 See complete schedule
-              </h1>
+              </Link>
             </div>
-            <div className="mt-4 flex w-full justify-between">
+            {/* <div className="mt-4 flex w-full justify-between">
               {timeIntervals.map((val, index) => (
                 <p key={index} className="text-[#B1B1B1]">
                   {val}
                 </p>
               ))}
-            </div>
-            <div className="mt-5 flex w-full flex-col justify-center gap-2">
-              <div className="h-[94px] w-[230px] rounded-lg border-l-4 border-[#11B67B] bg-[#c3f3c1] p-2 text-xs text-[#11B67B]">
-                <h1 className="font-bold">Live Class With Cody Getchell</h1>
-                <p>
-                  ab viral inferno, nam rick grimes malum cerebro. De carne
-                  lumbering
-                </p>
-                <p className="mt-2 flex items-center">
-                  <IoMdTime className="mr-2 text-lg" /> 12:00 13:00
-                </p>
-              </div>
-              <div className="ml-60 h-[94px] w-[230px] rounded-lg border-l-4 border-[#2769D9] bg-[#C1D7FD] p-2 text-xs text-[#2769D9]">
-                <h1 className="font-bold">Live Class With Cody Getchell</h1>
-                <p>
-                  ab viral inferno, nam rick grimes malum cerebro. De carne
-                  lumbering
-                </p>
-                <p className="mt-2 flex items-center">
-                  <IoMdTime className="mr-2 text-lg" /> 12:00 13:00
-                </p>
-              </div>
+            </div> */}
+            <div className="mt-5 flex w-full flex-col justify-center gap-2 text-black">
+              <EventScheduler scheduleData={mentorSchedule} height={300} />
             </div>
           </div>
           <div className="h-[475px] w-[35%] rounded-lg bg-white shadow-lg">
@@ -109,18 +118,20 @@ const Page = () => {
               </div>
               <div className="mt-5 p-5">
                 <h1 className="font-bold text-[#151B2B]">My Communities</h1>
-                <div className="mt-4 flex items-center">
-                  <Image
-                    src="/svg/user.svg"
-                    alt="user"
-                    width={80}
-                    height={80}
-                    className="rounded-full bg-white p-[1px]"
-                  />
-                  <h1 className="ml-3 text-xs font-bold text-[#151B2B]">
-                    Courses Make Millions
-                  </h1>
-                </div>
+                <Link href="/mentor/dashboard/courseDashboard/">
+                  <div className="mt-4 flex items-center">
+                    <Image
+                      src="/svg/user.svg"
+                      alt="user"
+                      width={80}
+                      height={80}
+                      className="rounded-full bg-white p-[1px]"
+                    />
+                    <h1 className="ml-3 text-xs font-bold text-[#151B2B]">
+                      Courses Make Millions
+                    </h1>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
@@ -147,8 +158,8 @@ const Page = () => {
               </div>
               <div className="flex justify-between border-b border-[#B9BABA] pb-3">
                 <p className="font-bold text-[#5D6475]">
-                  I didn&apos;ut even know we were calling him Big Bear. We
-                  never had the chance to?
+                  I didn't even know we were calling him Big Bear. We never had
+                  the chance to?
                 </p>
                 <TiArrowBack className="text-2xl font-bold text-[#5D6475]" />
               </div>
@@ -167,14 +178,14 @@ const Page = () => {
                 <TiArrowBack className="text-2xl font-bold text-[#5D6475]" />
               </div>
             </div>
-            <div className="mt-5 flex w-full justify-center">
+            {/* <div className="mt-5 flex w-full justify-center">
               <button className="flex items-center rounded-md border border-[#2769D9] px-[10px] py-[5px] font-bold text-[#2769D9]">
                 <RiUserFill />- Remove
               </button>
               <button className="ml-3 flex items-center rounded-md border border-[#2769D9] bg-[#2769D9] px-[10px] py-[5px] font-bold text-[white]">
                 <RiUserFill />+ Add
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="h-[475px] w-[35%] rounded-lg bg-white p-5 text-[#151B2B] shadow-lg">
             <div className="">
@@ -183,60 +194,38 @@ const Page = () => {
               </h1>
             </div>
             <div className="mt-6 grid grid-cols-1 gap-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <Image
-                    src="/svg/user.svg"
-                    alt="user"
-                    width={50}
-                    height={50}
-                    className="rounded-full bg-[#2769d9] p-[1px]"
-                  />
-                  <h1 className="ml-2 font-bold">Engelbert Bryughternexter</h1>
+              {data?.favoriteStudents.map((student: any) => (
+                <div
+                  className="flex items-center justify-between"
+                  key={student.students[0]?._id}
+                >
+                  <div className="flex items-center">
+                    <Image
+                      src={student.students[0]?.studentAvatar}
+                      alt="user"
+                      width={50}
+                      height={50}
+                      className="rounded-full"
+                    />
+                    <h1 className="ml-2 font-bold">
+                      {student.students[0]?.firstName}{" "}
+                      {student.students[0]?.lastName}
+                    </h1>
+                  </div>
+                  <div>
+                    <h1 className="font-bold">25876</h1>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="font-bold">25876</h1>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <Image
-                    src="/svg/user.svg"
-                    alt="user"
-                    width={50}
-                    height={50}
-                    className="rounded-full bg-[#2769d9] p-[1px]"
-                  />
-                  <h1 className="ml-2 font-bold">Dunk Gryertyuson</h1>
-                </div>
-                <div>
-                  <h1 className="font-bold">2123</h1>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <Image
-                    src="/svg/user.svg"
-                    alt="user"
-                    width={50}
-                    height={50}
-                    className="rounded-full bg-[#2769d9] p-[1px]"
-                  />
-                  <h1 className="ml-2 font-bold">Entrand Fretyuingre</h1>
-                </div>
-                <div>
-                  <h1 className="font-bold">1235</h1>
-                </div>
-              </div>
+              ))}
             </div>
-            <div className="mt-5 flex w-full justify-center">
+            {/* <div className="mt-5 flex w-full justify-center">
               <button className="flex items-center rounded-md border border-[#2769D9] px-[10px] py-[5px] font-bold text-[#2769D9]">
                 <RiUserFill />- Remove
               </button>
               <button className="ml-3 flex items-center rounded-md border border-[#2769D9] bg-[#2769D9] px-[10px] py-[5px] font-bold text-[white]">
                 <RiUserFill />+ Add
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="mt-10 flex justify-between text-[#151B2B]">
@@ -351,6 +340,112 @@ const Page = () => {
               <button className="ml-3 flex items-center rounded-md border border-[#2769D9] bg-[#2769D9] px-[10px] py-[5px] font-bold text-[white]">
                 <RiUserFill />+ Add
               </button>
+            </div>
+          </div>
+        </div>
+        <div className="mb-48 mt-10 flex justify-between text-[#151B2B]">
+          <div className="h-[365px] w-[60%] rounded-lg bg-white p-5 shadow-lg">
+            <div className="w-full rounded-lg bg-white p-3 shadow-md">
+              <h1 className="text-md font-bold">Support Tickets</h1>
+              <div className="mt-4 w-full">
+                <div className="flex w-full items-center justify-between border-b border-[#B9BABA] py-3 text-sm text-[#B9BABA]">
+                  <div>
+                    <h1>Ticket Id</h1>
+                  </div>
+                  <div>
+                    <h1>Subject</h1>
+                  </div>
+                  <div>
+                    <h1>Source</h1>
+                  </div>
+                  <div>
+                    <h1>Priority</h1>
+                  </div>
+                  <div>
+                    <h1>Status</h1>
+                  </div>
+                  <div>
+                    <h1>View</h1>
+                  </div>
+                </div>
+                <div className="w-full">
+                  {supportTicket?.map((ticket: any) => (
+                    <div
+                      className="flex w-full items-center justify-between border-b border-[#B9BABA] py-3"
+                      key={ticket?._id}
+                    >
+                      <div className="text-center">
+                        {" "}
+                        <h1
+                          onClick={() => {
+                            setSelectedTicketData(ticket);
+                            setIsOpenTicketDialog(true);
+                          }}
+                          className="cursor-pointer text-primary underline"
+                          title={ticket?.ticketId}
+                        >
+                          {truncateAddress(ticket?.ticketId)}
+                        </h1>
+                      </div>
+                      <div className="text-center">
+                        <h1 className=" w-[13px] text-wrap text-start">
+                          {ticket?.subject}
+                        </h1>
+                      </div>
+                      <div className="text-center">
+                        <h1 className="rounded border border-[yellow] p-1 text-start text-xs">
+                          {ticket?.source}
+                        </h1>
+                      </div>
+                      <div className="text-center">
+                        <h1 className="rounded bg-[#FEE9EE] p-1 text-xs text-[#FF007A]">
+                          {ticket?.priority}
+                        </h1>
+                      </div>
+                      <div className="text-center">
+                        <h1 className="rounded bg-[#CCFFCB] p-1 text-xs text-[#04D800]">
+                          {ticket?.status}
+                        </h1>
+                      </div>
+                      <div className="text-center">
+                        <h1
+                          onClick={() => {
+                            setSelectedTicketData(ticket);
+                            setIsOpenTicketDialog(true);
+                          }}
+                          className="cursor-pointer rounded bg-primary px-2 py-1 text-xs font-bold text-white"
+                        >
+                          View
+                        </h1>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="my-5 mt-32 flex w-full items-center justify-center gap-3">
+                {/* <button className="flex w-1/6 items-center justify-center gap-2 rounded-lg border-2 border-primary bg-transparent p-1 px-2 font-semibold text-primary">
+                <Icon
+                  icon="bxs:user-minus"
+                  color="#2769D9"
+                  className="h-6 w-6"
+                />
+                Remove
+              </button> */}
+                <Link
+                  href="/student/supportTicket"
+                  className="flex w-1/6 items-center justify-center gap-2 rounded-lg border-2 border-primary bg-primary p-1 px-2 font-semibold text-white"
+                >
+                  <Icon icon="bxs:user-plus" className="h-6 w-6" />
+                  Add
+                </Link>
+              </div>
+              <ViewSupportTicket
+                OpenDialog={isOpenTicketDialog}
+                setOpenDialog={setIsOpenTicketDialog}
+                selectedTicketData={selectedTicketData}
+                setSelectedTicketData={setSelectedTicketData}
+                refetch={refetch}
+              />
             </div>
           </div>
         </div>

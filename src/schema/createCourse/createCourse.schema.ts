@@ -6,6 +6,7 @@ name: z.string(),
 category: z.string(),
 description: z.string(),
 logo: z.string(),
+community: z.string(),  
   });
 
 export type ICreateCourse = z.TypeOf<typeof createCourseData>;

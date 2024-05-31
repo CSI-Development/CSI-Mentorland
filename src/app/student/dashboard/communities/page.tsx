@@ -12,10 +12,12 @@ import Breadcrumb from "@/components/student/dashboardStudentComponents/Breadcru
 import CommunityCard from "@/components/student/dashboardStudentComponents/communities/CommunityCard.Component";
 import { useQuery } from "@tanstack/react-query";
 import { getJoinedCourseApi } from "@/app/api/joinCourse/getJoinedCourse.api";
+import { useRouter } from "next/navigation";
 
 function Communities() {
   const [selectedOption, setSelectedOption] = useState("");
   const [courses, setCourses] = useState([]);
+  const router = useRouter();
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
@@ -32,7 +34,10 @@ function Communities() {
     }
   }, [data]);
   console.log(data, "DATA");
-
+  const handleEnrollClick = () => {
+    console.log("CHECK");
+    router.push("/student/dashboard/communities/enrollCourses");
+  };
 
   return (
     <DashboardLayout showSidebar={true}>
@@ -66,10 +71,18 @@ function Communities() {
                 <option value="alphabetical">Alphabetical</option>
               </select>
             </div>
-
-            <button className="mb-0.5 mt-auto h-11  rounded-lg bg-[#2769D9] px-5 text-xl font-bold text-white">
-              Go
-            </button>
+            <div className="flex gap-10 ">
+              <button className="mb-0.5 mt-auto h-11  rounded-lg bg-[#2769D9] px-5 text-xl font-bold text-white">
+                Go
+              </button>
+              <button
+                className="mb-0.5 mt-auto h-11  rounded-lg bg-[#2769D9] px-5 text-xl font-bold text-white"
+                onClick={handleEnrollClick}
+              >
+                {" "}
+                Enroll Course
+              </button>
+            </div>
           </div>
 
           <div className="mt-8 grid h-[62vh] grid-cols-1 gap-5 gap-y-8 overflow-y-scroll md:grid-cols-2 ">
@@ -83,8 +96,8 @@ function Communities() {
                 // courseName={data.courseName}
                 // progress={data.progress}
                 // classesLeft={data.classesLeft}
-                courses ={data?.courses}
-                mentor = {data?.mentors}
+                courses={data?.courses}
+                mentor={data?.mentors}
               />
             ))}
           </div>

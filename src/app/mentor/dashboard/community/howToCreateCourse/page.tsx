@@ -88,7 +88,7 @@ function howToCreateCourse() {
                 </h1>
               </div>
               <div className="w-full flex justify-center">
-                <Link href="/mentor/dashboard/community/course/create">
+                <Link href="/mentor/dashboard">
                 <button
                   type="button"
                   className="w-fit bg-primary font-semibold text-white px-4 py-3 rounded-lg outline-none"

@@ -26,7 +26,7 @@ const CourseDashboard = () => {
           }}
         >
           <h1 className="text-xl font-extrabold text-white">
-            Curses Make Millions Couse
+            Courses Make Millions Course
           </h1>
           <h2 className="text-lg font-medium text-white">With Cody Getchell</h2>
           <button className="mt-2 w-fit rounded-lg bg-white p-2 text-sm font-thin text-primary">

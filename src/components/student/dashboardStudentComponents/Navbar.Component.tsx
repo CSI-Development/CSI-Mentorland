@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable react-hooks/rules-of-hooks */
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import smallLogo from "../../../../public/mentorlandSmallLogo.png";
 import profile from "../../../../public/selectSubject/subjectMentor.png";
 import Image from "next/image";
@@ -16,10 +16,15 @@ import ConnectModal from "@/components/modals/connectModal";
 import { AppContext } from "@/providers/ContextProvider";
 import { useMagic } from "@/providers/MagicProvider";
 import { logout } from "@/utils/common";
+import ViewNotifications from "@/components/modals/notifications";
 
 function Navbar() {
   const router = useRouter();
   const { setOpenWallet, setMToken } = useContext(AppContext);
+
+  const [isOpenNotificationDialog, setIsOpenNotificationDialog] =
+    useState<boolean>(false);
+
   const { magic } = useMagic();
 
   const { data } = useQuery({
@@ -41,7 +46,9 @@ function Navbar() {
   return (
     <nav className="fixed z-50 flex w-full justify-between border-b-2 border-[#2668d8] bg-[#fffefe] p-4">
       <div className="flex">
-        <Image src={smallLogo} alt="Mentorland" />
+        <Link href={"/student/dashboard"}>
+          <Image src={smallLogo} alt="Mentorland" />
+        </Link>
         {/* <p className="my-auto border-r-2 border-gray-300 px-5 text-xl font-bold text-black ">
           General Dashboard
         </p> */}
@@ -72,7 +79,12 @@ function Navbar() {
         </Link>
         <Icon icon="ph:chats-duotone" />
         <Icon icon="material-symbols:translate" />
-        <Icon icon="pepicons-pencil:bell" />
+
+        <Icon
+          className="cursor-pointer"
+          onClick={() => setIsOpenNotificationDialog(true)}
+          icon="pepicons-pencil:bell"
+        />
         <Icon
           icon="uit:wallet"
           className="cursor-pointer"
@@ -96,6 +108,10 @@ function Navbar() {
           </button>
         </div>
       </div>
+      <ViewNotifications
+        OpenDialog={isOpenNotificationDialog}
+        setOpenDialog={setIsOpenNotificationDialog}
+      />
       <ConnectModal />
     </nav>
   );

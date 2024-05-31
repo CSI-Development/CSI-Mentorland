@@ -8,6 +8,9 @@ import MentorDashboardLayout from "@/layouts/mentorDashboardLayout";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { getCommunityAPI } from "@/app/api/getCommunityDetails/getCommunityDetails.api";
+import AskYourMentor from "@/components/mentor/dashboardMentorComponents/askMentor/AskYourMentor.Component";
+import Schedular from "../../schedule/page";
+import CreateSchedule from "@/components/mentor/createSchedule/CreateSchedule.Component";
 
 function CommunityComponent() {
   const [stage, setStage] = useState(1);
@@ -26,6 +29,8 @@ function CommunityComponent() {
         <CommunityNavbar stage={stage} setStage={setStage} />
         {stage === 1 && <Community id={slug} data={data} refetch={refetch} />}
         {stage === 2 && <CourseSection id={slug} cData={data} refetch={refetch} />}
+        {stage === 4 && <div className="py-10 px-20 text-black"><CreateSchedule /></div> }
+        {stage === 5 && <AskYourMentor id={slug}/>}
       </div>
     </MentorDashboardLayout>
   );

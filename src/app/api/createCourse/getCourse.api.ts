@@ -13,11 +13,14 @@ interface IGetCourseResponse extends AxiosResponse {
   };
 }
 
-export const courseGetApi = async (
-): Promise<any> => {
+export const courseGetApi = async (community: string): Promise<any> => {
   const token = getCookie("token") ?? "";
   const id = jwtDecode<DecodedToken>(token)._id;
-  const res = (await axiosInstance.get(`/courses/getCourses`, {
+  let url = `/courses/getCourses`;
+  if (community) {
+    url += `?community=${community}`;
+  }
+  const res = (await axiosInstance.get(url, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

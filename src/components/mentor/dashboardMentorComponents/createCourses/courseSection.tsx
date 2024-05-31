@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/prefer-optional-chain */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -18,6 +19,8 @@ function CourseSection({ cData, id, refetch }: any) {
   });
 
   console.log(data, "course data");
+  console.log("IDDDDD-CHECK")
+  console.log(id, "IDDDDD");
 
   // const router = useRouter();
 
@@ -36,7 +39,7 @@ function CourseSection({ cData, id, refetch }: any) {
           </div>
           <div className="flex w-full justify-end p-10">
             <Link
-              href="/mentor/dashboard/community/course/create"
+              href={`/mentor/dashboard/community/course/create/${id}`}
               className=" mt-10 rounded-lg bg-[#2769D9] px-[14px] py-[9px] font-bold text-white"
             >
               Create another Courses
@@ -117,7 +120,7 @@ function CourseSection({ cData, id, refetch }: any) {
               look here.
             </p>
             <Link
-              href="/mentor/dashboard/community/course/create"
+              href={`/mentor/dashboard/community/course/create/${id}`}
               className=" mt-10 rounded-lg bg-[#2769D9] px-[14px] py-[9px] font-bold text-white"
             >
               Create your first Course

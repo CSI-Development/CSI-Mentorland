@@ -10,15 +10,18 @@ import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { mentorDetailsApi } from "@/app/api/mentorDetails/mentorDetails.api";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "@/providers/ContextProvider";
 import ConnectModal from "@/components/modals/connectModal";
 import { logout } from "@/utils/common";
 import { useMagic } from "@/providers/MagicProvider";
+import ViewNotifications from "@/components/modals/notifications";
 
 function Navbar() {
   const router = useRouter();
   const { setOpenWallet, openWallet, setMToken } = useContext(AppContext);
+  const [isOpenNotificationDialog, setIsOpenNotificationDialog] =
+    useState<boolean>(false);
   const { magic } = useMagic();
 
   const { data } = useQuery({
@@ -62,7 +65,13 @@ function Navbar() {
         <Image src="/svg/Group.svg" alt="store" width={30} height={30} />
         <Image src="/svg/chat.svg" alt="store" width={30} height={30} />
         <Image src="/svg/language.svg" alt="store" width={30} height={30} />
-        <Image src="/svg/bell.svg" alt="store" width={30} height={30} />
+        <Icon
+          className="cursor-pointer"
+          onClick={() => setIsOpenNotificationDialog(true)}
+          icon="pepicons-pencil:bell"
+          data-ripple-dark="true" data-popover-target="notifications-menu"
+        />{" "}
+        
         <Icon
           icon="uit:wallet"
           className="cursor-pointer"
@@ -88,6 +97,10 @@ function Navbar() {
           </button>
         </div>
         <ConnectModal />
+        <ViewNotifications
+          OpenDialog={isOpenNotificationDialog}
+          setOpenDialog={setIsOpenNotificationDialog}
+        />
       </div>
     </header>
   );

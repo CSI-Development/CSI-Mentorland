@@ -12,9 +12,11 @@ interface CourseCardProps {
   title: string;
   description: string;
   imageUrl: string;
-  // price: string;
   id: string;
   mentorId: string;
+  class?: string;
+  mentorName?: string;
+  mentorImg?: string;
 }
 
 function CourseCard(props: CourseCardProps) {
@@ -25,7 +27,7 @@ function CourseCard(props: CourseCardProps) {
     setExpanded(!expanded);
   };
 
-  const { title, description, imageUrl, id, mentorId } = props;
+  const { title, description, imageUrl, id, mentorId} = props;
 
   const truncatedText = expanded
     ? description
@@ -43,6 +45,7 @@ function CourseCard(props: CourseCardProps) {
   });
 
   const handlejoincourse = async () => {
+    console.log(mentorId, "MENTORID");
     const data = {
       mentorId: mentorId,
       courseId: id,
@@ -50,7 +53,7 @@ function CourseCard(props: CourseCardProps) {
     mutate(data);
   };
   return (
-    <div className="mx-auto mt-4 w-8/12">
+    <div className={`mx-auto mt-4 w-8/12 ${props?.class}`}>
       <p className="text-xl font-semibold">{title}</p>
       <div className="mt-5 flex gap-8">
         <Image
@@ -60,9 +63,9 @@ function CourseCard(props: CourseCardProps) {
           alt="subject"
           className="h-44 w-44 rounded-full"
         />
-        <div className="flex-1">
-          <p>{truncatedText}</p>
-          {!expanded && description.length > 600 && (
+        <div className="flex-1 w-80 h-60 overflow-y-auto overflow-hidden">
+          <p className="break-words ">{truncatedText}</p>
+          {!expanded && description.length > 200 && (
             <button className="text-blue-500" onClick={toggleExpand}>
               Read More
             </button>

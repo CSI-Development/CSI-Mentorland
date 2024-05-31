@@ -20,7 +20,7 @@ function MentorDashboardLayout({
         <div
           className={`w-full ${
             showSidebar ? "flex-1" : "w-full"
-          } bg-[#F7F9FB] ${showSidebar ? "p-10" : "p-0"} scrollbar-hide overflow-y-auto`}
+          } z-10 bg-[#F7F9FB] ${showSidebar ? "p-10" : "p-0"} scrollbar-hide overflow-y-auto`}
         >
           {children}
         </div>

@@ -18,6 +18,7 @@ import { useMyStore } from "@/store/store";
 import { toast } from "react-toastify";
 import { baseURL } from "@/utils/axiosInstance";
 import { signupApi } from "@/app/api/signup/signup.api";
+import Link from "next/link";
 
 const Signup = () => {
   const { setLoading } = useContext(AppContext);
@@ -299,7 +300,7 @@ const Signup = () => {
               {/* </Link> */}
               <div className="flex gap-2">
                 <p>Already have an accoutn?</p>
-                <button className="text-[#2668d8] ">Login</button>
+                <Link href="/auth/signin" className="text-[#2668d8]">Login</Link>
               </div>
             </form>
           </div>

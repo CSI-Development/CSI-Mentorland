@@ -13,7 +13,7 @@ interface IGetCourseResponse extends AxiosResponse {
   };
 }
 
-export const courseGetApi = async (community: string): Promise<any> => {
+export const courseGetApi = async (community?: string): Promise<any> => {
   const token = getCookie("token") ?? "";
   const id = jwtDecode<DecodedToken>(token)._id;
   let url = `/courses/getCourses`;

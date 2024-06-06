@@ -129,7 +129,7 @@ function CourseCreate() {
 
   return (
     <MentorDashboardLayout showSidebar={false}>
-      <div className="h-full w-full pt-10  ">
+      <div className="h-full w-full pt-10 ">
         <div className="flex min-h-screen w-full justify-around bg-[#f7f9fb] pt-[80px] text-black">
           <div className="mt-20">
             <ul className="grid w-[290px] grid-cols-1 gap-4 rounded-md bg-white p-5 text-base font-bold">

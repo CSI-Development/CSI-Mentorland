@@ -26,7 +26,7 @@ function CommunityCard(props: CommunityCardProps) {
       <Image
         src={props.courses?.logo}
         alt="Mentor"
-        className="w-40"
+        className="w-40 rounded-full object-cover border border-black/10"
         width={100}
         height={100}
       />
@@ -38,7 +38,7 @@ function CommunityCard(props: CommunityCardProps) {
           <Image
             src={props.mentor?.mentorAvatar}
             alt="Mentor"
-            className="w-14"
+            className="w-14 h-14 rounded-full object-cover"
             width={100}
             height={100}
           />

@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 "use client";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, use, useEffect, useState } from "react";
 
 interface contextType {
   loading: boolean;
+  glassLoading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setGlassLoading: React.Dispatch<React.SetStateAction<boolean>>;
   openWallet: boolean;
   setOpenWallet: React.Dispatch<React.SetStateAction<boolean>>;
   mToken: string;
@@ -17,7 +19,9 @@ const defaultContextValue: contextType = {
   openWallet: false,
   setOpenWallet: () => {},
   mToken: "",
-  setMToken: () => {}
+  setMToken: () => {},
+  glassLoading: false,
+  setGlassLoading: () => {},
 };
 
 export const AppContext = createContext<contextType>(defaultContextValue);
@@ -29,19 +33,22 @@ const ContextProvider = ({
 }>) => {
   const [loading, setLoading] = useState<boolean>(defaultContextValue.loading);
   const [mToken, setMToken] = useState("");
-  const [openWallet, setOpenWallet] = useState(false)
+  const [openWallet, setOpenWallet] = useState(false);
+  const [glassLoading, setGlassLoading] = useState(false);
   const contextProps = {
     loading,
     setLoading,
     mToken,
     setMToken,
     openWallet,
-    setOpenWallet
+    setOpenWallet,
+    glassLoading,
+    setGlassLoading,
   };
 
   useEffect(() => {
-    setMToken(localStorage.getItem('mtoken') ?? '');
-  }, [setMToken])
+    setMToken(localStorage.getItem("mtoken") ?? "");
+  }, [setMToken]);
   return (
     <AppContext.Provider value={contextProps}>{children}</AppContext.Provider>
   );

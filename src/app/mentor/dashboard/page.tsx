@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -90,7 +91,7 @@ const Page = () => {
               ))}
             </div> */}
             <div className="mt-5 flex w-full flex-col justify-center gap-2 text-black">
-              <EventScheduler scheduleData={mentorSchedule} height={300} />
+              <EventScheduler scheduleData={mentorSchedule} student={false} />
             </div>
           </div>
           <div className="h-[475px] w-[35%] rounded-lg bg-white shadow-lg">
@@ -158,7 +159,7 @@ const Page = () => {
               </div>
               <div className="flex justify-between border-b border-[#B9BABA] pb-3">
                 <p className="font-bold text-[#5D6475]">
-                  I didn't even know we were calling him Big Bear. We never had
+                  I didn&apos;t even know we were calling him Big Bear. We never had
                   the chance to?
                 </p>
                 <TiArrowBack className="text-2xl font-bold text-[#5D6475]" />
@@ -432,7 +433,7 @@ const Page = () => {
                 Remove
               </button> */}
                 <Link
-                  href="/student/supportTicket"
+                  href="/mentor/supportTicket"
                   className="flex w-1/6 items-center justify-center gap-2 rounded-lg border-2 border-primary bg-primary p-1 px-2 font-semibold text-white"
                 >
                   <Icon icon="bxs:user-plus" className="h-6 w-6" />

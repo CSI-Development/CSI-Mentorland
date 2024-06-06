@@ -1,6 +1,10 @@
-import React from "react";
+"use client"
+import BecomeVip from "@/components/modals/becomeVip";
+import React, { useState } from "react";
 
 const CourseSchedule = () => {
+
+  const [openBecomeVip, setOpenBecomeVip] = useState(false)
   return (
     <div className="w-full h-full p-3 bg-white rounded-lg shadow-md flex flex-col items-center">
       <div className="w-full flex justify-between">
@@ -17,10 +21,11 @@ const CourseSchedule = () => {
           Get access now to the VIP level and get access to Live Calls,
           One-to-one calls, the VIP Community areas and More!
         </div>
-        <button className="bg-primary rounded-lg w-fit h-fit p-2 text-white text-sm">
+        <button className="bg-primary rounded-lg w-fit h-fit p-2 text-white text-sm" onClick={()=> setOpenBecomeVip(true)}>
           Click Here
         </button>
       </div>
+      <BecomeVip OpenDialog={openBecomeVip} setOpenDialog={setOpenBecomeVip} />
     </div>
   );
 };

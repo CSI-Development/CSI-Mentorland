@@ -8,27 +8,28 @@ function VideoSection({ activeLecture, quizTest }: any) {
   console.log(`activeLecture: `, activeLecture);
 
   return (
-    <div className="grid grid-cols-1 gap-8 py-20 pl-20">
+    <div className="w-full grid grid-cols-1 gap-8 py-20 px-10">
       {quizTest ? (
         <QuizTest activeLecture={activeLecture} />
       ) : (
-        <div className="">
+        <div className="w-full">
           <video
             title="Video Player"
-            width={875}
-            height={395}
+            // width={875}
+            // height={395}
             src={activeLecture[0]?.url}
             // frameBorder="0"
             controls
             autoPlay
             controlsList="nodownload"
             onContextMenu={e => e.preventDefault()}
+            className="w-full h-full"
             // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             // allowFullScreen
           ></video>
         </div>
       )}
-      <div className="grid w-[70%] grid-cols-1 gap-8">
+      <div className="grid w-full grid-cols-1 gap-8">
         <h1 className="text-2xl font-bold text-[#2769D9]">
           {activeLecture[1]?.title}
         </h1>

@@ -7,18 +7,21 @@
 import { categoryNameGetApi } from "@/app/api/createStudent/getCategoryName";
 import { getCategoryNameGetApi } from "@/app/api/getMentorCategory/getMentorCategory.api";
 import { uploadImage } from "@/app/api/uploadImage/uploadImage.api";
+import { AppContext } from "@/providers/ContextProvider";
 import axiosInstance from "@/utils/axiosInstance";
 import { setSession } from "@/utils/jwt";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useFormContext } from "react-hook-form";
+import { Hourglass } from "react-loader-spinner";
 import { toast } from "react-toastify";
 
 function StepOne({ handleNextStep, register }: any) {
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
   const { setValue } = useFormContext();
   const [categories, setCategories] = useState([]);
+  const { glassLoading, setGlassLoading } = useContext(AppContext);
 
   const { data: categoriesList } = useQuery({
     queryKey: ["categoryName"],
@@ -34,7 +37,8 @@ function StepOne({ handleNextStep, register }: any) {
   const { mutate } = useMutation({
     mutationFn: uploadImage,
     onSuccess: (e) => {
-      toast.success("Image Upload Successfully")
+      toast.success("Image Upload Successfully");
+      setGlassLoading(false);
       console.log("success", e);
       setValue("logo", e.data.file.url, { shouldTouch: true });
 
@@ -59,6 +63,7 @@ function StepOne({ handleNextStep, register }: any) {
       const formData: any = new FormData();
       formData.append("file", file);
       mutate(formData);
+      setGlassLoading(true);
     }
   };
 
@@ -161,9 +166,21 @@ function StepOne({ handleNextStep, register }: any) {
       <div className="mt-10 flex w-full justify-end">
         <button
           type="submit"
-          className="text-md rounded-xl bg-[#2769D9] px-[15px] py-[5px] text-base font-bold text-white"
+          className="text-md rounded-xl bg-[#2769D9] px-10 py-2 text-base font-bold text-white"
         >
-          Next
+          {glassLoading ? (
+            <Hourglass
+              visible={true}
+              height="30"
+              width="30"
+              ariaLabel="hourglass-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              colors={["#fff", "#ffffff80"]}
+            />
+          ) : (
+            "Next"
+          )}
         </button>
       </div>
     </div>

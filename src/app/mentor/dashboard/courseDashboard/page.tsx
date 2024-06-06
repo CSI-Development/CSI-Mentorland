@@ -13,7 +13,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getMentorScheduleApi } from "@/app/api/schedule/getMentorSchedule.api";
 
 function CourseDashboard() {
-
   const { data: mentorSchedule } = useQuery({
     queryKey: ["mentorSchedule"],
     queryFn: () => getMentorScheduleApi(),
@@ -37,7 +36,7 @@ function CourseDashboard() {
               <p className="mt-2 text-xl">WIth Cody Getchell</p>
             </div>
           </div>
-          <div className="mt-10 h-[475px] w-[700px] overflow-scroll rounded-lg bg-white p-5 shadow-lg">
+          <div className="mt-10 h-[450px] w-full overflow-scroll rounded-lg bg-white p-5 shadow-lg">
             <div className="flex items-center justify-between">
               <h1 className="font-bold">Today Schedule</h1>
               <Link
@@ -48,11 +47,11 @@ function CourseDashboard() {
               </Link>
             </div>
             <div className="mt-5 flex w-full flex-col justify-center gap-2">
-              <EventScheduler scheduleData={mentorSchedule} />
+              <EventScheduler scheduleData={mentorSchedule} student={false} />
             </div>
           </div>
-          <div className="flex w-full justify-between">
-            <div className="mt-10 h-[475px] w-[700px] rounded-lg bg-white p-5 shadow-lg">
+          <div className="flex w-full justify-between gap-10">
+            <div className="mt-10 h-[475px] w-[60%] rounded-lg bg-white p-5 shadow-lg">
               <div className="flex items-center justify-between">
                 <h1 className="font-bold">Notifications</h1>
                 <h1 className="font-bold text-[#2769D9]">
@@ -124,7 +123,7 @@ function CourseDashboard() {
                 </div>
               </div>
             </div>
-            <div className="mt-10 h-[475px] w-[458px] rounded-lg bg-white p-5 shadow-lg">
+            <div className="mt-10 h-[475px] w-[40%] rounded-lg bg-white p-5 shadow-lg">
               <div className="flex items-center justify-between">
                 <h1 className="font-bold">Assets</h1>
                 <h1 className="font-bold text-[#2769D9]">Add More</h1>
@@ -169,8 +168,8 @@ function CourseDashboard() {
               </div>
             </div>
           </div>
-          <div className="flex w-full justify-between">
-            <div className="mt-10 h-[475px] w-[700px] rounded-lg bg-white p-5 shadow-lg">
+          <div className="flex w-full justify-between gap-10">
+            <div className="mt-10 h-[475px] w-[60%] rounded-lg bg-white p-5 shadow-lg">
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="font-bold">Pending Requests</h1>
@@ -204,13 +203,16 @@ function CourseDashboard() {
                 </h1>
               </div>
             </div>
-            <div className="mt-10 h-[375px] w-[456px] rounded-lg bg-white p-5 shadow-lg">
+            <div className="mt-10 h-[375px] w-[40%] rounded-lg bg-white p-5 shadow-lg">
               <div className="">
                 <h1 className="font-bold">Past Students</h1>
               </div>
               <div className="mt-6 grid grid-cols-1 gap-3">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
+                  <Link
+                    href="/mentor/dashboard/studentProfile"
+                    className="flex items-center"
+                  >
                     <Image
                       src="/svg/user.svg"
                       alt="user"
@@ -221,13 +223,16 @@ function CourseDashboard() {
                     <h1 className="ml-2 font-bold">
                       Engelbert Bryughternexter
                     </h1>
-                  </div>
+                  </Link>
                   <div>
                     <h1 className="font-bold">25876</h1>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
+                  <Link
+                    href="/mentor/dashboard/studentProfile"
+                    className="flex items-center"
+                  >
                     <Image
                       src="/svg/user.svg"
                       alt="user"
@@ -236,13 +241,16 @@ function CourseDashboard() {
                       className="rounded-full bg-[#2769d9] p-[1px]"
                     />
                     <h1 className="ml-2 font-bold">Dunk Gryertyuson</h1>
-                  </div>
+                  </Link>
                   <div>
                     <h1 className="font-bold">2123</h1>
                   </div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
+                  <Link
+                    href="/mentor/dashboard/studentProfile"
+                    className="flex items-center"
+                  >
                     <Image
                       src="/svg/user.svg"
                       alt="user"
@@ -251,7 +259,7 @@ function CourseDashboard() {
                       className="rounded-full bg-[#2769d9] p-[1px]"
                     />
                     <h1 className="ml-2 font-bold">Entrand Fretyuingre</h1>
-                  </div>
+                  </Link>
                   <div>
                     <h1 className="font-bold">1235</h1>
                   </div>

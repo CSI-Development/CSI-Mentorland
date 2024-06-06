@@ -11,6 +11,7 @@ import { getCommunityAPI } from "@/app/api/getCommunityDetails/getCommunityDetai
 import AskYourMentor from "@/components/mentor/dashboardMentorComponents/askMentor/AskYourMentor.Component";
 import Schedular from "../../schedule/page";
 import CreateSchedule from "@/components/mentor/createSchedule/CreateSchedule.Component";
+import CommunityChannel from "@/components/mentor/dashboardMentorComponents/communityChannel/Channel.Component";
 
 function CommunityComponent() {
   const [stage, setStage] = useState(1);
@@ -25,10 +26,11 @@ function CommunityComponent() {
 
   return (
     <MentorDashboardLayout showSidebar={false}>
-      <div className="h-full w-full pt-20  ">
+      <div className="h-full w-full pt-20">
         <CommunityNavbar stage={stage} setStage={setStage} />
         {stage === 1 && <Community id={slug} data={data} refetch={refetch} />}
         {stage === 2 && <CourseSection id={slug} cData={data} refetch={refetch} />}
+        {stage === 3 && <CommunityChannel id={slug} /> }
         {stage === 4 && <div className="py-10 px-20 text-black"><CreateSchedule /></div> }
         {stage === 5 && <AskYourMentor id={slug}/>}
       </div>

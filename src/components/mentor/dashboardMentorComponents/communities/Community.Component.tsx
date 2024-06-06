@@ -34,12 +34,12 @@ export const Card = () => {
   });
 
   return (
-    <div className=" h-[80%] w-[30%] ">
+    <div className="w-[30%]">
       <div className="m-3">
         <h1 className="text-lg font-bold">Mentor</h1>
       </div>
-      <div className="flex w-full items-center justify-around border-b-2 px-3 pb-6 pt-4">
-        <Image src={data?.mentorAvatar} alt="" width={136} height={136} />
+      <div className="flex w-full items-center gap-5 border-b-2 px-3 pb-6 pt-4">
+        <Image src={data?.mentorAvatar} alt="" width={136} height={136} className="rounded-full h-[100px] w-[100px] object-cover" />
         <div>
           <h1 className="text-2xl font-bold">
             {data?.firstName + " " + data?.lastName}
@@ -62,7 +62,7 @@ export const Card = () => {
         </div>
       </div>
       <div className="mt-4 w-full items-center">
-        <div className="h-[155px] w-[405px] bg-white px-6 py-3">
+        <div className="w-full bg-white px-6 py-3">
           <h1 className="font-bold">Leaderboard</h1>
           <p>
             Monthly winners will be period regard sudden better. Decisively
@@ -102,7 +102,7 @@ export const MainCommunityFeed = ({ id }: { id: string }) => {
   };
 
   return (
-    <div className=" flex w-[80%] justify-between px-10">
+    <div className=" flex w-[60%] justify-between px-10">
       {data?.length > 0 ? (
         <Feeds data={data} refetch={refetch} id={id} />
       ) : (
@@ -134,7 +134,7 @@ export const InitialFeed = () => {
 
 export const Feeds = ({ data, refetch, id }: any) => {
   return (
-    <div className=" flex w-[836px] flex-col gap-7">
+    <div className=" flex w-full flex-col gap-7">
       <SingleFeed data={data} id={id} refetch={refetch} />
       {/* Banner */}
       <div className=" flex h-[232px] w-full items-center">
@@ -185,7 +185,7 @@ export const SingleFeed = ({ data, refetch, id }: any) => {
             {/* head */}
             <div className="flex items-center justify-between">
               <div className="flex w-[45%] items-center gap-5">
-                <Image src={val.user?.avatar} alt="" width={50} height={50} />
+                <Image src={val.user?.avatar} alt="" width={50} height={50} className="rounded-full h-[50px] w-[50px] object-cover" />
                 <div>
                   <h1 className="text-xl">
                     {val.user?.firstName + " " + val.user?.lastName}
@@ -326,7 +326,7 @@ export function CommentSection({ refetch, data }: any) {
               <div>
                 <Image
                   src={item.user.avatar}
-                  className="rounded-full"
+                  className="rounded-full h-[30px] w-[30px] object-cover"
                   alt=""
                   width={30}
                   height={30}
@@ -410,45 +410,18 @@ export function CommentSection({ refetch, data }: any) {
   );
 }
 
-// export function CommunityNavbar() {
-//   return (
-//     <>
-//       <nav className=" w-full h-[60px] bg-[#0E2245]">
-//         <ul className=" h-full ml-24 flex gap-6 ">
-//           <li className=" uppercase text-white text-xl py-[20px] px-4 font-bold cursor-pointer hover:bg-[#FF007A] hover:rounded-t-lg">
-//             Community Feed
-//           </li>
-//           <li className=" uppercase text-white text-xl py-[20px] px-4 font-bold cursor-pointer hover:bg-[#FF007A] hover:rounded-t-lg">
-//             {" "}
-//             Courses
-//           </li>
-//           <li className=" uppercase text-white text-xl py-[20px] px-4 font-bold cursor-pointer hover:bg-[#FF007A] hover:rounded-t-lg">
-//             Channel
-//           </li>
-//             <li className="uppercase text-white text-xl py-[20px] px-4 font-bold cursor-pointer hover:bg-[#FF007A] hover:rounded-t-lg">
-//               Live Call Schedule
-//             </li>
-//             <li className=" uppercase text-white text-xl py-[20px] px-4 font-bold cursor-pointer hover:bg-[#FF007A] active:bg-[#FF007A] hover:rounded-t-lg">
-//               Ask Your Mentor
-//             </li>
-//         </ul>
-//       </nav>
-//     </>
-//   );
-// }
-
 export default function Community({ id, data, refetch }: any) {
   return (
     <div className="text-black">
       <CommunityBanner data={data} id={id} refetch={refetch} />
 
-      <div className=" mb-9 flex w-full gap-[10%] bg-[#f7f9fb] py-10">
+      <div className=" mb-9 flex w-full bg-[#f7f9fb] py-10">
         <div className="h-full w-auto ">
           <TooltipBar />
         </div>
         {/* <MainCommunityFeed /> */}
 
-        <div className="flex w-[80%] justify-between px-10 pb-10">
+        <div className="flex w-full justify-around px-10 pb-10">
           <MainCommunityFeed id={id} />
           <Card />
         </div>

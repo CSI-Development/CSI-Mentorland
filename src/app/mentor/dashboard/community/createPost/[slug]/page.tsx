@@ -8,7 +8,7 @@ function CommunityPost() {
   const { slug }: { slug: string } = useParams();
   return (
     <MentorDashboardLayout showSidebar={false}>
-      <div className="h-full w-full pt-10  ">
+      <div className="h-full w-full pt-20  ">
         <CreatePost id={slug} />
       </div>
     </MentorDashboardLayout>

@@ -85,7 +85,7 @@ function Communities() {
             </div>
           </div>
 
-          <div className="mt-8 grid h-[62vh] grid-cols-1 gap-5 gap-y-8 overflow-y-scroll md:grid-cols-2 ">
+          <div className="grid grid-cols-2 mt-10 p-5 gap-10">
             {courses.map((data: any, index: number) => (
               <CommunityCard
                 key={index}

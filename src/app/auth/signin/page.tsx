@@ -263,9 +263,9 @@ function SignIn() {
                       errors.email ? " border-[#FF007A]" : " border-[#b9baba]",
                     )}
                   />
-                  {errors.email && (
+                  {errors?.email && (
                     <p className="rounded-md bg-[#FF007A] p-1.5 text-xs text-white">
-                      {errors.email.message}
+                      {errors?.email?.message}
                     </p>
                   )}
                 </div>

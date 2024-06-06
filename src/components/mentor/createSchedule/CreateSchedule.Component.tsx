@@ -50,6 +50,7 @@ export function Calendar({ dateValue, setDateValue }: any) {
           onChange={(newValue: any) =>
             setDateValue(dayjs(newValue).format("YYYY-MM-DD"))
           }
+          className="w-full"
         />
       </DemoContainer>
     </LocalizationProvider>
@@ -120,7 +121,7 @@ export default function CreateSchedule() {
             </div>
           </div>
           <div className="h-[700px] overflow-scroll">
-            <EventScheduler scheduleData={scheduleData} />
+            <EventScheduler scheduleData={scheduleData} student={false} setOpenDialog={setIsOpenScheduleDialog} />
           </div>
         </div>
         <div className="h-fit rounded-lg border bg-white p-2">

@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
 import React from "react";
 import dayjs from "dayjs";
@@ -18,11 +20,11 @@ const page = () => {
   return (
     <DashboardLayout showSidebar={true}>
       <div className="grid grid-cols-3 text-black pb-20 mr-16">
-        <div className="col-span-2 p-10">
+        <div className="col-span-2 p-10 z-10">
           <h4 className="text-2xl font-bold text-black">My Schedule</h4>
-          <EventScheduler scheduleData={scheduleData} student="student"/>
+          <EventScheduler scheduleData={scheduleData} student={true}/>
         </div>
-        <div className="col-span-1 h-fit rounded-lg border bg-white p-2 mt-20">
+        <div className="col-span-1 h-fit w-full rounded-lg border bg-white p-2 mt-20">
           <Calendar dateValue={dateValue} setDateValue={setDateValue} />
         </div>
       </div>

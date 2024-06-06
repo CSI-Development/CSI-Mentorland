@@ -5,16 +5,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useFormContext } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { uploadImage } from "@/app/api/uploadImage/uploadImage.api";
 import { toast } from "react-toastify";
 import Image from "next/image";
+import { Hourglass } from "react-loader-spinner";
+import { AppContext } from "@/providers/ContextProvider";
 
 function StageFive() {
   const [image, setImage] = useState<string | ArrayBuffer | null>();
+  const { glassLoading, setGlassLoading } = useContext(AppContext);
   const { setValue } = useFormContext();
 
   const [link, setLink] = useState("");
@@ -27,6 +30,7 @@ function StageFive() {
       // setValue("logo", e.data.file.url, { shouldTouch: true });
       setImage(e.data.file.url);
       toast.success("Thumbnail uploaded succesfully");
+      setGlassLoading(false)
       // setSession(e.data.token); //here will set the token into the session for axios header
       //remaining: after success user must be redirect somewhere. like dashboard or home page more details see console
       // setValue("studentAvatar", e.data.file.url, { shouldTouch: true });
@@ -34,7 +38,7 @@ function StageFive() {
   });
 
   const handleAddClick = () => {
-    console.log(link, image, "hett");
+    console.log(link, image, "hett"); 
     if (link && image) {
       const updated = [
         ...links,
@@ -73,6 +77,7 @@ function StageFive() {
       const formData: any = new FormData();
       formData.append("file", file);
       mutate(formData);
+      setGlassLoading(true)
     }
   };
 
@@ -138,13 +143,25 @@ function StageFive() {
             </div> */}
             </div>
           </div>
-          <button
-            type="button"
-            className="rounded-lg bg-primary px-4 py-1 font-semibold text-white"
-            onClick={handleAddClick}
-          >
-            Add
-          </button>
+          {glassLoading ? (
+            <Hourglass
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="hourglass-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              colors={["#306cce", "#72a1ed"]}
+            />
+          ) : (
+            <button
+              type="button"
+              className="rounded-lg bg-primary px-4 py-1 font-semibold text-white"
+              onClick={handleAddClick}
+            >
+              Add
+            </button>
+          )}
         </div>
         <div className="flex flex-col gap-3">
           {links.map((item: any, index: number) => {

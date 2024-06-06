@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 import Header from "@/components/Header";
 import PaymentConfirm from "@/components/mentor/payment/paymentConfirm";

@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
 import { getNotificationApi } from "@/app/api/notification/getNotification";
+import ViewNotifications from "@/components/modals/notifications";
 import Breadcrumb from "@/components/student/dashboardStudentComponents/Breadcrumb.Component";
 import NotificationCards from "@/components/student/dashboardStudentComponents/notification/NotificationCard.Component";
 import MentorDashboardLayout from "@/layouts/mentorDashboardLayout";
@@ -19,6 +21,11 @@ export interface notificationsData {
 }
 
 function Page() {
+  const [isOpenNotificationDialog, setIsOpenNotificationDialog] =
+    useState<boolean>(false);
+
+  const [selectedNotificationData, setSelectedNotificationData] =
+    useState<any>();
 
   const { data: notificationData } = useQuery({
     queryKey: ["getSchedule"],
@@ -56,6 +63,12 @@ function Page() {
     },
   ]);
 
+  // Sort notifications from newest to oldest
+  const sortedNotifications = notificationData?.notifications?.sort(
+    (a: any, b: any) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
+
   return (
     <MentorDashboardLayout showSidebar={true}>
       <div className="h-full w-full px-4 py-20 ">
@@ -79,18 +92,32 @@ function Page() {
               <p>Date</p>
             </div>
             <div className="mt-10 w-full">
-              {notificationData?.notifications?.map((data:any) => {
+              {sortedNotifications?.map((data: any) => {
                 return (
-                  <NotificationCards
+                  <div
                     key={data?._id}
-                    notification={data?.senderName}
-                    notificationDate={data?.createdAt}
-                    notificationDiscription={data?.description}
-                    notificationSubject={data?.title}
-                  />
+                    className="cursor-pointer"
+                    onClick={() => {
+                      setSelectedNotificationData(data);
+                      setIsOpenNotificationDialog(true);
+                    }}
+                  >
+                    <NotificationCards
+                      key={data?._id}
+                      notification={data?.senderName}
+                      notificationDate={data?.createdAt}
+                      notificationDiscription={data?.description}
+                      notificationSubject={data?.title}
+                    />
+                  </div>
                 );
               })}
             </div>
+            <ViewNotifications
+              OpenDialog={isOpenNotificationDialog}
+              setOpenDialog={setIsOpenNotificationDialog}
+              selectedNotificationData={selectedNotificationData}
+            />
           </div>
         </div>
       </div>

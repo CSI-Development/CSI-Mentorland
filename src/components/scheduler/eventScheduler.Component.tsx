@@ -1,15 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/consistent-type-imports */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import { Scheduler } from "@aldabil/react-scheduler";
 import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";
 import { IoMdTime } from "react-icons/io";
 
+// Function to generate a random color
 function generateRandomColor() {
   const generateHexValue = (min = 1) => {
     return Math.floor(((min + Math.random()) * 256) / (min + 1))
@@ -32,6 +37,7 @@ function generateRandomColor() {
   return "#" + red + green + blue + "80";
 }
 
+// Custom event renderer function
 const customEventRenderer = ({
   event,
   defaultAttributes,
@@ -41,17 +47,15 @@ const customEventRenderer = ({
   const borderColor = backgroundColor.substring(0, 7);
 
   return (
-    <Link href={event?.hostLink ||event?.classLink}>
+    <Link href={event?.hostLink || event?.classLink}>
       <div
         {...defaultAttributes}
         style={{
           ...defaultStyles,
           backgroundColor,
-          // opacity: '50%',
           borderLeft: `4px solid ${borderColor}`,
           padding: "10px",
           color: `${borderColor}`,
-          // width:"120px",
         }}
         className="h-full"
       >
@@ -69,13 +73,36 @@ const customEventRenderer = ({
   );
 };
 
-function EventScheduler({ scheduleData, student }: any) {
-  const [events, setEvents] = React.useState([]);
+// Define the types for scheduleData and props
+interface ScheduleEvent {
+  _id: string;
+  title: string;
+  description: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  classLink?: string;
+  hostLink?: string;
+}
+
+interface EventSchedulerProps {
+  scheduleData: ScheduleEvent[];
+  student: boolean;
+  setOpenDialog?: any;
+}
+
+// Main component
+function EventScheduler({
+  scheduleData,
+  student,
+  setOpenDialog,
+}: EventSchedulerProps) {
+  const [events, setEvents] = React.useState<any[]>([]);
 
   React.useEffect(() => {
-    const key= student? "classLink": "hostLink";
-    if (scheduleData) {
-      const data = scheduleData?.map((val: any) => ({
+    const key = student ? "classLink" : "hostLink";
+    if (Array.isArray(scheduleData)) {
+      const data = scheduleData.map((val) => ({
         event_id: val._id,
         title: val.title,
         description: val.description,
@@ -84,14 +111,19 @@ function EventScheduler({ scheduleData, student }: any) {
         ),
         end: new Date(`${dayjs(val.date).format("YYYY/MM/DD")} ${val.endTime}`),
         color: generateRandomColor(),
-        [key]: student? val.classLink: val.hostLink,
-        hostLink: val?.hostLink
+        [key]: val[key],
+        hostLink: val.hostLink,
       }));
       setEvents(data);
     }
-  }, [scheduleData]);
+  }, [scheduleData, student]);
+
+  const handleCellClick = () => {
+    setOpenDialog(true);
+  };
+
   return (
-    <div>
+    <div className="z-10">
       <Scheduler
         events={events}
         disableViewer
@@ -100,18 +132,18 @@ function EventScheduler({ scheduleData, student }: any) {
         height={300}
         eventRenderer={customEventRenderer}
         day={{
-          startHour: 9,
-          endHour: 20,
+          startHour: 1,
+          endHour: 24,
           step: 60,
         }}
         week={{
-          weekDays: [1,2, 3, 4, 5, 6],
+          weekDays: [1, 2, 3, 4, 5, 6],
           weekStartOn: 6,
-          startHour: 9,
-          endHour: 20,
+          startHour: 1,
+          endHour: 24,
           step: 60,
         }}
-        // onEventClick={handlePage}
+        onCellClick={handleCellClick}
       />
     </div>
   );

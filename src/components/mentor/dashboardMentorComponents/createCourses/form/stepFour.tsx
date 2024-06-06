@@ -19,14 +19,18 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 // import ReactQuill from "react-quill";
 import { CSVLink, CSVDownload } from "react-csv";
-import { useCSVReader } from 'react-papaparse';
+import { useCSVReader } from "react-papaparse";
 
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
-import { Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
+import {
+  Dialog,
+  DialogBody,
+  DialogFooter,
+  DialogHeader,
+} from "@material-tailwind/react";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { mentorEditor } from "@/utils/mentorEditor";
 import dynamic from "next/dynamic";
-
 
 function StepFour({ handlePrevStep }: any) {
   const ReactQuill = useMemo(
@@ -39,7 +43,14 @@ function StepFour({ handlePrevStep }: any) {
       sectionName: "",
       describeSection: "",
       videos: [
-        { name: "", url: "", description: "", duration: 0, timeDuration: 0, title: '' },
+        {
+          name: "",
+          url: "",
+          description: "",
+          duration: 0,
+          timeDuration: 0,
+          title: "",
+        },
       ],
       quiz: [
         // {
@@ -48,9 +59,8 @@ function StepFour({ handlePrevStep }: any) {
         //   options: [],
         //   answer: [],
         //   quesionSet: 20
-
         // },
-      ]
+      ],
     },
   ]);
   type QuizItem = {
@@ -60,7 +70,6 @@ function StepFour({ handlePrevStep }: any) {
     answer: any;
   };
 
-
   const [videoDuration, setVideoDuration] = useState<string>("0");
   const [videoDurationNumber, setVideoDurationNumber] = useState<string>("0");
   const [video, setVideo] = useState<string | ArrayBuffer | null>(null);
@@ -68,13 +77,14 @@ function StepFour({ handlePrevStep }: any) {
   const [videoName, setVideoName] = useState<string[]>([]);
   const [saveStatus, setSaveStatus] = useState(true);
   const [quizImport, setQuizImport] = useState<QuizItem[][]>([]);
-  const [isOpenCourseImportDialog, setIsOpenCourseImportDialog] = useState<boolean[]>([false]);
+  const [isOpenCourseImportDialog, setIsOpenCourseImportDialog] = useState<
+    boolean[]
+  >([false]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [activeQuizSectionIndex, setActiveQuizSectionIndex] = useState(0);
 
-
-  const [courseDescription, setCourseDescription] = useState<string>('');
-  const [courseText, setCourseText] = useState('');
+  const [courseDescription, setCourseDescription] = useState<string>("");
+  const [courseText, setCourseText] = useState("");
 
   // const handleAddSection = () => {
   //   setSections([...sections, { name: '', description: '', videos: [{ name: '', url: '', description: '' }] }]);
@@ -106,16 +116,14 @@ function StepFour({ handlePrevStep }: any) {
     setSaveStatus(true);
   };
 
-
-
   const handleCourseDescription = (value: any, sectionIndex: number) => {
-    const name = 'describeSection';
+    const name = "describeSection";
     const updatedSections = sections.map((item: any, i: number) =>
       i === sectionIndex ? { ...item, [name]: value } : item,
     );
     setSections(updatedSections);
     setSaveStatus(true);
-  }
+  };
 
   const handleAddSection = async () => {
     try {
@@ -207,14 +215,15 @@ function StepFour({ handlePrevStep }: any) {
     }
   };
 
-
-  const setQuizDataInSection = async (quizImported: any[], sectionIndex: number) => {
-    console.log('Quiz Imported:', quizImported);
-    console.log('Section Index:', sectionIndex);
+  const setQuizDataInSection = async (
+    quizImported: any[],
+    sectionIndex: number,
+  ) => {
+    console.log("Quiz Imported:", quizImported);
+    console.log("Section Index:", sectionIndex);
 
     const updatedSections = sections.map((item: any, i: number) => {
       if (i === sectionIndex) {
-
         // const updatedQuiz = item.quiz ? [...item.quiz, ...activeQuiz] : [...activeQuiz];
         return {
           ...item,
@@ -224,7 +233,7 @@ function StepFour({ handlePrevStep }: any) {
       return item;
     });
 
-    console.log('Updated Sections:', updatedSections);
+    console.log("Updated Sections:", updatedSections);
     setIsDialogOpen(false);
 
     setSections(updatedSections);
@@ -237,7 +246,7 @@ function StepFour({ handlePrevStep }: any) {
       ) as HTMLInputElement;
 
       const lectureTitleInput = document.getElementById(
-        `lectureTitle-${sectionIndex}`
+        `lectureTitle-${sectionIndex}`,
       ) as HTMLInputElement;
 
       const description = descriptionInput?.value;
@@ -246,19 +255,19 @@ function StepFour({ handlePrevStep }: any) {
       const updatedSections = sections.map((item: any, i: number) =>
         i === sectionIndex
           ? {
-            ...item,
-            videos: [
-              ...item.videos,
-              {
-                name: videoName,
-                url: videoURL,
-                description: description,
-                duration: videoDuration,
-                timeDuration: videoDurationNumber,
-                title: lectureTitle
-              },
-            ],
-          }
+              ...item,
+              videos: [
+                ...item.videos,
+                {
+                  name: videoName,
+                  url: videoURL,
+                  description: description,
+                  duration: videoDuration,
+                  timeDuration: videoDurationNumber,
+                  title: lectureTitle,
+                },
+              ],
+            }
           : item,
       );
       setSections(updatedSections);
@@ -303,8 +312,11 @@ function StepFour({ handlePrevStep }: any) {
   const saveCourse = async () => {
     console.log(sections);
 
-    const data = sections.
-      filter((section) => section.sectionName !== '' && section.describeSection !== '')
+    const data = sections
+      .filter(
+        (section) =>
+          section.sectionName !== "" && section.describeSection !== "",
+      )
       .map((section) => ({
         title: section.sectionName,
         description: section.describeSection,
@@ -314,10 +326,10 @@ function StepFour({ handlePrevStep }: any) {
             url: video.url,
             description: video.description,
             duration: Number(video.timeDuration),
-            title: video.title
+            title: video.title,
           })),
-        quiz: section.quiz
-        }));
+        quiz: section.quiz,
+      }));
     console.log(data);
 
     const token = getCookie("token") ?? "";
@@ -343,42 +355,66 @@ function StepFour({ handlePrevStep }: any) {
     console.log(data);
   };
 
-
   const sampleQuizImport = [
-    [`Instruction
+    [
+      `Instruction
       Question Type wil be among from :
       1) Multiple Choice
       2) True/False
       3) Single Choice
-      `
+      `,
     ],
-    ["Sr. No", "QuestionType", "Question", "Option1", "Opion2", "Option3", "Option4", "Answer"],
-    ["1", "1", "Select prime numbers from given numbers", "5", "7", "4", "16", "1,2"],
-    ["2", "2", "The blue whale is thex biggest animal to have ever lived", "TRUE", "FALSE", "1"],
-    ["3", "3", "9, 15 and 21 are divisible by", "2", "4", "5", "3", "4"]
+    [
+      "Sr. No",
+      "QuestionType",
+      "Question",
+      "Option1",
+      "Opion2",
+      "Option3",
+      "Option4",
+      "Answer",
+    ],
+    [
+      "1",
+      "1",
+      "Select prime numbers from given numbers",
+      "5",
+      "7",
+      "4",
+      "16",
+      "1,2",
+    ],
+    [
+      "2",
+      "2",
+      "The blue whale is thex biggest animal to have ever lived",
+      "TRUE",
+      "FALSE",
+      "1",
+    ],
+    ["3", "3", "9, 15 and 21 are divisible by", "2", "4", "5", "3", "4"],
   ];
 
   const { CSVReader } = useCSVReader();
 
-
   const handleCSVImport = (data: string[][], sectionIndex: number) => {
-    console.log('CSV Data:', data);
-    console.log('Section Index:', sectionIndex);
+    console.log("CSV Data:", data);
+    console.log("Section Index:", sectionIndex);
 
-    const quizData = data.slice(2).
-      filter((row) => row[2] !== undefined)
+    const quizData = data
+      .slice(2)
+      .filter((row) => row[2] !== undefined)
       .map((row) => {
         const questionType = row[1];
         let options: (string | undefined)[] = [];
         let answer: any = [];
 
-        if (questionType === '1' || questionType === '3') {
+        if (questionType === "1" || questionType === "3") {
           options = [row[3], row[4], row[5], row[6]].filter(Boolean);
-          answer = row[7]?.split(',');
-
-        } else if (questionType === '2') {
+          answer = row[7]?.split(",");
+        } else if (questionType === "2") {
           options = [row[3], row[4]].filter(Boolean);
-          answer = row[7]?.split(',');
+          answer = row[7]?.split(",");
         }
 
         return {
@@ -386,10 +422,8 @@ function StepFour({ handlePrevStep }: any) {
           question: row[2],
           options: options,
           answer: answer,
-        }
-
+        };
       });
-
 
     setQuizImport((prevQuizImport) => {
       const updatedQuizImport = [...prevQuizImport];
@@ -397,18 +431,13 @@ function StepFour({ handlePrevStep }: any) {
       return updatedQuizImport;
     });
 
-
     setActiveQuizSectionIndex(sectionIndex);
     setIsDialogOpen(true);
 
-
-
     console.log(quizImport);
 
-
     console.log(quizData);
-
-  }
+  };
 
   return (
     <div className="my-20 w-[587px]">
@@ -432,7 +461,8 @@ function StepFour({ handlePrevStep }: any) {
           placeholder={undefined}
           onPointerEnterCapture={undefined}
           onPointerLeaveCapture={undefined}
-        >Quiz Imported Questions
+        >
+          Quiz Imported Questions
         </DialogHeader>
         <DialogBody
           placeholder={undefined}
@@ -457,26 +487,31 @@ function StepFour({ handlePrevStep }: any) {
                 {quizImport[activeQuizSectionIndex]?.map((item, index) => (
                   <tr key={index} className="even:bg-blue-gray-50/50">
                     <td className="p-4">{index}</td>
-                    <td className="p-4">{item.questionType === "1" ? 'Multiple Choice' :
-                      item.questionType === "2" ? 'True/False'
-                        : 'Single Choice'}</td>
+                    <td className="p-4">
+                      {item.questionType === "1"
+                        ? "Multiple Choice"
+                        : item.questionType === "2"
+                          ? "True/False"
+                          : "Single Choice"}
+                    </td>
                     <td className="p-4">{item.question}</td>
 
-                    {item.questionType === "2" ? <>
-                      <td className="p-4">{item.options[0]}</td>
-                      <td className="p-4">{item.options[1]}</td>
-                      <td className="p-4"></td>
-                      <td className="p-4"></td>
-                    </> : <>
-                      <td className="p-4">{item.options[0]}</td>
-                      <td className="p-4">{item.options[1]}</td>
-                      <td className="p-4">{item.options[3]}</td>
-                      <td className="p-4">{item.options[4]}</td>
-                    </>}
-                    <td>
-                      {item.answer.join(', ')}
-
-                    </td>
+                    {item.questionType === "2" ? (
+                      <>
+                        <td className="p-4">{item.options[0]}</td>
+                        <td className="p-4">{item.options[1]}</td>
+                        <td className="p-4"></td>
+                        <td className="p-4"></td>
+                      </>
+                    ) : (
+                      <>
+                        <td className="p-4">{item.options[0]}</td>
+                        <td className="p-4">{item.options[1]}</td>
+                        <td className="p-4">{item.options[3]}</td>
+                        <td className="p-4">{item.options[4]}</td>
+                      </>
+                    )}
+                    <td>{item.answer.join(", ")}</td>
                   </tr>
                 ))}
               </tbody>
@@ -484,7 +519,6 @@ function StepFour({ handlePrevStep }: any) {
           ) : (
             <p>No questions available for this section.</p>
           )}
-
         </DialogBody>
         <DialogFooter
           placeholder={undefined}
@@ -494,7 +528,7 @@ function StepFour({ handlePrevStep }: any) {
           <div className="mt-4 flex justify-center">
             <button
               type="button"
-              className="text-md rounded-xl bg-[#5D6475] px-[15px] py-[5px] text-base font-bold text-white mr-2"
+              className="text-md mr-2 rounded-xl bg-[#5D6475] px-[15px] py-[5px] text-base font-bold text-white"
               onClick={() => setIsDialogOpen(false)}
             >
               Cancel
@@ -502,7 +536,9 @@ function StepFour({ handlePrevStep }: any) {
             <button
               className="text-md rounded-xl bg-[#2769D9] px-[15px] py-[5px] text-base font-bold text-white"
               type="submit"
-              onClick={() => setQuizDataInSection(quizImport, activeQuizSectionIndex)}
+              onClick={() =>
+                setQuizDataInSection(quizImport, activeQuizSectionIndex)
+              }
             >
               Create
             </button>
@@ -562,7 +598,7 @@ function StepFour({ handlePrevStep }: any) {
               onChange={(value) => {
                 console.log(value, "value");
                 setCourseText(value);
-                handleCourseDescription(value, sectionIndex)
+                handleCourseDescription(value, sectionIndex);
               }}
               className="h-40"
             />
@@ -647,7 +683,10 @@ function StepFour({ handlePrevStep }: any) {
 
               <br />
 
-              <label htmlFor="lectureTitle" className="text-base text-[#1A458F]">
+              <label
+                htmlFor="lectureTitle"
+                className="text-base text-[#1A458F]"
+              >
                 Lecture Title
               </label>
               <br />
@@ -657,15 +696,15 @@ function StepFour({ handlePrevStep }: any) {
                 type="text"
                 placeholder="Add Lecture Title"
                 className="h-[55px] w-full rounded-md border border-[#B9BABA] bg-white p-[10px] outline-none"
-              // value={section.sectionName}
-              // onChange={(e) => handleFormChange(e, sectionIndex)}
+                // value={section.sectionName}
+                // onChange={(e) => handleFormChange(e, sectionIndex)}
               />
-
+              <br />
+              <br />
 
               <label
                 htmlFor={`describeLesson-${sectionIndex}`}
-                className="text-base text-trey.beasley@hi5mg.com
-                [#1A458F]"
+                className="text-base text-[#1A458F]"
               >
                 Enter a brief description of this lesson
               </label>
@@ -687,15 +726,12 @@ function StepFour({ handlePrevStep }: any) {
             </div>
           </div>
 
-
           <div className="mt-6 border-b border-[#B9BABA] p-[10px]">
             <div className="mt-6 border-b border-[#B9BABA] p-[10px]">
               <div className="flex w-full justify-between">
                 <span className="text-xl font-bold text-[#2769D9]">Quiz</span>
                 <CSVLink data={sampleQuizImport}>
-                  <span
-                    className="flex justify-between gap-3 items-center"
-                  >
+                  <span className="flex items-center justify-between gap-3">
                     <FaDownload />
                     Download Sample course import CSV
                   </span>
@@ -703,16 +739,25 @@ function StepFour({ handlePrevStep }: any) {
               </div>
             </div>
             <div className="w-full border border-[#B9BABA] p-8">
-
               <div className="w-full text-center">
                 <CSVReader
-                  onUploadAccepted={(results: any) => handleCSVImport(results.data, sectionIndex)}
+                  onUploadAccepted={(results: any) =>
+                    handleCSVImport(results.data, sectionIndex)
+                  }
                 >
-                  {({ getRootProps, acceptedFile }: { getRootProps: () => any, acceptedFile: File | null }) => (
+                  {({
+                    getRootProps,
+                    acceptedFile,
+                  }: {
+                    getRootProps: () => any;
+                    acceptedFile: File | null;
+                  }) => (
                     <div className="flex w-[486px]">
                       <div className="flex h-[44px] w-full items-center border border-[#B9BABA] bg-white px-4 text-[#b9baba]">
-                        <div className="max-w-72 w-full overflow-hidden text-ellipsis whitespace-nowrap">
-                          {acceptedFile ? acceptedFile.name : "No File Selected"}
+                        <div className="w-full max-w-72 overflow-hidden text-ellipsis whitespace-nowrap">
+                          {acceptedFile
+                            ? acceptedFile.name
+                            : "No File Selected"}
                         </div>
                       </div>
                       <button
@@ -724,7 +769,6 @@ function StepFour({ handlePrevStep }: any) {
                     </div>
                   )}
                 </CSVReader>
-
               </div>
               <input
                 id={`fileQuiz-${sectionIndex}`}
@@ -736,8 +780,7 @@ function StepFour({ handlePrevStep }: any) {
             </div>
           </div>
         </div>
-      ))
-      }
+      ))}
       <div className="mt-10 flex w-full justify-between">
         <button
           type="button"
@@ -775,7 +818,7 @@ function StepFour({ handlePrevStep }: any) {
 
         {/* saveStatus */}
       </div>
-    </div >
+    </div>
   );
 }
 

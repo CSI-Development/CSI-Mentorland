@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable react-hooks/rules-of-hooks */
@@ -10,13 +14,25 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { deleteCookie } from "cookies-next";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useDetailsApi } from "@/app/api/userDetails/userDetails.api";
 import ConnectModal from "@/components/modals/connectModal";
 import { AppContext } from "@/providers/ContextProvider";
 import { useMagic } from "@/providers/MagicProvider";
 import { logout } from "@/utils/common";
 import ViewNotifications from "@/components/modals/notifications";
+import { getNotificationApi } from "@/app/api/notification/getNotification";
+import { putNotificationApi } from "@/app/api/notification/putNotification";
+import dayjs from "dayjs";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
+import { IoMdPower } from "react-icons/io";
+import SupportChat from "@/components/modals/supportChat";
+import MessageChat from "@/components/modals/chatModal";
+import { Select, Option } from "@material-tailwind/react";
+import { IoHomeOutline } from "react-icons/io5";
+import { PiShootingStar } from "react-icons/pi";
+import { IoSettingsOutline } from "react-icons/io5";
+import { CgCommunity } from "react-icons/cg";
 
 function Navbar() {
   const router = useRouter();
@@ -24,6 +40,25 @@ function Navbar() {
 
   const [isOpenNotificationDialog, setIsOpenNotificationDialog] =
     useState<boolean>(false);
+
+  const [selectedNotificationData, setSelectedNotificationData] =
+    useState<any>();
+
+  const [openSupportChat, setOpenSupportChat] = useState(false);
+
+  const [openMessageChat, setOpenMessageChat] = useState(false);
+
+  const [selectedOption, setSelectedOption] = useState("dashboard");
+
+  const handleChange = (event: any) => {
+    const value = event?.target?.value;
+    setSelectedOption(value);
+  };
+
+  const { data: notificationData, refetch } = useQuery({
+    queryKey: ["notifications"],
+    queryFn: () => getNotificationApi(),
+  });
 
   const { magic } = useMagic();
 
@@ -39,9 +74,56 @@ function Navbar() {
     deleteCookie("user_email");
     router.push("/");
   };
-  const handleChange = () => {
-    router.push("/student/posts");
+  // const handleChange = () => {
+  //   router.push("/student/posts");
+  // };
+
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const toggleMenu = () => {
+    setMenuVisible(!menuVisible);
   };
+
+  // const [isNotificationValue, setIsNotificationValue] = useState<any>(
+  //   notificationData?.unread
+  // );
+
+  // console.log(isNotificationValue, "value of notification");
+
+  const { mutate: setNotificationStatusData } = useMutation({
+    mutationFn: (notificationId: string) => putNotificationApi(notificationId),
+    onSuccess: async (e: any) => {
+      await refetch();
+      console.log("success", e);
+    },
+  });
+
+  const [isOpenAccount, setIsOpenAccount] = useState(false);
+  const accountRef = useOutsideClick(() => {
+    setIsOpenAccount(false);
+  });
+
+  const notificationValue = (statusId: string) => {
+    setNotificationStatusData(statusId);
+    setIsOpenNotificationDialog(true);
+  };
+
+  const menuRef = useOutsideClick(() => {
+    setMenuVisible(false);
+  });
+
+  const supportRef = useOutsideClick(() => {
+    setOpenSupportChat(false);
+  });
+
+  const messageChatRef = useOutsideClick(() => {
+    setOpenMessageChat(false);
+  });
+
+  const sortedNotifications = notificationData?.notifications?.sort(
+    (a: any, b: any) =>
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+  );
 
   return (
     <nav className="fixed z-50 flex w-full justify-between border-b-2 border-[#2668d8] bg-[#fffefe] p-4">
@@ -52,39 +134,143 @@ function Navbar() {
         {/* <p className="my-auto border-r-2 border-gray-300 px-5 text-xl font-bold text-black ">
           General Dashboard
         </p> */}
-        <div className="flex items-center gap-10">
-          <select
-            name="community"
-            id="community"
-            // Value="community"
-            className="w-100 ml-5 cursor-pointer border-0 bg-white text-base font-bold text-[#0E2245] outline-none"
+        <div className="ml-4 flex w-72 items-center gap-10">
+          <Select
+            value={selectedOption}
+            label="Select Menu"
             onChange={handleChange}
+            selected={(element) =>
+              element &&
+              React.cloneElement(element, {
+                disabled: true,
+                className:
+                  "flex items-center opacity-100 px-0 gap-2 pointer-events-none outline-none border-none",
+              })
+            }
+            className="border-none font-bold text-[#0E2245] shadow-none outline-none"
+            placeholder=""
+            onPointerEnterCapture={undefined}
+            onPointerLeaveCapture={undefined}
           >
-            <option value="home" className="border-none bg-white outline-none">
-              Home
-            </option>
-            <option
+            <h1 className="font-semibold text-primary">OTHER</h1>
+            <Option value="/student/posts">
+              <Link href="/student/posts" className="flex items-center gap-2">
+                <IoHomeOutline className="text-xl" /> Home
+              </Link>
+            </Option>
+            <Option value="mostPopular" className="flex items-center gap-2">
+              <PiShootingStar className="text-xl" />
+              Most Popular Course
+            </Option>
+            <Option value="settings" className="flex items-center gap-2">
+              <IoSettingsOutline className="text-xl" />
+              Settings
+            </Option>
+            <Option
               value="community"
-              className="border-none bg-white outline-none"
-              selected
+              className="flex items-center gap-2
+            "
             >
-              General Dashboard
-            </option>
-          </select>
+              <CgCommunity className="text-xl" /> Communities
+            </Option>
+            <h1 className="mt-5 font-semibold text-primary">MY COMMUNITIES</h1>
+            <Option value="dashboard">
+              <Link href="" className="flex items-center gap-3">
+                <Image
+                  src={profile}
+                  alt="profile"
+                  width={30}
+                  height={30}
+                  className="cursor-pointer rounded-full"
+                />
+                Integrated Coaching Master
+              </Link>
+            </Option>
+            {/* Add more options as needed */}
+          </Select>
         </div>
       </div>
       <div className="flex items-center gap-4 text-3xl text-[#2668d8]">
         <Link href="/student/marketplace">
           <Icon icon="fluent:building-shop-20-regular" />
         </Link>
-        <Icon icon="ph:chats-duotone" />
-        <Icon icon="material-symbols:translate" />
-
-        <Icon
+        <Image
+          src="/svg/Group.svg"
+          alt="store"
+          width={30}
+          height={30}
           className="cursor-pointer"
-          onClick={() => setIsOpenNotificationDialog(true)}
-          icon="pepicons-pencil:bell"
+          onClick={() => setOpenSupportChat((prev) => !prev)}
         />
+        <Icon
+          icon="ph:chats-duotone"
+          onClick={() => setOpenMessageChat((prev) => !prev)}
+          className="cursor-pointer"
+        />
+        <Icon icon="material-symbols:translate" />
+        <div className="relative">
+          <Icon
+            className="cursor-pointer"
+            onClick={toggleMenu}
+            icon="pepicons-pencil:bell"
+            data-ripple-dark="true"
+            data-popover-target="notifications-menu"
+          />
+          <div className="absolute -top-1 left-6 flex h-4 w-4 items-center justify-center rounded-full bg-[red] text-xs font-bold text-white">
+            {notificationData?.unread}
+          </div>
+        </div>
+        <div className="relative inline-block" ref={menuRef}>
+          {menuVisible && (
+            <ul
+              role="menu"
+              data-popover="notifications-menu"
+              data-popover-placement="bottom"
+              className="absolute -right-[120px] top-10 z-10 flex h-[200px] w-[450px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
+            >
+              <h1 className="text-xl text-black">Notifications</h1>
+              {sortedNotifications?.map((data: any) => (
+                <div key={data?._id} className="relative flex items-center">
+                  {!data.read ? (
+                    <div className="h-3 w-3 rounded-full bg-[red]"></div>
+                  ) : (
+                    <div className="h-3 w-3 rounded-full bg-blue-gray-50"></div>
+                  )}
+                  <button
+                    role="menuitem"
+                    onClick={() => {
+                      notificationValue(data?._id);
+                      setSelectedNotificationData(data);
+                    }}
+                    className="flex w-full cursor-pointer select-none items-center gap-4 rounded-md px-3 py-2 pl-2 pr-8 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                  >
+                    <div className="flex w-full justify-between gap-1">
+                      <p className="block font-sans text-sm font-semibold leading-normal text-gray-700 antialiased">
+                        {data?.title}
+                      </p>
+                      <p className="flex items-center gap-1 font-sans text-sm font-medium text-blue-gray-500 antialiased">
+                        <svg
+                          width="16"
+                          height="17"
+                          viewBox="0 0 16 17"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M7.99998 14.9C9.69736 14.9 11.3252 14.2257 12.5255 13.0255C13.7257 11.8252 14.4 10.1974 14.4 8.49998C14.4 6.80259 13.7257 5.17472 12.5255 3.97449C11.3252 2.77426 9.69736 2.09998 7.99998 2.09998C6.30259 2.09998 4.67472 2.77426 3.47449 3.97449C2.27426 5.17472 1.59998 6.80259 1.59998 8.49998C1.59998 10.1974 2.27426 11.8252 3.47449 13.0255C4.67472 14.2257 6.30259 14.9 7.99998 14.9ZM8.79998 5.29998C8.79998 5.0878 8.71569 4.88432 8.56566 4.73429C8.41563 4.58426 8.21215 4.49998 7.99998 4.49998C7.7878 4.49998 7.58432 4.58426 7.43429 4.73429C7.28426 4.88432 7.19998 5.0878 7.19998 5.29998V8.49998C7.20002 8.71213 7.28434 8.91558 7.43438 9.06558L9.69678 11.3288C9.7711 11.4031 9.85934 11.4621 9.95646 11.5023C10.0536 11.5425 10.1577 11.5632 10.2628 11.5632C10.3679 11.5632 10.472 11.5425 10.5691 11.5023C10.6662 11.4621 10.7544 11.4031 10.8288 11.3288C10.9031 11.2544 10.9621 11.1662 11.0023 11.0691C11.0425 10.972 11.0632 10.8679 11.0632 10.7628C11.0632 10.6577 11.0425 10.5536 11.0023 10.4565C10.9621 10.3593 10.9031 10.2711 10.8288 10.1968L8.79998 8.16878V5.29998Z"
+                          ></path>
+                        </svg>
+                        <p>{dayjs(data?.createdAt).format("MMM DD, YYYY")}</p>
+                      </p>
+                    </div>
+                  </button>
+                </div>
+              ))}
+            </ul>
+          )}
+        </div>
         <Icon
           icon="uit:wallet"
           className="cursor-pointer"
@@ -97,20 +283,54 @@ function Navbar() {
           alt="Profile"
           width={36}
           height={36}
-          className="h-9 w-9 rounded-full"
+          className="h-9 w-9 cursor-pointer rounded-full"
+          onClick={() => setIsOpenAccount((prev) => !prev)}
         />
-        <div>
+        <div ref={accountRef}>
+          {isOpenAccount && (
+            <div className="fixed right-10 top-20 h-28 w-48 rounded-lg bg-white p-3 shadow-sm">
+              <div className="flex w-full items-center justify-between border-b border-[#BCBFC6] pb-2">
+                <h1 className="text-lg font-semibold text-black">Account</h1>
+                <IoMdPower
+                  className="cursor-pointer text-lg text-[#FE5F55]"
+                  onClick={logOut}
+                />
+              </div>
+              <div className="flex cursor-pointer items-center gap-3 py-4">
+                <Image
+                  src={data?.studentAvatar ?? profile}
+                  alt="Profile"
+                  width={36}
+                  height={36}
+                  className="h-9 w-9 cursor-pointer rounded-full"
+                />
+                <h1 className="text-sm text-black">
+                  {data?.firstName + " " + data?.lastName}
+                </h1>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="h-fit w-fit text-base" ref={supportRef}>
+          {openSupportChat && <SupportChat data={data} />}
+        </div>
+        <div className="text-base" ref={messageChatRef}>
+          {openMessageChat && <MessageChat data={data} />}
+        </div>
+
+        {/* <div>
           <button
             className="rounded border border-[#2668d8] bg-[#2668d8] px-3 py-2 text-sm text-white"
             onClick={logOut}
           >
             LogOut
           </button>
-        </div>
+        </div> */}
       </div>
       <ViewNotifications
         OpenDialog={isOpenNotificationDialog}
         setOpenDialog={setIsOpenNotificationDialog}
+        selectedNotificationData={selectedNotificationData}
       />
       <ConnectModal />
     </nav>

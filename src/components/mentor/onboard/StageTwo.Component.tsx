@@ -1,15 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { uploadImage } from "@/app/api/uploadImage/uploadImage.api";
+import { AppContext } from "@/providers/ContextProvider";
 import { setSession } from "@/utils/jwt";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { toast } from "react-toastify";
 
 function StageTwo() {
+
+  const { setGlassLoading } = useContext(AppContext);
+
   const [image, setImage] = useState<string | ArrayBuffer | null>(null);
 
   const { setValue } = useFormContext();
@@ -18,6 +23,7 @@ function StageTwo() {
     mutationFn: uploadImage,
     onSuccess: (e) => {
       toast.success("Image Upload Successfully");
+      setGlassLoading(false);
       console.log("success", e);
       setSession(e.data.token); //here will set the token into the session for axios header
       //remaining: after success user must be redirect somewhere. like dashboard or home page more details see console
@@ -39,6 +45,7 @@ function StageTwo() {
       formData.append("file", file);
       mutate(formData);
     }
+    setGlassLoading(true)
   };
 
   return (

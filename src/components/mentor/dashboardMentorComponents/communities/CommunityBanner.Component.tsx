@@ -9,6 +9,7 @@ import { uploadImage } from "@/app/api/uploadImage/uploadImage.api";
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import React, { useState } from "react";
+import { Hourglass } from "react-loader-spinner";
 import { toast } from "react-toastify";
 
 const CommunityBanner = ({ data, id, refetch }: any) => {
@@ -95,14 +96,24 @@ const CommunityBanner = ({ data, id, refetch }: any) => {
         <div className="relative h-full w-full">
           {loading && (
             <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-white/40 text-3xl font-bold">
-              Updating...
+              <Hourglass
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="hourglass-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                colors={["#306cce", "#72a1ed"]}
+              />
             </div>
           )}
-          <img
-            src={data.communityBanner}
-            alt="banner"
-            className="h-full w-full overflow-hidden object-cover"
-          />
+          <div className="w-full h-full">
+            <img
+              src={data.communityBanner}
+              alt="banner"
+              className="h-full w-full bg-cover"
+            />
+          </div>
           {!loading && (
             <div className="absolute bottom-0 right-0 flex h-20 w-40 cursor-pointer items-center justify-center rounded-tl-xl bg-white/20 font-bold text-white">
               Edit
@@ -117,8 +128,8 @@ const CommunityBanner = ({ data, id, refetch }: any) => {
           )}
         </div>
       ) : (
-        <div className="relative flex h-full w-full justify-center items-center">
-          <div className=" flex flex-col  h-[350px] w-[490px]">
+        <div className="relative flex h-full w-full items-center justify-center">
+          <div className=" flex h-[350px]  w-[490px] flex-col">
             <div className=" my-3 h-[70px] w-full gap-3">
               <h3 className=" text-center text-[31px] font-bold leading-10 text-[#5D6475] ">
                 Your Community Main Banner

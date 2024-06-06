@@ -7,7 +7,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../Sidebar.Component";
 import Navbar from "../Navbar.Component";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -23,6 +23,7 @@ import ViewSupportTicket from "@/components/modals/viewSupportTicket";
 import { getSupportTicketApi } from "@/app/api/supportTicket/getSupportTicket";
 import EventScheduler from "@/components/scheduler/eventScheduler.Component";
 import { getScheduleApi } from "@/app/api/schedule/getSchedule.api";
+import StudentDiscount from "@/components/modals/studentDiscount";
 
 const CourseOverview = ({ data }: any) => {
   return (
@@ -188,6 +189,16 @@ const FavoriteClassmatesCard = () => {
 function Dashbaord() {
   const [selectedMentors, setSelectedMentors] = useState<number[]>([]);
   const [selectedTicketData, setSelectedTicketData] = useState<any>(null);
+  const [discountModel, setDiscountModal] = useState(false);
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDiscountModal(true);
+    }, 2000);
+
+    return () => clearTimeout(timeoutId);
+  }, []);
+
   const { data: scheduleData } = useQuery({
     queryKey: ["getSchedule"],
     queryFn: () => getScheduleApi(),
@@ -286,35 +297,88 @@ function Dashbaord() {
       <h1 className="text-xl font-bold">General Dashboard</h1>
       <div className="mt-4 flex w-full flex-1 gap-5 ">
         <div className="flex w-2/3 flex-col gap-3 ">
-          <div className="w-full h-[475px] overflow-scroll rounded-lg bg-white p-3 shadow-md">
+          <div className="z-10 h-[475px] w-full overflow-scroll rounded-lg bg-white p-3 shadow-md">
             <h4 className="text-2xl font-bold text-black">My Schedule</h4>
-            <EventScheduler scheduleData={scheduleData} student="student" height={300}/>
+            <EventScheduler
+              scheduleData={scheduleData}
+              student={true}
+            />
           </div>
           <FavoriteClassmatesCard />
           <div className="w-full rounded-lg bg-white p-3 shadow-md">
             <h1 className="text-md font-bold">Support Tickets</h1>
             <div className="mt-4 w-full">
               <div className="flex w-full items-center justify-between border-b border-[#B9BABA] py-3 text-sm text-[#B9BABA]">
-                <div>
-                  <h1>Ticket Id</h1>
-                </div>
-                <div>
-                  <h1>Subject</h1>
-                </div>
-                <div>
-                  <h1>Source</h1>
-                </div>
-                <div>
-                  <h1>Priority</h1>
-                </div>
-                <div>
-                  <h1>Status</h1>
-                </div>
-                <div>
-                  <h1>View</h1>
-                </div>
+                <table
+                  className="w-full border-spacing-y-3 gap-3"
+                  cellSpacing={8}
+                  cellPadding={8}
+                >
+                  <thead>
+                    <tr className="text-left">
+                      <th>Ticket Id</th>
+                      <th>Subject</th>
+                      <th>Source</th>
+                      <th>Priority</th>
+                      <th>Status</th>
+                      <th>View</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {supportTicket?.map((ticket: any) => (
+                      <tr
+                        className="mt-5 text-sm text-[#151B2B]"
+                        key={ticket?._id}
+                      >
+                        <td>
+                          <h1
+                            onClick={() => {
+                              setSelectedTicketData(ticket);
+                              setIsOpenTicketDialog(true);
+                            }}
+                            className="cursor-pointer text-primary underline"
+                            title={ticket?.ticketId}
+                          >
+                            {truncateAddress(ticket?.ticketId)}
+                          </h1>
+                        </td>
+                        <td>
+                          <h1>
+                            {ticket?.subject}
+                          </h1>
+                        </td>
+                        <td>
+                          <h1 className="rounded border border-[yellow] p-1 text-xs w-fit">
+                            {ticket?.source}
+                          </h1>
+                        </td>
+                        <td>
+                          <h1 className="rounded bg-[#FEE9EE] p-1 text-xs text-[#FF007A] w-fit">
+                            {ticket?.priority}
+                          </h1>
+                        </td>
+                        <td>
+                          <h1 className="rounded bg-[#CCFFCB] p-1 text-xs text-[#04D800] w-fit">
+                            {ticket?.status}
+                          </h1>
+                        </td>
+                        <td>
+                          <h1
+                            onClick={() => {
+                              setSelectedTicketData(ticket);
+                              setIsOpenTicketDialog(true);
+                            }}
+                            className="cursor-pointer rounded bg-primary px-2 py-1 text-xs font-bold text-white w-fit"
+                          >
+                            View
+                          </h1>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
-              <div className="w-full">
+              {/* <div className="w-full">
                 {supportTicket?.map((ticket: any) => (
                   <div
                     className="flex w-full items-center justify-between border-b border-[#B9BABA] py-3"
@@ -366,7 +430,7 @@ function Dashbaord() {
                     </div>
                   </div>
                 ))}
-              </div>
+              </div> */}
             </div>
             <div className="my-5 mt-32 flex w-full items-center justify-center gap-3">
               {/* <button className="flex w-1/6 items-center justify-center gap-2 rounded-lg border-2 border-primary bg-transparent p-1 px-2 font-semibold text-primary">
@@ -457,6 +521,11 @@ function Dashbaord() {
             setOpenDialog={setIsOpenCommunityDialog}
             refetch={refetch}
           />
+          {discountModel ? (
+            <StudentDiscount data={data} setDiscountModal={setDiscountModal} />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

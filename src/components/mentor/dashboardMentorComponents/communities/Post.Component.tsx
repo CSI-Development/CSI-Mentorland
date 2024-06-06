@@ -8,6 +8,7 @@ import { communityRulesApi } from "@/app/api/communityRules/communityRules.api";
 import { communityRulesGetApi } from "@/app/api/communityRules/getCommunityRules.api";
 import { mentorDetailsApi } from "@/app/api/mentorDetails/mentorDetails.api";
 import { uploadImage } from "@/app/api/uploadImage/uploadImage.api";
+import { AppContext } from "@/providers/ContextProvider";
 import { type ICreateCommunityRules } from "@/schema/communityRules/communityRules.schema";
 import {
   type ICreateCommunityPost,
@@ -20,8 +21,9 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useContext, useMemo, useRef, useState } from "react";
 import { SubmitHandler, useForm, useFormContext } from "react-hook-form";
+import { Hourglass } from "react-loader-spinner";
 // import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "react-toastify";
@@ -32,6 +34,8 @@ export default function CreatePost({ id }: { id: string }) {
     [],
   );
   const [stage, setStage] = useState(1);
+
+  const { glassLoading, setGlassLoading } = useContext(AppContext);
 
   const [postText, setPostText] = useState("");
   // const quillRef = useRef<any>(null);
@@ -70,7 +74,7 @@ export default function CreatePost({ id }: { id: string }) {
       toast.error("Please add the Multimedia");
       return;
     }
-    postData({data, id});
+    postData({ data, id });
     // console.log(getValues(), quillRef.current.getEditor(), "something in post");
   };
 
@@ -81,6 +85,7 @@ export default function CreatePost({ id }: { id: string }) {
     mutationFn: uploadImage,
     onSuccess: (e) => {
       toast.success("Image Upload Successfully");
+      setGlassLoading(false);
       console.log("success", e);
       setSession(e.data.token); //here will set the token into the session for axios header
       //remaining: after success user must be redirect somewhere. like dashboard or home page more details see console
@@ -101,21 +106,22 @@ export default function CreatePost({ id }: { id: string }) {
       const formData: any = new FormData();
       formData.append("file", file);
       mutate(formData);
+      setGlassLoading(true);
     }
   };
 
   return (
-    <div className="mt-[78px] h-auto w-full bg-[#f7f9fb] pt-[50px] text-black">
-      <div className=" mx-auto flex  h-auto w-[80%] flex-col gap-8 p-5">
+    <div className=" h-auto w-full bg-[#f7f9fb] px-48 py-28 text-black">
+      <div className=" mx-auto flex  h-auto w-full flex-col gap-8 p-5">
         <h1 className="text-2xl font-bold">Create a new Post</h1>
-        <div className=" flex w-full justify-between p-3">
+        <div className=" flex w-full justify-between gap-20 p-3">
           {/*  form section */}
-          <div className="  bg-white">
-            <div className="h-[522px] w-[836px] p-[30px]">
-              <div className=" h-[462px] w-[776px]">
-                <ul className=" flex  h-[52px] w-full bg-white">
+          <div className=" w-[60%] bg-white">
+            <div className="h-[522px] w-full p-[30px]">
+              <div className=" h-[462px] w-full">
+                <ul className=" flex h-[52px] w-full bg-white">
                   <li
-                    className={`h-[52px] ${
+                    className={`h-[52px] w-full ${
                       stage === 1 ? " bg-[#F3F5FA]" : "bg-[white]"
                     } flex cursor-pointer items-center gap-2 rounded-sm p-3 px-2`}
                     onClick={() => setStage(1)}
@@ -131,7 +137,7 @@ export default function CreatePost({ id }: { id: string }) {
                     </p>
                   </li>
                   <li
-                    className={`h-[52px] ${
+                    className={`h-[52px] w-full ${
                       stage === 2 ? " bg-[#F3F5FA]" : "bg-[white]"
                     } flex cursor-pointer items-center gap-2 rounded-sm p-3 px-2`}
                     onClick={() => setStage(2)}
@@ -147,7 +153,7 @@ export default function CreatePost({ id }: { id: string }) {
                     </p>
                   </li>
                   <li
-                    className={`h-[52px] ${
+                    className={`h-[52px] w-full ${
                       stage === 3 ? " bg-[#F3F5FA]" : "bg-[white]"
                     } flex cursor-pointer items-center gap-2 rounded-sm p-3 px-2`}
                     onClick={() => setStage(3)}
@@ -163,7 +169,7 @@ export default function CreatePost({ id }: { id: string }) {
                     </p>
                   </li>
                 </ul>
-                <div className=" h-[410px] w-[776px] bg-[#f7f9fb] p-5">
+                <div className=" h-[410px] w-full bg-[#f7f9fb] p-5">
                   <form
                     onSubmit={handleSubmit(onSubmit)}
                     className=" flex flex-col gap-10"
@@ -178,7 +184,6 @@ export default function CreatePost({ id }: { id: string }) {
                         />
                         <div className="bg-white">
                           <ReactQuill
-                            theme="snow"
                             // ref={quillRef}
                             value={postText}
                             onChange={(e) => {
@@ -194,7 +199,7 @@ export default function CreatePost({ id }: { id: string }) {
                                 // },
                               );
                             }}
-                            className="h-40"
+                            className="h-40 bg-white"
                           />
                         </div>
                       </>
@@ -206,8 +211,18 @@ export default function CreatePost({ id }: { id: string }) {
                             htmlFor="imageInput"
                             className="cursor-pointer"
                           >
-                            <div className="flex h-40 w-40 items-center justify-center rounded border-2 border-dashed border-gray-500 bg-white text-center">
-                              {image ? (
+                            <div className="flex h-40 w-60 items-center justify-center rounded border-2 border-dashed border-gray-500 bg-white text-center">
+                              {glassLoading ? (
+                                <Hourglass
+                                  visible={true}
+                                  height="80"
+                                  width="80"
+                                  ariaLabel="hourglass-loading"
+                                  wrapperStyle={{}}
+                                  wrapperClass=""
+                                  colors={["#306cce", "#72a1ed"]}
+                                />
+                              ) : image ? (
                                 <Image
                                   alt="Profile Picture"
                                   className="h-full w-full"
@@ -307,8 +322,8 @@ export function CommunityRules() {
   };
 
   return (
-    <div className=" flex h-[578px] w-[404px] flex-col gap-4 border bg-white p-4">
-      <div className=" flex flex-col gap-4 ">
+    <div className=" flex h-[578px] w-[30%] flex-col gap-4 border bg-white p-4">
+      <div className="flex w-full flex-col gap-4 ">
         <h2 className=" text-[20px] font-bold leading-7 ">Community Rules</h2>
         <p className="  text-base  font-medium tracking-tighter">
           Cupcake ipsum dolor. Sit amet marshmallow topping cheesecake muffin.
@@ -316,7 +331,7 @@ export function CommunityRules() {
           topping carrot cake danish tart cake cheesecake.
         </p>
       </div>
-      <ol className=" list ml-7 flex list-decimal flex-col gap-4">
+      <ol className="list ml-7 flex w-full list-decimal flex-col gap-4 p-3">
         {/* {data &&
           data?.map((val: any, i: any) => (
             <>
@@ -325,7 +340,7 @@ export function CommunityRules() {
               </li>
             </>
           ))} */}
-        <li className="  pl-3  text-base font-medium tracking-tighter">
+        <li className="  pl-3 text-base font-medium tracking-tighter">
           Cupcake ipsum dolor. Sit amet marshmallow topping cheesecake muffin.
           Halvah croissant candy canes bonbon candy. Apple pie jelly beans
           topping carrot cake danish tart cake cheesecake.
